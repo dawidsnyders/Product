@@ -6,7 +6,7 @@
     },
     "github": {
       "type": "http",
-      "url": "https://mcp.github.com/mcp"
+      "url": "https://api.githubcopilot.com/mcp/"
     }
   }
 }
