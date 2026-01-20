@@ -1,0 +1,281 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#1a1a2e', 'primaryTextColor': '#fff', 'primaryBorderColor': '#4361ee', 'lineColor': '#4361ee', 'secondaryColor': '#16213e', 'tertiaryColor': '#0f3460'}}}%%
+
+flowchart TB
+    subgraph ENTRY["🌐 ENTRY POINTS"]
+        LANDING["kamino.com<br/>Landing Page"]
+        APP["app.kamino.finance<br/>Main App"]
+        V2["v2.kamino.finance<br/>V2 App"]
+        DOCS["docs.kamino.finance<br/>Documentation"]
+        GOV["gov.kamino.finance<br/>Governance"]
+    end
+
+    subgraph WALLET["🔐 WALLET CONNECTION"]
+        DISCONNECTED["Disconnected State<br/>• Browse markets<br/>• View APYs/TVL<br/>• Cannot transact"]
+        CONNECT_MODAL["Connect Wallet Modal<br/>• Phantom<br/>• Solflare<br/>• Backpack<br/>• Ledger<br/>• Other wallets"]
+        CONNECTED["Connected State<br/>• Full access<br/>• Transact<br/>• View portfolio"]
+    end
+
+    subgraph HEADER["📍 MAIN NAVIGATION"]
+        NAV_LENDING["Lending"]
+        NAV_LIQUIDITY["Liquidity"]
+        NAV_MULTIPLY["Multiply"]
+        NAV_LONGSHORT["Long/Short"]
+        NAV_PORTFOLIO["Portfolio"]
+        NAV_POINTS["Points"]
+    end
+
+    subgraph LENDING["💰 LENDING (/lending)"]
+        LEND_MARKETS["Markets Overview<br/>• Total Supply<br/>• Total Borrowed<br/>• Utilization"]
+        LEND_SUPPLY["Supply Markets<br/>• SOL, USDC, USDT<br/>• JitoSOL, mSOL<br/>• JLP, PYUSD..."]
+        LEND_BORROW["Borrow Markets<br/>• Available liquidity<br/>• Borrow APY<br/>• Caps"]
+        LEND_POSITION["My Position<br/>• Supplied assets<br/>• Borrowed assets<br/>• LTV & Health"]
+
+        subgraph LEND_ACTIONS["Lending Actions"]
+            SUPPLY_MODAL["Supply Modal<br/>→ Enter amount<br/>→ Confirm"]
+            WITHDRAW_MODAL["Withdraw Modal<br/>→ Enter amount<br/>→ Confirm"]
+            BORROW_MODAL["Borrow Modal<br/>→ Enter amount<br/>→ Review LTV<br/>→ Confirm"]
+            REPAY_MODAL["Repay Modal<br/>→ Enter amount<br/>→ Confirm"]
+            REPAY_COLLATERAL["Repay w/ Collateral<br/>→ One-click"]
+        end
+
+        subgraph LEND_MODES["Position Modes"]
+            CROSS_MODE["Cross Mode<br/>Multiple assets"]
+            ISOLATED_MODE["Isolated Mode<br/>Single pair"]
+            E_MODE["E-Mode<br/>Correlated assets<br/>Higher LTV"]
+        end
+    end
+
+    subgraph LIQUIDITY["💧 LIQUIDITY (/liquidity)"]
+        LIQ_LIST["Vault List<br/>• Filter by asset<br/>• Sort by APY/TVL"]
+
+        subgraph LIQ_VAULTS["Vault Types"]
+            ORCA_VAULT["Orca Whirlpools<br/>Concentrated LP"]
+            RAYDIUM_VAULT["Raydium CLMM<br/>Concentrated LP"]
+            METEORA_VAULT["Meteora<br/>Dynamic pools"]
+        end
+
+        LIQ_DETAIL["Vault Detail<br/>/liquidity/[address]<br/>• Performance<br/>• APY history<br/>• Fee breakdown"]
+
+        subgraph LIQ_ACTIONS["Liquidity Actions"]
+            LIQ_DEPOSIT["Deposit<br/>→ Enter amount<br/>→ Receive kTokens"]
+            LIQ_WITHDRAW["Withdraw<br/>→ Enter amount<br/>→ Get underlying"]
+            KTOKEN_COLLATERAL["Use kTokens<br/>as Collateral<br/>→ Deposit to K-Lend"]
+        end
+    end
+
+    subgraph MULTIPLY["⚡ MULTIPLY (/multiply)"]
+        MULT_LIST["Multiply Vaults<br/>Leveraged Yield"]
+
+        subgraph MULT_STRATEGIES["Strategies"]
+            JITOSOL_MULT["JitoSOL Multiply<br/>Up to 10x"]
+            MSOL_MULT["mSOL Multiply"]
+            JUPSOL_MULT["JupSOL Multiply"]
+            JLP_MULT["JLP Multiply"]
+        end
+
+        MULT_DETAIL["Vault Detail<br/>/multiply/[address]<br/>• Leverage slider<br/>• Net APY calc<br/>• Liq. price"]
+
+        subgraph MULT_ACTIONS["Position Management"]
+            OPEN_MULT["Open Position<br/>→ Set leverage<br/>→ Deposit<br/>→ Confirm"]
+            ADJUST_MULT["Adjust Leverage<br/>→ Move slider<br/>→ Confirm"]
+            ADD_MULT["Add to Position<br/>→ More collateral"]
+            CLOSE_MULT["Close Position<br/>→ Full unwind"]
+        end
+    end
+
+    subgraph LONGSHORT["📈 LONG/SHORT (/long-short)"]
+        LS_LIST["Long/Short Vaults<br/>Directional Leverage"]
+
+        subgraph LS_TYPES["Position Types"]
+            LONG_SOL["Long SOL<br/>Bullish bet"]
+            SHORT_SOL["Short SOL<br/>Bearish bet"]
+            LONG_OTHER["Long Other<br/>Various assets"]
+            SHORT_OTHER["Short Other<br/>Various assets"]
+        end
+
+        LS_DETAIL["Position Detail<br/>• Leverage: 1-5x<br/>• Entry price<br/>• Liq. price"]
+
+        subgraph LS_ACTIONS["L/S Actions"]
+            OPEN_LONG["Open Long<br/>→ Leverage<br/>→ Deposit USDC"]
+            OPEN_SHORT["Open Short<br/>→ Leverage<br/>→ Deposit"]
+            CLOSE_LS["Close Position<br/>→ Realize PnL"]
+        end
+    end
+
+    subgraph PORTFOLIO["📊 PORTFOLIO (/portfolio)"]
+        PORT_OVERVIEW["Portfolio Overview<br/>• Total Value<br/>• Total PnL"]
+
+        subgraph PORT_SECTIONS["Position Sections"]
+            PORT_LENDING["Lending Positions<br/>• Supplied<br/>• Borrowed<br/>• Health Factor"]
+            PORT_LIQ["Liquidity Positions<br/>• kToken balances<br/>• Fees earned"]
+            PORT_MULT["Multiply Positions<br/>• Leverage<br/>• Net APY<br/>• LTV"]
+            PORT_LS["Long/Short Positions<br/>• PnL<br/>• Liq. price"]
+        end
+
+        LOAN_DASHBOARD["Loan Dashboard<br/>Advanced management"]
+        RISK_SIMULATOR["Risk Simulator<br/>Price scenarios"]
+    end
+
+    subgraph POINTS["🎯 POINTS (/points)"]
+        POINTS_OVERVIEW["Points Overview<br/>• Your points<br/>• Daily earning rate"]
+
+        subgraph POINTS_BREAKDOWN["Earning Sources"]
+            PTS_LENDING["Lending Points"]
+            PTS_LIQ["Liquidity Points"]
+            PTS_MULT["Multiply Points"]
+            PTS_STAKE["Staking Boost"]
+        end
+
+        STAKING["KMNO Staking<br/>• Stake for boost<br/>• Up to 2x multiplier"]
+
+        subgraph SEASONS["Seasons"]
+            S4_CLAIM["Season 4 Claims<br/>• Vesting: 6 mo<br/>• Early claim penalty"]
+            S5_ACTIVE["Season 5 Active<br/>• Real-time rewards<br/>• Borrowing incentives"]
+        end
+
+        CLAIM_REWARDS["Claim Rewards<br/>• Instant (penalty)<br/>• Wait (full amount)"]
+    end
+
+    subgraph MODALS["🔲 GLOBAL MODALS"]
+        TX_CONFIRM["Transaction Confirm<br/>• Action summary<br/>• Fees<br/>• Wallet approval"]
+        TX_PENDING["Transaction Pending<br/>• Loading state"]
+        TX_SUCCESS["Transaction Success<br/>• View on explorer"]
+        TX_ERROR["Transaction Error<br/>• Retry option"]
+        SETTINGS["Settings<br/>• Preferences<br/>• Notifications"]
+    end
+
+    %% Entry flows
+    LANDING --> APP
+    LANDING --> DOCS
+    LANDING --> GOV
+    APP --> DISCONNECTED
+
+    %% Wallet connection
+    DISCONNECTED --> CONNECT_MODAL
+    CONNECT_MODAL --> CONNECTED
+    CONNECTED --> HEADER
+
+    %% Navigation
+    HEADER --> NAV_LENDING
+    HEADER --> NAV_LIQUIDITY
+    HEADER --> NAV_MULTIPLY
+    HEADER --> NAV_LONGSHORT
+    HEADER --> NAV_PORTFOLIO
+    HEADER --> NAV_POINTS
+
+    %% Lending flows
+    NAV_LENDING --> LEND_MARKETS
+    LEND_MARKETS --> LEND_SUPPLY
+    LEND_MARKETS --> LEND_BORROW
+    LEND_SUPPLY --> SUPPLY_MODAL
+    LEND_SUPPLY --> WITHDRAW_MODAL
+    LEND_BORROW --> BORROW_MODAL
+    LEND_BORROW --> REPAY_MODAL
+    LEND_POSITION --> REPAY_COLLATERAL
+    LEND_MARKETS --> LEND_POSITION
+    LEND_POSITION --> CROSS_MODE
+    LEND_POSITION --> ISOLATED_MODE
+    LEND_POSITION --> E_MODE
+
+    %% Liquidity flows
+    NAV_LIQUIDITY --> LIQ_LIST
+    LIQ_LIST --> ORCA_VAULT
+    LIQ_LIST --> RAYDIUM_VAULT
+    LIQ_LIST --> METEORA_VAULT
+    ORCA_VAULT --> LIQ_DETAIL
+    RAYDIUM_VAULT --> LIQ_DETAIL
+    METEORA_VAULT --> LIQ_DETAIL
+    LIQ_DETAIL --> LIQ_DEPOSIT
+    LIQ_DETAIL --> LIQ_WITHDRAW
+    LIQ_DEPOSIT --> KTOKEN_COLLATERAL
+    KTOKEN_COLLATERAL --> LEND_SUPPLY
+
+    %% Multiply flows
+    NAV_MULTIPLY --> MULT_LIST
+    MULT_LIST --> JITOSOL_MULT
+    MULT_LIST --> MSOL_MULT
+    MULT_LIST --> JUPSOL_MULT
+    MULT_LIST --> JLP_MULT
+    JITOSOL_MULT --> MULT_DETAIL
+    MULT_DETAIL --> OPEN_MULT
+    MULT_DETAIL --> ADJUST_MULT
+    MULT_DETAIL --> ADD_MULT
+    MULT_DETAIL --> CLOSE_MULT
+
+    %% Long/Short flows
+    NAV_LONGSHORT --> LS_LIST
+    LS_LIST --> LONG_SOL
+    LS_LIST --> SHORT_SOL
+    LONG_SOL --> LS_DETAIL
+    SHORT_SOL --> LS_DETAIL
+    LS_DETAIL --> OPEN_LONG
+    LS_DETAIL --> OPEN_SHORT
+    LS_DETAIL --> CLOSE_LS
+
+    %% Portfolio flows
+    NAV_PORTFOLIO --> PORT_OVERVIEW
+    PORT_OVERVIEW --> PORT_LENDING
+    PORT_OVERVIEW --> PORT_LIQ
+    PORT_OVERVIEW --> PORT_MULT
+    PORT_OVERVIEW --> PORT_LS
+    PORT_LENDING --> LOAN_DASHBOARD
+    LOAN_DASHBOARD --> RISK_SIMULATOR
+
+    %% Points flows
+    NAV_POINTS --> POINTS_OVERVIEW
+    POINTS_OVERVIEW --> PTS_LENDING
+    POINTS_OVERVIEW --> PTS_LIQ
+    POINTS_OVERVIEW --> PTS_MULT
+    POINTS_OVERVIEW --> PTS_STAKE
+    POINTS_OVERVIEW --> STAKING
+    STAKING --> S5_ACTIVE
+    POINTS_OVERVIEW --> S4_CLAIM
+    S4_CLAIM --> CLAIM_REWARDS
+
+    %% Modal connections (all actions lead to transaction modals)
+    SUPPLY_MODAL --> TX_CONFIRM
+    WITHDRAW_MODAL --> TX_CONFIRM
+    BORROW_MODAL --> TX_CONFIRM
+    REPAY_MODAL --> TX_CONFIRM
+    LIQ_DEPOSIT --> TX_CONFIRM
+    LIQ_WITHDRAW --> TX_CONFIRM
+    OPEN_MULT --> TX_CONFIRM
+    ADJUST_MULT --> TX_CONFIRM
+    CLOSE_MULT --> TX_CONFIRM
+    OPEN_LONG --> TX_CONFIRM
+    OPEN_SHORT --> TX_CONFIRM
+    CLOSE_LS --> TX_CONFIRM
+    CLAIM_REWARDS --> TX_CONFIRM
+
+    TX_CONFIRM --> TX_PENDING
+    TX_PENDING --> TX_SUCCESS
+    TX_PENDING --> TX_ERROR
+
+    %% Cross-linking
+    PORT_LENDING --> LEND_POSITION
+    PORT_LIQ --> LIQ_DETAIL
+    PORT_MULT --> MULT_DETAIL
+    PORT_LS --> LS_DETAIL
+
+    %% Styling
+    classDef entry fill:#1a1a2e,stroke:#4361ee,color:#fff
+    classDef wallet fill:#16213e,stroke:#e94560,color:#fff
+    classDef nav fill:#0f3460,stroke:#4361ee,color:#fff
+    classDef lending fill:#1e3a5f,stroke:#3498db,color:#fff
+    classDef liquidity fill:#1e4d3d,stroke:#2ecc71,color:#fff
+    classDef multiply fill:#3d1e5f,stroke:#9b59b6,color:#fff
+    classDef longshort fill:#5f3d1e,stroke:#e67e22,color:#fff
+    classDef portfolio fill:#2c3e50,stroke:#95a5a6,color:#fff
+    classDef points fill:#5f1e3d,stroke:#e91e63,color:#fff
+    classDef modal fill:#1a1a2e,stroke:#f39c12,color:#fff
+
+    class LANDING,APP,V2,DOCS,GOV entry
+    class DISCONNECTED,CONNECT_MODAL,CONNECTED wallet
+    class NAV_LENDING,NAV_LIQUIDITY,NAV_MULTIPLY,NAV_LONGSHORT,NAV_PORTFOLIO,NAV_POINTS nav
+    class LEND_MARKETS,LEND_SUPPLY,LEND_BORROW,LEND_POSITION,SUPPLY_MODAL,WITHDRAW_MODAL,BORROW_MODAL,REPAY_MODAL,REPAY_COLLATERAL,CROSS_MODE,ISOLATED_MODE,E_MODE lending
+    class LIQ_LIST,ORCA_VAULT,RAYDIUM_VAULT,METEORA_VAULT,LIQ_DETAIL,LIQ_DEPOSIT,LIQ_WITHDRAW,KTOKEN_COLLATERAL liquidity
+    class MULT_LIST,JITOSOL_MULT,MSOL_MULT,JUPSOL_MULT,JLP_MULT,MULT_DETAIL,OPEN_MULT,ADJUST_MULT,ADD_MULT,CLOSE_MULT multiply
+    class LS_LIST,LONG_SOL,SHORT_SOL,LONG_OTHER,SHORT_OTHER,LS_DETAIL,OPEN_LONG,OPEN_SHORT,CLOSE_LS longshort
+    class PORT_OVERVIEW,PORT_LENDING,PORT_LIQ,PORT_MULT,PORT_LS,LOAN_DASHBOARD,RISK_SIMULATOR portfolio
+    class POINTS_OVERVIEW,PTS_LENDING,PTS_LIQ,PTS_MULT,PTS_STAKE,STAKING,S4_CLAIM,S5_ACTIVE,CLAIM_REWARDS points
+    class TX_CONFIRM,TX_PENDING,TX_SUCCESS,TX_ERROR,SETTINGS modal
