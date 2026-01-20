@@ -1,0 +1,585 @@
+{
+  "title": "Kamino Finance - Complete User Journey Map",
+  "description": "Comprehensive mapping of all screens, routes, and user flows",
+  "legend": {
+    "colors": {
+      "entry": "#1a1a2e",
+      "wallet": "#e94560",
+      "lending": "#3498db",
+      "liquidity": "#2ecc71",
+      "multiply": "#9b59b6",
+      "longShort": "#e67e22",
+      "portfolio": "#95a5a6",
+      "points": "#e91e63",
+      "modal": "#f39c12"
+    }
+  },
+  "sections": [
+    {
+      "id": "entry",
+      "name": "Entry Points",
+      "color": "#1a1a2e",
+      "nodes": [
+        {
+          "id": "landing",
+          "label": "kamino.com",
+          "type": "page",
+          "description": "Marketing/Landing Page",
+          "url": "https://kamino.com"
+        },
+        {
+          "id": "app",
+          "label": "app.kamino.finance",
+          "type": "page",
+          "description": "Main Application",
+          "url": "https://app.kamino.finance"
+        },
+        {
+          "id": "v2",
+          "label": "v2.kamino.finance",
+          "type": "page",
+          "description": "V2 Application"
+        },
+        {
+          "id": "docs",
+          "label": "docs.kamino.finance",
+          "type": "page",
+          "description": "Documentation Portal"
+        },
+        {
+          "id": "gov",
+          "label": "gov.kamino.finance",
+          "type": "page",
+          "description": "Governance Forum"
+        }
+      ]
+    },
+    {
+      "id": "wallet",
+      "name": "Wallet Connection",
+      "color": "#e94560",
+      "nodes": [
+        {
+          "id": "disconnected",
+          "label": "Disconnected State",
+          "type": "state",
+          "features": [
+            "Browse markets",
+            "View APYs/TVL",
+            "Cannot transact"
+          ]
+        },
+        {
+          "id": "connect-modal",
+          "label": "Connect Wallet Modal",
+          "type": "modal",
+          "options": ["Phantom", "Solflare", "Backpack", "Ledger", "Other wallets"]
+        },
+        {
+          "id": "connected",
+          "label": "Connected State",
+          "type": "state",
+          "features": [
+            "Full access",
+            "Execute transactions",
+            "View portfolio"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "header",
+      "name": "Main Navigation",
+      "color": "#4361ee",
+      "nodes": [
+        {"id": "nav-lending", "label": "Lending", "route": "/lending"},
+        {"id": "nav-liquidity", "label": "Liquidity", "route": "/liquidity"},
+        {"id": "nav-multiply", "label": "Multiply", "route": "/multiply"},
+        {"id": "nav-longshort", "label": "Long/Short", "route": "/long-short"},
+        {"id": "nav-portfolio", "label": "Portfolio", "route": "/portfolio"},
+        {"id": "nav-points", "label": "Points", "route": "/points"}
+      ]
+    },
+    {
+      "id": "lending",
+      "name": "Lending Section",
+      "color": "#3498db",
+      "route": "/lending",
+      "nodes": [
+        {
+          "id": "lend-markets",
+          "label": "Markets Overview",
+          "type": "page",
+          "metrics": ["Total Supply", "Total Borrowed", "Utilization"]
+        },
+        {
+          "id": "lend-supply",
+          "label": "Supply Markets",
+          "type": "component",
+          "assets": ["SOL", "USDC", "USDT", "JitoSOL", "mSOL", "JLP", "PYUSD"]
+        },
+        {
+          "id": "lend-borrow",
+          "label": "Borrow Markets",
+          "type": "component",
+          "info": ["Available liquidity", "Borrow APY", "Caps"]
+        },
+        {
+          "id": "lend-position",
+          "label": "My Position",
+          "type": "component",
+          "metrics": ["Supplied assets", "Borrowed assets", "LTV", "Health Factor"]
+        }
+      ],
+      "actions": [
+        {
+          "id": "supply-modal",
+          "label": "Supply",
+          "type": "modal",
+          "flow": ["Enter amount", "Confirm in wallet", "Receive kTokens"]
+        },
+        {
+          "id": "withdraw-modal",
+          "label": "Withdraw",
+          "type": "modal",
+          "flow": ["Enter amount", "Confirm", "Receive assets"]
+        },
+        {
+          "id": "borrow-modal",
+          "label": "Borrow",
+          "type": "modal",
+          "flow": ["Enter amount", "Review LTV impact", "Confirm"]
+        },
+        {
+          "id": "repay-modal",
+          "label": "Repay",
+          "type": "modal",
+          "flow": ["Enter amount", "Confirm", "Reduce debt"]
+        },
+        {
+          "id": "repay-collateral",
+          "label": "Repay with Collateral",
+          "type": "action",
+          "description": "One-click debt repayment using collateral"
+        }
+      ],
+      "modes": [
+        {
+          "id": "cross-mode",
+          "label": "Cross Mode",
+          "description": "Multiple collateral & debt assets (default)"
+        },
+        {
+          "id": "isolated-mode",
+          "label": "Isolated Mode",
+          "description": "Single collateral, single debt"
+        },
+        {
+          "id": "e-mode",
+          "label": "E-Mode (Elevation)",
+          "description": "Higher LTV for correlated assets"
+        }
+      ]
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity Section",
+      "color": "#2ecc71",
+      "route": "/liquidity",
+      "nodes": [
+        {
+          "id": "liq-list",
+          "label": "Vault List",
+          "type": "page",
+          "features": ["Filter by asset", "Sort by APY/TVL"]
+        },
+        {
+          "id": "liq-detail",
+          "label": "Vault Detail",
+          "type": "page",
+          "route": "/liquidity/[address]",
+          "info": ["Performance charts", "APY history", "Fee breakdown"]
+        }
+      ],
+      "vaultTypes": [
+        {"id": "orca", "label": "Orca Whirlpools", "description": "Concentrated LP"},
+        {"id": "raydium", "label": "Raydium CLMM", "description": "Concentrated LP"},
+        {"id": "meteora", "label": "Meteora", "description": "Dynamic pools"}
+      ],
+      "actions": [
+        {
+          "id": "liq-deposit",
+          "label": "Deposit",
+          "type": "modal",
+          "flow": ["Enter amount", "Confirm", "Receive kTokens"]
+        },
+        {
+          "id": "liq-withdraw",
+          "label": "Withdraw",
+          "type": "modal",
+          "flow": ["Enter amount", "Confirm", "Get underlying assets"]
+        },
+        {
+          "id": "ktoken-collateral",
+          "label": "Use as Collateral",
+          "type": "action",
+          "description": "Deposit kTokens into K-Lend"
+        }
+      ]
+    },
+    {
+      "id": "multiply",
+      "name": "Multiply Section",
+      "color": "#9b59b6",
+      "route": "/multiply",
+      "tagline": "Boost your SOL yields up to 10x",
+      "nodes": [
+        {
+          "id": "mult-list",
+          "label": "Multiply Vaults",
+          "type": "page",
+          "description": "Leveraged yield strategies"
+        },
+        {
+          "id": "mult-detail",
+          "label": "Vault Detail",
+          "type": "page",
+          "route": "/multiply/[address]",
+          "components": ["Leverage slider", "Net APY calculator", "Liquidation price"]
+        }
+      ],
+      "strategies": [
+        {"id": "jitosol-mult", "label": "JitoSOL Multiply", "maxLeverage": "10x"},
+        {"id": "msol-mult", "label": "mSOL Multiply", "maxLeverage": "10x"},
+        {"id": "jupsol-mult", "label": "JupSOL Multiply", "maxLeverage": "10x"},
+        {"id": "jlp-mult", "label": "JLP Multiply", "maxLeverage": "5x"}
+      ],
+      "actions": [
+        {
+          "id": "open-mult",
+          "label": "Open Position",
+          "type": "modal",
+          "flow": ["Set leverage", "Enter deposit", "Review", "Confirm"]
+        },
+        {
+          "id": "adjust-mult",
+          "label": "Adjust Leverage",
+          "type": "modal",
+          "flow": ["Move slider", "Review impact", "Confirm"]
+        },
+        {
+          "id": "add-mult",
+          "label": "Add to Position",
+          "type": "modal",
+          "description": "Deposit more collateral"
+        },
+        {
+          "id": "close-mult",
+          "label": "Close Position",
+          "type": "modal",
+          "description": "Full unwind back to single asset"
+        }
+      ]
+    },
+    {
+      "id": "longShort",
+      "name": "Long/Short Section",
+      "color": "#e67e22",
+      "route": "/long-short",
+      "tagline": "Leverage your directional exposure",
+      "nodes": [
+        {
+          "id": "ls-list",
+          "label": "Long/Short Vaults",
+          "type": "page"
+        },
+        {
+          "id": "ls-detail",
+          "label": "Position Detail",
+          "type": "page",
+          "info": ["Leverage: 1-5x", "Entry price", "Liquidation price"]
+        }
+      ],
+      "positionTypes": [
+        {"id": "long-sol", "label": "Long SOL", "description": "Bullish bet on SOL"},
+        {"id": "short-sol", "label": "Short SOL", "description": "Bearish bet on SOL"},
+        {"id": "long-other", "label": "Long (Other)", "description": "Various assets"},
+        {"id": "short-other", "label": "Short (Other)", "description": "Various assets"}
+      ],
+      "actions": [
+        {
+          "id": "open-long",
+          "label": "Open Long",
+          "type": "modal",
+          "flow": ["Select leverage", "Deposit USDC", "Confirm"]
+        },
+        {
+          "id": "open-short",
+          "label": "Open Short",
+          "type": "modal",
+          "flow": ["Select leverage", "Deposit", "Confirm"]
+        },
+        {
+          "id": "close-ls",
+          "label": "Close Position",
+          "type": "modal",
+          "description": "Realize PnL"
+        }
+      ]
+    },
+    {
+      "id": "portfolio",
+      "name": "Portfolio Section",
+      "color": "#95a5a6",
+      "route": "/portfolio",
+      "alternateRoute": "/my-portfolio",
+      "nodes": [
+        {
+          "id": "port-overview",
+          "label": "Portfolio Overview",
+          "type": "page",
+          "metrics": ["Total Value", "Total PnL"]
+        },
+        {
+          "id": "port-lending",
+          "label": "Lending Positions",
+          "type": "component",
+          "info": ["Supplied", "Borrowed", "Health Factor"]
+        },
+        {
+          "id": "port-liq",
+          "label": "Liquidity Positions",
+          "type": "component",
+          "info": ["kToken balances", "Fees earned"]
+        },
+        {
+          "id": "port-mult",
+          "label": "Multiply Positions",
+          "type": "component",
+          "info": ["Leverage", "Net APY", "LTV"]
+        },
+        {
+          "id": "port-ls",
+          "label": "Long/Short Positions",
+          "type": "component",
+          "info": ["PnL", "Liquidation price"]
+        },
+        {
+          "id": "loan-dashboard",
+          "label": "Loan Dashboard",
+          "type": "page",
+          "description": "Advanced position management"
+        },
+        {
+          "id": "risk-simulator",
+          "label": "Risk Simulator",
+          "type": "tool",
+          "description": "Simulate price scenarios"
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "name": "Points Section",
+      "color": "#e91e63",
+      "route": "/points",
+      "nodes": [
+        {
+          "id": "points-overview",
+          "label": "Points Overview",
+          "type": "page",
+          "metrics": ["Your points", "Daily earning rate", "Estimated KMNO"]
+        },
+        {
+          "id": "staking",
+          "label": "KMNO Staking",
+          "type": "component",
+          "features": ["Stake for boost", "Up to 2x multiplier"]
+        }
+      ],
+      "earningSources": [
+        {"id": "pts-lending", "label": "Lending Points"},
+        {"id": "pts-liq", "label": "Liquidity Points"},
+        {"id": "pts-mult", "label": "Multiply Points"},
+        {"id": "pts-stake", "label": "Staking Boost"}
+      ],
+      "seasons": [
+        {
+          "id": "s4-claim",
+          "label": "Season 4 Claims",
+          "status": "claiming",
+          "info": ["6 month vesting", "Early claim penalty"]
+        },
+        {
+          "id": "s5-active",
+          "label": "Season 5",
+          "status": "active",
+          "info": ["Real-time rewards", "Borrowing incentives"]
+        }
+      ],
+      "actions": [
+        {
+          "id": "stake-kmno",
+          "label": "Stake KMNO",
+          "type": "modal"
+        },
+        {
+          "id": "unstake-kmno",
+          "label": "Unstake KMNO",
+          "type": "modal"
+        },
+        {
+          "id": "claim-rewards",
+          "label": "Claim Rewards",
+          "type": "modal",
+          "options": ["Claim now (penalty)", "Wait for full amount"]
+        }
+      ]
+    },
+    {
+      "id": "globalModals",
+      "name": "Global Modals",
+      "color": "#f39c12",
+      "nodes": [
+        {
+          "id": "tx-confirm",
+          "label": "Transaction Confirmation",
+          "type": "modal",
+          "content": ["Action summary", "Fees", "Wallet approval button"]
+        },
+        {
+          "id": "tx-pending",
+          "label": "Transaction Pending",
+          "type": "modal",
+          "content": ["Loading spinner", "Status text"]
+        },
+        {
+          "id": "tx-success",
+          "label": "Transaction Success",
+          "type": "modal",
+          "content": ["Success message", "View on explorer link"]
+        },
+        {
+          "id": "tx-error",
+          "label": "Transaction Error",
+          "type": "modal",
+          "content": ["Error message", "Retry button"]
+        },
+        {
+          "id": "settings",
+          "label": "Settings",
+          "type": "modal",
+          "content": ["Preferences", "Notifications"]
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {"from": "landing", "to": "app", "label": "Launch App"},
+    {"from": "app", "to": "disconnected", "label": "Initial load"},
+    {"from": "disconnected", "to": "connect-modal", "label": "Click Connect"},
+    {"from": "connect-modal", "to": "connected", "label": "Wallet approved"},
+    {"from": "connected", "to": "nav-lending", "label": "Navigate"},
+    {"from": "connected", "to": "nav-liquidity", "label": "Navigate"},
+    {"from": "connected", "to": "nav-multiply", "label": "Navigate"},
+    {"from": "connected", "to": "nav-longshort", "label": "Navigate"},
+    {"from": "connected", "to": "nav-portfolio", "label": "Navigate"},
+    {"from": "connected", "to": "nav-points", "label": "Navigate"},
+    {"from": "nav-lending", "to": "lend-markets", "label": "Route"},
+    {"from": "nav-liquidity", "to": "liq-list", "label": "Route"},
+    {"from": "nav-multiply", "to": "mult-list", "label": "Route"},
+    {"from": "nav-longshort", "to": "ls-list", "label": "Route"},
+    {"from": "nav-portfolio", "to": "port-overview", "label": "Route"},
+    {"from": "nav-points", "to": "points-overview", "label": "Route"},
+    {"from": "liq-deposit", "to": "ktoken-collateral", "label": "Optional"},
+    {"from": "ktoken-collateral", "to": "lend-supply", "label": "Cross-product"},
+    {"from": "port-lending", "to": "lend-position", "label": "Manage"},
+    {"from": "port-liq", "to": "liq-detail", "label": "Manage"},
+    {"from": "port-mult", "to": "mult-detail", "label": "Manage"},
+    {"from": "port-ls", "to": "ls-detail", "label": "Manage"},
+    {"from": "supply-modal", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "withdraw-modal", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "borrow-modal", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "repay-modal", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "liq-deposit", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "liq-withdraw", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "open-mult", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "adjust-mult", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "close-mult", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "open-long", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "open-short", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "close-ls", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "claim-rewards", "to": "tx-confirm", "label": "Confirm"},
+    {"from": "tx-confirm", "to": "tx-pending", "label": "Submit"},
+    {"from": "tx-pending", "to": "tx-success", "label": "Success"},
+    {"from": "tx-pending", "to": "tx-error", "label": "Failure"}
+  ],
+  "userJourneys": [
+    {
+      "name": "New User First Deposit",
+      "steps": [
+        "Landing Page",
+        "Connect Wallet",
+        "Select Phantom",
+        "Approve Connection",
+        "Browse Lending Markets",
+        "Click Supply on SOL",
+        "Enter Amount",
+        "Confirm in Wallet",
+        "View in Portfolio"
+      ]
+    },
+    {
+      "name": "Open Multiply Position",
+      "steps": [
+        "Connect Wallet",
+        "Navigate to Multiply",
+        "Select JitoSOL Multiply",
+        "Set Leverage (3x)",
+        "Enter Deposit Amount",
+        "Review Position",
+        "Click Open Position",
+        "Confirm in Wallet",
+        "Monitor in Portfolio"
+      ]
+    },
+    {
+      "name": "Provide Liquidity",
+      "steps": [
+        "Navigate to Liquidity",
+        "Browse Vaults",
+        "Select SOL-USDC",
+        "Click Deposit",
+        "Enter Amount",
+        "Confirm",
+        "Receive kTokens",
+        "(Optional) Use kTokens as Collateral"
+      ]
+    },
+    {
+      "name": "Long SOL with Leverage",
+      "steps": [
+        "Navigate to Long/Short",
+        "Select Long SOL",
+        "Choose Leverage (3x)",
+        "Deposit USDC",
+        "Review Position",
+        "Confirm",
+        "Monitor Price & Liquidation",
+        "Close when desired"
+      ]
+    },
+    {
+      "name": "Claim Rewards",
+      "steps": [
+        "Navigate to Points",
+        "View Accumulated Points",
+        "Check Season Status",
+        "View Claimable KMNO",
+        "Choose Claim Now or Wait",
+        "Stake KMNO for Boost",
+        "Confirm"
+      ]
+    }
+  ]
+}
