@@ -1,0 +1,480 @@
+{
+  "title": "Kamino.com - Complete User Journey Map (Kamino 2.0)",
+  "description": "Comprehensive mapping of kamino.com - the unified Kamino 2.0 interface",
+  "version": "2.0",
+  "mappedDate": "2026-01-20",
+  "legend": {
+    "colors": {
+      "entry": "#0f172a",
+      "wallet": "#ef4444",
+      "navigation": "#3b82f6",
+      "earn": "#10b981",
+      "borrow": "#f97316",
+      "liquidity": "#3b82f6",
+      "multiply": "#a855f7",
+      "leverage": "#fbbf24",
+      "swap": "#06b6d4",
+      "portfolio": "#6b7280",
+      "stake": "#ec4899",
+      "modal": "#f59e0b"
+    }
+  },
+  "routes": {
+    "home": "/",
+    "earn": "/earn",
+    "earnLend": "/earn/lend",
+    "lendVault": "/lend/[vault-name]",
+    "borrow": "/borrow",
+    "liquidity": "/liquidity",
+    "liquidityVault": "/liquidity/[address]",
+    "multiply": "/multiply",
+    "leverage": "/leverage",
+    "leveragePair": "/leverage/main/[pair]",
+    "swap": "/swap",
+    "portfolio": "/my-portfolio",
+    "stake": "/stake",
+    "governance": "/governance-and-staking",
+    "airdrop": "/season-3-airdrop",
+    "assets": "/assets/[market]",
+    "security": "/security",
+    "build": "/build"
+  },
+  "sections": [
+    {
+      "id": "navigation",
+      "name": "Main Navigation",
+      "color": "#3b82f6",
+      "items": [
+        {"id": "nav-earn", "label": "Earn", "route": "/earn"},
+        {"id": "nav-borrow", "label": "Borrow", "route": "/borrow"},
+        {"id": "nav-liquidity", "label": "Liquidity", "route": "/liquidity"},
+        {"id": "nav-multiply", "label": "Multiply", "route": "/multiply"},
+        {"id": "nav-leverage", "label": "Leverage", "route": "/leverage"},
+        {"id": "nav-swap", "label": "Swap", "route": "/swap"},
+        {"id": "nav-portfolio", "label": "Portfolio", "route": "/my-portfolio"},
+        {"id": "nav-stake", "label": "Stake", "route": "/stake"}
+      ]
+    },
+    {
+      "id": "earn",
+      "name": "Earn Section",
+      "color": "#10b981",
+      "pages": [
+        {
+          "id": "earn-list",
+          "route": "/earn",
+          "alternateRoute": "/earn/lend",
+          "label": "Earn Vaults",
+          "description": "Browse optimized lending vaults managed by expert risk managers",
+          "components": ["Search bar", "Filter dropdown", "Sort options", "Vault cards grid"]
+        },
+        {
+          "id": "vault-detail",
+          "route": "/lend/[vault-name]",
+          "label": "Vault Detail",
+          "description": "Individual vault page with deposit/withdraw",
+          "components": ["APY display", "TVL", "Performance chart", "Deposit form", "Withdraw form", "Position display"]
+        }
+      ],
+      "namedVaults": [
+        {"id": "usdc-prime", "route": "/lend/usdc-prime", "label": "USDC Prime", "asset": "USDC"},
+        {"id": "cash-earn", "route": "/lend/cash-earn", "label": "Cash Earn", "asset": "Stables"},
+        {"id": "sentora-pyusd", "route": "/lend/sentora-pyusd", "label": "Sentora PYUSD", "asset": "PYUSD"},
+        {"id": "allez-usdc", "route": "/lend/allez-usdc", "label": "Allez USDC", "asset": "USDC"}
+      ],
+      "actions": [
+        {"id": "earn-deposit", "label": "Deposit", "flow": ["Enter amount", "Confirm in wallet", "Receive receipt"]},
+        {"id": "earn-withdraw", "label": "Withdraw", "flow": ["Enter amount", "Confirm in wallet", "Receive assets"]}
+      ]
+    },
+    {
+      "id": "borrow",
+      "name": "Borrow Section",
+      "color": "#f97316",
+      "pages": [
+        {
+          "id": "borrow-page",
+          "route": "/borrow",
+          "label": "Borrow",
+          "description": "Borrow against crypto collateral with flexible rates",
+          "components": ["Collateral selector", "Collateral amount input", "Debt asset selector", "Borrow amount input", "LTV display", "Health factor", "Liquidation price", "Position list"]
+        }
+      ],
+      "actions": [
+        {"id": "add-collateral", "label": "Add Collateral", "flow": ["Select asset", "Enter amount", "Confirm"]},
+        {"id": "borrow-action", "label": "Borrow", "flow": ["Select debt asset", "Enter amount", "Review LTV", "Confirm"]},
+        {"id": "repay", "label": "Repay", "flow": ["Enter amount", "Confirm", "Reduce debt"]}
+      ],
+      "metrics": ["LTV", "Health Factor", "Liquidation Price", "Borrow APY"]
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity Section",
+      "color": "#3b82f6",
+      "pages": [
+        {
+          "id": "liq-list",
+          "route": "/liquidity",
+          "label": "LP Vaults",
+          "description": "Earn trading fees with automated LP management",
+          "components": ["Search", "Asset filter", "Sort by APY/TVL", "LP vault cards"]
+        },
+        {
+          "id": "liq-detail",
+          "route": "/liquidity/[address]",
+          "label": "LP Vault Detail",
+          "description": "Individual LP vault with performance data",
+          "components": ["APY chart", "Fee breakdown", "TVL", "Deposit/Withdraw forms"]
+        }
+      ],
+      "lpPairs": [
+        {"id": "sol-usdc", "label": "SOL-USDC", "dex": "Orca"},
+        {"id": "jitosol-sol", "label": "JitoSOL-SOL", "dex": "Raydium"},
+        {"id": "jlp-jitosol", "label": "JLP-JitoSOL", "dex": "Various"},
+        {"id": "cbbtc-jitosol", "label": "cbBTC-JitoSOL", "dex": "Various"},
+        {"id": "honey-jitosol", "label": "HONEY-JitoSOL", "dex": "Various"},
+        {"id": "kmno-pyusd", "label": "KMNO-PYUSD", "dex": "Various"}
+      ],
+      "actions": [
+        {"id": "liq-deposit", "label": "Deposit", "flow": ["Enter amount", "Confirm", "Receive kTokens"]},
+        {"id": "liq-withdraw", "label": "Withdraw", "flow": ["Enter amount", "Confirm", "Get underlying"]}
+      ]
+    },
+    {
+      "id": "multiply",
+      "name": "Multiply Section",
+      "color": "#a855f7",
+      "pages": [
+        {
+          "id": "mult-list",
+          "route": "/multiply",
+          "label": "Multiply Vaults",
+          "description": "One-click leveraged yield vaults",
+          "components": ["Strategy cards", "APY comparison"]
+        },
+        {
+          "id": "mult-detail",
+          "route": "/multiply/[strategy]",
+          "label": "Strategy Detail",
+          "description": "Open/manage leveraged position",
+          "components": ["Leverage slider", "Deposit input", "Net APY calculator", "LTV display", "Liquidation price", "Position preview"]
+        }
+      ],
+      "strategies": [
+        {"id": "jitosol-mult", "label": "JitoSOL Multiply", "maxLeverage": "10x", "asset": "JitoSOL"},
+        {"id": "msol-mult", "label": "mSOL Multiply", "maxLeverage": "10x", "asset": "mSOL"},
+        {"id": "jupsol-mult", "label": "JupSOL Multiply", "maxLeverage": "10x", "asset": "JupSOL"},
+        {"id": "jlp-mult", "label": "JLP Multiply", "maxLeverage": "5x", "asset": "JLP"}
+      ],
+      "actions": [
+        {"id": "open-mult", "label": "Open Position", "flow": ["Set leverage", "Enter deposit", "Review", "Confirm"]},
+        {"id": "adjust-mult", "label": "Adjust Leverage", "flow": ["Move slider", "Review impact", "Confirm"]},
+        {"id": "close-mult", "label": "Close Position", "flow": ["Click close", "Confirm", "Receive assets"]}
+      ]
+    },
+    {
+      "id": "leverage",
+      "name": "Leverage Section",
+      "color": "#fbbf24",
+      "pages": [
+        {
+          "id": "lev-page",
+          "route": "/leverage",
+          "label": "Spot Leverage",
+          "description": "Directional leverage trading",
+          "components": ["Pair selector", "Price chart", "Long/Short toggle", "Leverage selector", "Position form"]
+        },
+        {
+          "id": "lev-pair",
+          "route": "/leverage/main/[pair]",
+          "label": "Trading Pair",
+          "example": "/leverage/main/SOL/USDC",
+          "components": ["Price chart with timeframes", "Order form", "Open positions list"]
+        }
+      ],
+      "positionTypes": [
+        {"id": "long", "label": "Long", "description": "Bullish - profit when price goes up"},
+        {"id": "short", "label": "Short", "description": "Bearish - profit when price goes down"}
+      ],
+      "leverageOptions": ["1x", "2x", "3x", "4x", "5x"],
+      "actions": [
+        {"id": "open-lev", "label": "Open Position", "flow": ["Select direction", "Set leverage", "Enter collateral", "Confirm"]},
+        {"id": "close-lev", "label": "Close Position", "flow": ["Click close", "Confirm", "Realize PnL"]}
+      ]
+    },
+    {
+      "id": "swap",
+      "name": "Swap Section",
+      "color": "#06b6d4",
+      "pages": [
+        {
+          "id": "swap-page",
+          "route": "/swap",
+          "label": "Swap",
+          "description": "Zero-fee token swaps via 10+ aggregators",
+          "components": ["From token selector", "From amount input", "To token selector", "To amount display", "Rate display", "Route info", "Swap button", "Recent swaps"]
+        }
+      ],
+      "features": [
+        "Zero platform fees",
+        "Best execution across 10+ aggregators",
+        "Powered by Jupiter",
+        "Price impact display"
+      ],
+      "actions": [
+        {"id": "swap-action", "label": "Swap", "flow": ["Select from token", "Enter amount", "Select to token", "Review rate", "Confirm"]}
+      ]
+    },
+    {
+      "id": "portfolio",
+      "name": "Portfolio Section",
+      "color": "#6b7280",
+      "pages": [
+        {
+          "id": "port-page",
+          "route": "/my-portfolio",
+          "label": "My Portfolio",
+          "description": "Unified view of all positions",
+          "components": ["Total value display", "24h change", "Earn positions list", "Borrow positions list", "Liquidity positions list", "Multiply positions list", "Leverage positions list"]
+        }
+      ],
+      "positionSections": [
+        {"id": "port-earn", "label": "Earn Positions", "metrics": ["Deposited", "Current value", "Interest earned", "APY"]},
+        {"id": "port-borrow", "label": "Borrow Positions", "metrics": ["Collateral", "Borrowed", "LTV", "Health factor"]},
+        {"id": "port-liq", "label": "Liquidity Positions", "metrics": ["kToken balance", "Value", "Fees earned", "APY"]},
+        {"id": "port-mult", "label": "Multiply Positions", "metrics": ["Value", "Leverage", "Net APY", "LTV", "Liq price"]},
+        {"id": "port-lev", "label": "Leverage Positions", "metrics": ["Size", "Entry price", "Current price", "PnL", "Liq price"]}
+      ]
+    },
+    {
+      "id": "stake",
+      "name": "Stake & Governance",
+      "color": "#ec4899",
+      "pages": [
+        {
+          "id": "stake-page",
+          "route": "/stake",
+          "label": "KMNO Staking",
+          "description": "Stake KMNO for rewards and boost",
+          "components": ["Staked amount display", "APY", "Rewards earned", "Boost multiplier", "Stake form", "Unstake form"]
+        },
+        {
+          "id": "gov-page",
+          "route": "/governance-and-staking",
+          "label": "Governance",
+          "description": "Vote on protocol decisions",
+          "components": ["Voting power display", "Active proposals", "Link to governance forum"]
+        },
+        {
+          "id": "airdrop-page",
+          "route": "/season-3-airdrop",
+          "label": "Season 3 Airdrop",
+          "description": "Claim KMNO allocation",
+          "components": ["Allocation display", "Vesting progress", "Claim button", "Season history"]
+        }
+      ],
+      "actions": [
+        {"id": "stake-kmno", "label": "Stake KMNO", "flow": ["Enter amount", "Confirm", "Start earning"]},
+        {"id": "unstake-kmno", "label": "Unstake", "flow": ["Enter amount", "Confirm", "Receive KMNO"]},
+        {"id": "claim-rewards", "label": "Claim", "flow": ["Click claim", "Confirm", "Receive KMNO"]}
+      ],
+      "seasons": [
+        {"id": "s3", "label": "Season 3", "status": "vesting"},
+        {"id": "s4", "label": "Season 4", "status": "active"},
+        {"id": "s5", "label": "Season 5", "status": "active"}
+      ]
+    },
+    {
+      "id": "other",
+      "name": "Other Pages",
+      "color": "#64748b",
+      "pages": [
+        {"id": "assets", "route": "/assets/[market]", "label": "Assets", "description": "View assets by market"},
+        {"id": "security", "route": "/security", "label": "Security", "description": "Security practices and audits"},
+        {"id": "build", "route": "/build", "label": "Developer Docs", "description": "API and SDK documentation"}
+      ]
+    },
+    {
+      "id": "modals",
+      "name": "Global Modals",
+      "color": "#f59e0b",
+      "items": [
+        {"id": "wallet-connect", "label": "Connect Wallet", "options": ["Phantom", "Solflare", "Backpack", "Ledger", "Other"]},
+        {"id": "tx-confirm", "label": "Transaction Confirmation", "content": ["Action summary", "Fees", "Confirm button"]},
+        {"id": "tx-pending", "label": "Transaction Pending", "content": ["Loading spinner", "Status text"]},
+        {"id": "tx-success", "label": "Transaction Success", "content": ["Success message", "View on Solscan link"]},
+        {"id": "tx-error", "label": "Transaction Error", "content": ["Error message", "Retry button"]}
+      ]
+    }
+  ],
+  "connections": [
+    {"from": "home", "to": "wallet-connect", "type": "action"},
+    {"from": "wallet-connect", "to": "navigation", "type": "state-change"},
+
+    {"from": "nav-earn", "to": "earn-list", "type": "navigation"},
+    {"from": "earn-list", "to": "vault-detail", "type": "click"},
+    {"from": "vault-detail", "to": "earn-deposit", "type": "action"},
+    {"from": "vault-detail", "to": "earn-withdraw", "type": "action"},
+
+    {"from": "nav-borrow", "to": "borrow-page", "type": "navigation"},
+    {"from": "borrow-page", "to": "borrow-action", "type": "action"},
+    {"from": "borrow-page", "to": "repay", "type": "action"},
+
+    {"from": "nav-liquidity", "to": "liq-list", "type": "navigation"},
+    {"from": "liq-list", "to": "liq-detail", "type": "click"},
+    {"from": "liq-detail", "to": "liq-deposit", "type": "action"},
+    {"from": "liq-detail", "to": "liq-withdraw", "type": "action"},
+
+    {"from": "nav-multiply", "to": "mult-list", "type": "navigation"},
+    {"from": "mult-list", "to": "mult-detail", "type": "click"},
+    {"from": "mult-detail", "to": "open-mult", "type": "action"},
+    {"from": "mult-detail", "to": "adjust-mult", "type": "action"},
+    {"from": "mult-detail", "to": "close-mult", "type": "action"},
+
+    {"from": "nav-leverage", "to": "lev-page", "type": "navigation"},
+    {"from": "lev-page", "to": "lev-pair", "type": "select"},
+    {"from": "lev-pair", "to": "open-lev", "type": "action"},
+    {"from": "lev-pair", "to": "close-lev", "type": "action"},
+
+    {"from": "nav-swap", "to": "swap-page", "type": "navigation"},
+    {"from": "swap-page", "to": "swap-action", "type": "action"},
+
+    {"from": "nav-portfolio", "to": "port-page", "type": "navigation"},
+    {"from": "port-earn", "to": "vault-detail", "type": "manage"},
+    {"from": "port-borrow", "to": "borrow-page", "type": "manage"},
+    {"from": "port-liq", "to": "liq-detail", "type": "manage"},
+    {"from": "port-mult", "to": "mult-detail", "type": "manage"},
+    {"from": "port-lev", "to": "lev-pair", "type": "manage"},
+
+    {"from": "nav-stake", "to": "stake-page", "type": "navigation"},
+    {"from": "stake-page", "to": "stake-kmno", "type": "action"},
+    {"from": "stake-page", "to": "unstake-kmno", "type": "action"},
+    {"from": "stake-page", "to": "gov-page", "type": "navigation"},
+    {"from": "stake-page", "to": "airdrop-page", "type": "navigation"},
+
+    {"from": "all-actions", "to": "tx-confirm", "type": "trigger"},
+    {"from": "tx-confirm", "to": "tx-pending", "type": "submit"},
+    {"from": "tx-pending", "to": "tx-success", "type": "success"},
+    {"from": "tx-pending", "to": "tx-error", "type": "failure"}
+  ],
+  "userJourneys": [
+    {
+      "id": "first-earn",
+      "name": "First-Time User Earns Yield",
+      "steps": [
+        {"page": "/", "action": "Land on home"},
+        {"page": "/earn", "action": "Browse earn vaults"},
+        {"page": "/lend/usdc-prime", "action": "Select USDC Prime vault"},
+        {"modal": "wallet-connect", "action": "Click Connect Wallet"},
+        {"modal": "wallet-connect", "action": "Select Phantom"},
+        {"page": "/lend/usdc-prime", "action": "Enter deposit amount"},
+        {"modal": "tx-confirm", "action": "Click Deposit"},
+        {"modal": "tx-pending", "action": "Confirm in wallet"},
+        {"modal": "tx-success", "action": "Transaction confirmed"},
+        {"page": "/my-portfolio", "action": "View position"}
+      ]
+    },
+    {
+      "id": "borrow-flow",
+      "name": "Borrow Against Collateral",
+      "steps": [
+        {"page": "/borrow", "action": "Navigate to Borrow"},
+        {"page": "/borrow", "action": "Select collateral (SOL)"},
+        {"page": "/borrow", "action": "Enter collateral amount"},
+        {"page": "/borrow", "action": "Select debt asset (USDC)"},
+        {"page": "/borrow", "action": "Enter borrow amount"},
+        {"page": "/borrow", "action": "Review LTV and liquidation price"},
+        {"modal": "tx-confirm", "action": "Click Borrow USDC"},
+        {"modal": "tx-pending", "action": "Confirm in wallet"},
+        {"modal": "tx-success", "action": "Funds received"},
+        {"page": "/my-portfolio", "action": "Monitor position"}
+      ]
+    },
+    {
+      "id": "multiply-flow",
+      "name": "Open Multiply Position",
+      "steps": [
+        {"page": "/multiply", "action": "Navigate to Multiply"},
+        {"page": "/multiply", "action": "Select JitoSOL Multiply"},
+        {"page": "/multiply/[strategy]", "action": "Set leverage to 3x"},
+        {"page": "/multiply/[strategy]", "action": "Enter deposit amount"},
+        {"page": "/multiply/[strategy]", "action": "Review net APY and liquidation"},
+        {"modal": "tx-confirm", "action": "Click Open Position"},
+        {"modal": "tx-pending", "action": "Confirm in wallet"},
+        {"modal": "tx-success", "action": "Position opened"},
+        {"page": "/my-portfolio", "action": "Monitor in portfolio"}
+      ]
+    },
+    {
+      "id": "leverage-long",
+      "name": "Long SOL with Leverage",
+      "steps": [
+        {"page": "/leverage", "action": "Navigate to Leverage"},
+        {"page": "/leverage/main/SOL/USDC", "action": "Select SOL/USDC pair"},
+        {"page": "/leverage/main/SOL/USDC", "action": "Select Long direction"},
+        {"page": "/leverage/main/SOL/USDC", "action": "Choose 3x leverage"},
+        {"page": "/leverage/main/SOL/USDC", "action": "Enter USDC collateral"},
+        {"page": "/leverage/main/SOL/USDC", "action": "Review liquidation price"},
+        {"modal": "tx-confirm", "action": "Click Open Long"},
+        {"modal": "tx-pending", "action": "Confirm in wallet"},
+        {"modal": "tx-success", "action": "Position opened"},
+        {"page": "/my-portfolio", "action": "Monitor PnL"}
+      ]
+    },
+    {
+      "id": "swap-tokens",
+      "name": "Swap Tokens",
+      "steps": [
+        {"page": "/swap", "action": "Navigate to Swap"},
+        {"page": "/swap", "action": "Select From token (SOL)"},
+        {"page": "/swap", "action": "Enter amount"},
+        {"page": "/swap", "action": "Select To token (USDC)"},
+        {"page": "/swap", "action": "Review rate and route"},
+        {"modal": "tx-confirm", "action": "Click Swap"},
+        {"modal": "tx-pending", "action": "Confirm in wallet"},
+        {"modal": "tx-success", "action": "Swap complete"}
+      ]
+    },
+    {
+      "id": "stake-kmno",
+      "name": "Stake KMNO for Boost",
+      "steps": [
+        {"page": "/stake", "action": "Navigate to Stake"},
+        {"page": "/stake", "action": "Enter stake amount"},
+        {"modal": "tx-confirm", "action": "Click Stake KMNO"},
+        {"modal": "tx-pending", "action": "Confirm in wallet"},
+        {"modal": "tx-success", "action": "KMNO staked"},
+        {"page": "/stake", "action": "View boost multiplier"},
+        {"page": "/governance-and-staking", "action": "View voting power"}
+      ]
+    }
+  ],
+  "assets": {
+    "lending": ["SOL", "USDC", "USDT", "PYUSD", "JitoSOL", "mSOL", "JupSOL", "JLP", "cbBTC", "HONEY", "KMNO"],
+    "liquidity": ["SOL-USDC", "JitoSOL-SOL", "JLP-JitoSOL", "cbBTC-JitoSOL", "HONEY-JitoSOL", "KMNO-PYUSD"]
+  },
+  "figJamNotes": {
+    "colorCoding": {
+      "Green (#10b981)": "Earn section",
+      "Orange (#f97316)": "Borrow section",
+      "Blue (#3b82f6)": "Liquidity section",
+      "Purple (#a855f7)": "Multiply section",
+      "Yellow (#fbbf24)": "Leverage section",
+      "Cyan (#06b6d4)": "Swap section",
+      "Gray (#6b7280)": "Portfolio section",
+      "Pink (#ec4899)": "Stake/Governance section",
+      "Amber (#f59e0b)": "Modals"
+    },
+    "nodeTypes": {
+      "rectangle": "Pages/Screens",
+      "rounded": "Components/Sections",
+      "diamond": "Decision points",
+      "pill": "Actions/Buttons"
+    },
+    "connectionTypes": {
+      "solid": "Primary navigation",
+      "dashed": "Secondary/optional flow",
+      "dotted": "Modal triggers"
+    }
+  }
+}
