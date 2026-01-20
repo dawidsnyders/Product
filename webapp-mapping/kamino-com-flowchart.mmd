@@ -1,0 +1,311 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0f172a', 'primaryTextColor': '#fff', 'primaryBorderColor': '#3b82f6', 'lineColor': '#3b82f6', 'secondaryColor': '#1e293b', 'tertiaryColor': '#334155'}}}%%
+
+flowchart TB
+    subgraph ENTRY["ENTRY"]
+        HOME["kamino.com<br/>Home"]
+    end
+
+    subgraph WALLET["WALLET CONNECTION"]
+        DISCONNECTED["Disconnected<br/>• Browse only<br/>• No transactions"]
+        CONNECT["Connect Wallet<br/>• Phantom<br/>• Solflare<br/>• Backpack<br/>• Ledger"]
+        CONNECTED["Connected<br/>• Full access<br/>• All features"]
+    end
+
+    subgraph NAV["MAIN NAVIGATION"]
+        NAV_EARN["Earn"]
+        NAV_BORROW["Borrow"]
+        NAV_LIQ["Liquidity"]
+        NAV_MULT["Multiply"]
+        NAV_LEV["Leverage"]
+        NAV_SWAP["Swap"]
+        NAV_PORT["Portfolio"]
+        NAV_STAKE["Stake"]
+    end
+
+    subgraph EARN["EARN /earn"]
+        EARN_LIST["Earn Vaults List<br/>/earn<br/>/earn/lend"]
+
+        subgraph EARN_VAULTS["Named Lend Vaults /lend/[name]"]
+            USDC_PRIME["/lend/usdc-prime<br/>USDC Prime"]
+            CASH_EARN["/lend/cash-earn<br/>Cash Earn"]
+            SENTORA["/lend/sentora-pyusd<br/>Sentora PYUSD"]
+            ALLEZ["/lend/allez-usdc<br/>Allez USDC"]
+            OTHER_VAULTS["Other Vaults..."]
+        end
+
+        EARN_DETAIL["Vault Detail<br/>• APY chart<br/>• TVL<br/>• Deposit/Withdraw"]
+
+        subgraph EARN_ACTIONS["Actions"]
+            EARN_DEPOSIT["Deposit<br/>→ Enter amount<br/>→ Confirm"]
+            EARN_WITHDRAW["Withdraw<br/>→ Enter amount<br/>→ Confirm"]
+        end
+    end
+
+    subgraph BORROW["BORROW /borrow"]
+        BORROW_PAGE["Borrow Page<br/>• Select collateral<br/>• Select debt<br/>• Set amounts"]
+
+        subgraph BORROW_ACTIONS["Actions"]
+            ADD_COLLATERAL["Add Collateral"]
+            BORROW_ACTION["Borrow"]
+            REPAY["Repay"]
+        end
+
+        BORROW_POSITIONS["My Positions<br/>• LTV<br/>• Health Factor<br/>• Liquidation Price"]
+    end
+
+    subgraph LIQUIDITY["LIQUIDITY /liquidity"]
+        LIQ_LIST["LP Vaults List<br/>• Filter by asset<br/>• Sort APY/TVL"]
+
+        subgraph LIQ_PAIRS["LP Pairs"]
+            SOL_USDC["SOL-USDC<br/>Orca"]
+            JITOSOL_SOL["JitoSOL-SOL<br/>Raydium"]
+            JLP_JITOSOL["JLP-JitoSOL"]
+            KMNO_PYUSD["KMNO-PYUSD"]
+            OTHER_LP["Other pairs..."]
+        end
+
+        LIQ_DETAIL["Vault Detail<br/>/liquidity/[address]<br/>• Performance<br/>• Fee breakdown"]
+
+        subgraph LIQ_ACTIONS["Actions"]
+            LIQ_DEPOSIT["Deposit<br/>→ Receive kTokens"]
+            LIQ_WITHDRAW["Withdraw<br/>→ Get assets"]
+        end
+    end
+
+    subgraph MULTIPLY["MULTIPLY /multiply"]
+        MULT_LIST["Multiply Vaults<br/>Leveraged Yield"]
+
+        subgraph MULT_STRATS["Strategies"]
+            JITOSOL_MULT["JitoSOL<br/>Up to 10x"]
+            MSOL_MULT["mSOL"]
+            JUPSOL_MULT["JupSOL"]
+            JLP_MULT["JLP"]
+        end
+
+        MULT_DETAIL["Strategy Detail<br/>• Leverage slider<br/>• Net APY calc<br/>• Liq. price"]
+
+        subgraph MULT_ACTIONS["Actions"]
+            OPEN_MULT["Open Position"]
+            ADJUST_MULT["Adjust Leverage"]
+            CLOSE_MULT["Close Position"]
+        end
+    end
+
+    subgraph LEVERAGE["LEVERAGE /leverage"]
+        LEV_PAGE["Spot Leverage<br/>/leverage"]
+        LEV_PAIR["Trading Pair<br/>/leverage/main/[pair]<br/>e.g., SOL/USDC"]
+
+        subgraph LEV_TYPES["Position Types"]
+            LONG["Long<br/>Bullish"]
+            SHORT["Short<br/>Bearish"]
+        end
+
+        LEV_CHART["Price Chart<br/>• 1H/4H/1D/1W"]
+
+        subgraph LEV_ACTIONS["Actions"]
+            OPEN_LEV["Open Position<br/>• Select leverage<br/>• Enter collateral"]
+            CLOSE_LEV["Close Position<br/>• Realize PnL"]
+        end
+    end
+
+    subgraph SWAP["SWAP /swap"]
+        SWAP_PAGE["Swap Interface<br/>• Zero fees<br/>• 10+ aggregators"]
+
+        subgraph SWAP_FLOW["Swap Flow"]
+            FROM_TOKEN["From Token<br/>Amount"]
+            TO_TOKEN["To Token<br/>Quote"]
+            SWAP_ROUTE["Best Route<br/>via Jupiter"]
+        end
+
+        SWAP_ACTION["Execute Swap"]
+    end
+
+    subgraph PORTFOLIO["PORTFOLIO /my-portfolio"]
+        PORT_OVERVIEW["Portfolio Overview<br/>• Total Value<br/>• 24h Change"]
+
+        subgraph PORT_SECTIONS["Position Sections"]
+            PORT_EARN["Earn Positions"]
+            PORT_BORROW["Borrow Positions"]
+            PORT_LIQ["Liquidity Positions"]
+            PORT_MULT["Multiply Positions"]
+            PORT_LEV["Leverage Positions"]
+        end
+    end
+
+    subgraph STAKE["STAKE"]
+        STAKE_PAGE["/stake<br/>KMNO Staking"]
+        GOV_PAGE["/governance-and-staking<br/>Governance"]
+
+        subgraph STAKE_FEATURES["Features"]
+            STAKE_KMNO["Stake KMNO<br/>• Earn APY<br/>• Get boost"]
+            UNSTAKE_KMNO["Unstake"]
+            VOTING["Voting Power"]
+        end
+    end
+
+    subgraph REWARDS["REWARDS"]
+        AIRDROP["/season-3-airdrop<br/>Claim Allocation"]
+
+        subgraph SEASONS["Seasons"]
+            S3["Season 3<br/>Vesting"]
+            S4["Season 4<br/>Active"]
+            S5["Season 5<br/>Active"]
+        end
+    end
+
+    subgraph OTHER["OTHER PAGES"]
+        ASSETS["/assets/[market]<br/>Assets Overview"]
+        SECURITY["/security<br/>Security Info"]
+        BUILD["/build<br/>Developer Docs"]
+    end
+
+    subgraph MODALS["GLOBAL MODALS"]
+        TX_CONFIRM["Confirm<br/>in Wallet"]
+        TX_PENDING["Pending..."]
+        TX_SUCCESS["Success<br/>View on Solscan"]
+        TX_ERROR["Error<br/>Retry"]
+    end
+
+    %% Entry flows
+    HOME --> DISCONNECTED
+    DISCONNECTED --> CONNECT
+    CONNECT --> CONNECTED
+    CONNECTED --> NAV
+
+    %% Navigation
+    NAV --> NAV_EARN
+    NAV --> NAV_BORROW
+    NAV --> NAV_LIQ
+    NAV --> NAV_MULT
+    NAV --> NAV_LEV
+    NAV --> NAV_SWAP
+    NAV --> NAV_PORT
+    NAV --> NAV_STAKE
+
+    %% Earn flows
+    NAV_EARN --> EARN_LIST
+    EARN_LIST --> USDC_PRIME
+    EARN_LIST --> CASH_EARN
+    EARN_LIST --> SENTORA
+    EARN_LIST --> ALLEZ
+    EARN_LIST --> OTHER_VAULTS
+    USDC_PRIME --> EARN_DETAIL
+    CASH_EARN --> EARN_DETAIL
+    EARN_DETAIL --> EARN_DEPOSIT
+    EARN_DETAIL --> EARN_WITHDRAW
+
+    %% Borrow flows
+    NAV_BORROW --> BORROW_PAGE
+    BORROW_PAGE --> ADD_COLLATERAL
+    BORROW_PAGE --> BORROW_ACTION
+    BORROW_PAGE --> BORROW_POSITIONS
+    BORROW_POSITIONS --> REPAY
+
+    %% Liquidity flows
+    NAV_LIQ --> LIQ_LIST
+    LIQ_LIST --> SOL_USDC
+    LIQ_LIST --> JITOSOL_SOL
+    LIQ_LIST --> JLP_JITOSOL
+    LIQ_LIST --> KMNO_PYUSD
+    LIQ_LIST --> OTHER_LP
+    SOL_USDC --> LIQ_DETAIL
+    JITOSOL_SOL --> LIQ_DETAIL
+    LIQ_DETAIL --> LIQ_DEPOSIT
+    LIQ_DETAIL --> LIQ_WITHDRAW
+
+    %% Multiply flows
+    NAV_MULT --> MULT_LIST
+    MULT_LIST --> JITOSOL_MULT
+    MULT_LIST --> MSOL_MULT
+    MULT_LIST --> JUPSOL_MULT
+    MULT_LIST --> JLP_MULT
+    JITOSOL_MULT --> MULT_DETAIL
+    MULT_DETAIL --> OPEN_MULT
+    MULT_DETAIL --> ADJUST_MULT
+    MULT_DETAIL --> CLOSE_MULT
+
+    %% Leverage flows
+    NAV_LEV --> LEV_PAGE
+    LEV_PAGE --> LEV_PAIR
+    LEV_PAIR --> LONG
+    LEV_PAIR --> SHORT
+    LEV_PAIR --> LEV_CHART
+    LONG --> OPEN_LEV
+    SHORT --> OPEN_LEV
+    OPEN_LEV --> CLOSE_LEV
+
+    %% Swap flows
+    NAV_SWAP --> SWAP_PAGE
+    SWAP_PAGE --> FROM_TOKEN
+    FROM_TOKEN --> TO_TOKEN
+    TO_TOKEN --> SWAP_ROUTE
+    SWAP_ROUTE --> SWAP_ACTION
+
+    %% Portfolio flows
+    NAV_PORT --> PORT_OVERVIEW
+    PORT_OVERVIEW --> PORT_EARN
+    PORT_OVERVIEW --> PORT_BORROW
+    PORT_OVERVIEW --> PORT_LIQ
+    PORT_OVERVIEW --> PORT_MULT
+    PORT_OVERVIEW --> PORT_LEV
+    PORT_EARN --> EARN_DETAIL
+    PORT_BORROW --> BORROW_POSITIONS
+    PORT_LIQ --> LIQ_DETAIL
+    PORT_MULT --> MULT_DETAIL
+
+    %% Stake flows
+    NAV_STAKE --> STAKE_PAGE
+    STAKE_PAGE --> STAKE_KMNO
+    STAKE_PAGE --> UNSTAKE_KMNO
+    STAKE_PAGE --> GOV_PAGE
+    GOV_PAGE --> VOTING
+    STAKE_PAGE --> AIRDROP
+    AIRDROP --> S3
+    AIRDROP --> S4
+    AIRDROP --> S5
+
+    %% Transaction modals
+    EARN_DEPOSIT --> TX_CONFIRM
+    EARN_WITHDRAW --> TX_CONFIRM
+    BORROW_ACTION --> TX_CONFIRM
+    REPAY --> TX_CONFIRM
+    LIQ_DEPOSIT --> TX_CONFIRM
+    LIQ_WITHDRAW --> TX_CONFIRM
+    OPEN_MULT --> TX_CONFIRM
+    ADJUST_MULT --> TX_CONFIRM
+    CLOSE_MULT --> TX_CONFIRM
+    OPEN_LEV --> TX_CONFIRM
+    CLOSE_LEV --> TX_CONFIRM
+    SWAP_ACTION --> TX_CONFIRM
+    STAKE_KMNO --> TX_CONFIRM
+
+    TX_CONFIRM --> TX_PENDING
+    TX_PENDING --> TX_SUCCESS
+    TX_PENDING --> TX_ERROR
+
+    %% Styling
+    classDef entry fill:#0f172a,stroke:#3b82f6,color:#fff
+    classDef wallet fill:#1e293b,stroke:#ef4444,color:#fff
+    classDef nav fill:#334155,stroke:#3b82f6,color:#fff
+    classDef earn fill:#064e3b,stroke:#10b981,color:#fff
+    classDef borrow fill:#7c2d12,stroke:#f97316,color:#fff
+    classDef liquidity fill:#1e3a8a,stroke:#3b82f6,color:#fff
+    classDef multiply fill:#581c87,stroke:#a855f7,color:#fff
+    classDef leverage fill:#78350f,stroke:#fbbf24,color:#fff
+    classDef swap fill:#155e75,stroke:#06b6d4,color:#fff
+    classDef portfolio fill:#374151,stroke:#6b7280,color:#fff
+    classDef stake fill:#831843,stroke:#ec4899,color:#fff
+    classDef modal fill:#1f2937,stroke:#f59e0b,color:#fff
+
+    class HOME entry
+    class DISCONNECTED,CONNECT,CONNECTED wallet
+    class NAV_EARN,NAV_BORROW,NAV_LIQ,NAV_MULT,NAV_LEV,NAV_SWAP,NAV_PORT,NAV_STAKE nav
+    class EARN_LIST,USDC_PRIME,CASH_EARN,SENTORA,ALLEZ,OTHER_VAULTS,EARN_DETAIL,EARN_DEPOSIT,EARN_WITHDRAW earn
+    class BORROW_PAGE,ADD_COLLATERAL,BORROW_ACTION,REPAY,BORROW_POSITIONS borrow
+    class LIQ_LIST,SOL_USDC,JITOSOL_SOL,JLP_JITOSOL,KMNO_PYUSD,OTHER_LP,LIQ_DETAIL,LIQ_DEPOSIT,LIQ_WITHDRAW liquidity
+    class MULT_LIST,JITOSOL_MULT,MSOL_MULT,JUPSOL_MULT,JLP_MULT,MULT_DETAIL,OPEN_MULT,ADJUST_MULT,CLOSE_MULT multiply
+    class LEV_PAGE,LEV_PAIR,LONG,SHORT,LEV_CHART,OPEN_LEV,CLOSE_LEV leverage
+    class SWAP_PAGE,FROM_TOKEN,TO_TOKEN,SWAP_ROUTE,SWAP_ACTION swap
+    class PORT_OVERVIEW,PORT_EARN,PORT_BORROW,PORT_LIQ,PORT_MULT,PORT_LEV portfolio
+    class STAKE_PAGE,GOV_PAGE,STAKE_KMNO,UNSTAKE_KMNO,VOTING,AIRDROP,S3,S4,S5 stake
+    class TX_CONFIRM,TX_PENDING,TX_SUCCESS,TX_ERROR modal
