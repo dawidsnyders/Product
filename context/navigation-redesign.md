@@ -2,21 +2,17 @@
 
 ## The Problem
 
-We're rebuilding the Kamino app and need to rethink navigation. The current structure has 5 header items (Swap, Earn, Borrow, Multiply, Liquidity), and we're adding new products:
+The current app navigation has 5 header items (Swap, Earn, Borrow, Multiply, Liquidity). With the introduction of Kamino USD, Private Credit, and the Assets page, simply adding more items would create cognitive overload and a cluttered experience.
 
-- **Kamino USD** — One-click managed yield, intended to become THE primary yield product
-- **Private Credit** — On-chain users lending into off-chain BTC-backed institutional demand
-- **Assets page** — RWA discovery and data, with CTAs to deploy into Kamino products
-
-Adding these to an already full navigation would create cognitive overload. We needed to step back and think about structure, not just placement.
+This requires rethinking the navigation structure — not just where new products go, but how products should be organized overall.
 
 ---
 
-## Key Insights From Our Thinking
+## The Thinking
 
-### 1. Products cluster into clear user intents
+### Products cluster into clear user intents
 
-When we looked at what users actually want to DO, patterns emerged:
+When looking at what users actually want to DO, patterns emerge:
 
 | Intent | Products |
 |--------|----------|
@@ -25,27 +21,27 @@ When we looked at what users actually want to DO, patterns emerged:
 | "I want leverage" | Borrow (Markets), Multiply |
 | "I want to explore RWAs" | Assets |
 
-This gave us our structure: **Swap, Earn, Borrow, Assets**.
+Navigation should match user intent, not internal product organization.
 
-### 2. Borrow and Multiply are conceptually linked but both critical
+### Borrow and Multiply are conceptually linked
 
 Multiply is essentially one-click leveraged borrowing — it automates what power users do manually in Borrow. They're two modes of the same core action: using collateral to get exposure.
 
-But Multiply can't be buried as a "feature" — it represents ~$1B of $1.3B in total borrows. It's the product, especially for RWA leverage which is a growing focus.
+However, Multiply cannot be treated as a minor feature. It represents ~$1B of $1.3B in total borrows and will become even more significant with the expansion of RWA strategies and the introduction of fixed rates.
 
-**Decision:** Keep them under one "Borrow" header, but treat Markets and Multiply as equal siblings (tabs or segments), not parent-child.
+The approach: Keep both under one "Borrow" header, but treat Markets and Multiply as equal siblings (tabs or segments), not parent-child.
 
-### 3. Earn can hold multiple products without becoming bloated
+### Earn can hold multiple products without becoming bloated
 
-We debated whether grouping Kamino USD, Lending, Private Credit, and Liquidity under "Earn" was too much surface area.
+Grouping Kamino USD, Lending, Private Credit, and Liquidity under "Earn" might seem like too much surface area — but it works. Users understand "Earn = I want yield."
 
-Conclusion: It's fine. Users understand "Earn = I want yield." The dropdown and page structure can clearly differentiate the options. What matters is:
-- Kamino USD gets hero treatment (it's the simple, recommended path)
-- Other products are clearly accessible for users who want specific strategies
+What matters is hierarchy within the category:
+- Kamino USD gets hero treatment as the simple, recommended path
+- Other products remain clearly accessible for users who want specific strategies
 
-### 4. The dropdown + clickable header pattern
+### The dropdown + clickable header pattern
 
-This emerged as the preferred interaction model:
+The preferred interaction model:
 
 - **Hover** on a header item → Dropdown shows all products with visuals and key info
 - **Click** a dropdown item → Goes directly to that product
@@ -55,17 +51,18 @@ This serves both user types:
 - Returning users who know exactly what they want can go direct
 - Exploring users can see options and make a choice
 
-### 5. Assets is a discovery + conversion play
+### Assets is a discovery + conversion play
 
 The Assets page serves two purposes:
-1. Content/discovery — Be the place for RWA data on Solana (like RWA.xyz)
-2. Conversion — When users click into an asset, show rich info AND strong CTAs to deploy into Kamino products
 
-We already do this with Prime (buy form + multiply prompt on the asset page). This becomes the pattern for all RWAs.
+1. **Content/discovery** — The destination for RWA data on Solana (similar to RWA.xyz)
+2. **Conversion** — When users click into an asset, they see rich info AND strong CTAs to deploy into Kamino products
+
+This pattern already exists with Prime (buy form + multiply prompt on the asset page). It becomes the template for all RWAs.
 
 ---
 
-## The Final Navigation Structure
+## The Navigation Structure
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -78,8 +75,9 @@ We already do this with Prime (buy form + multiply prompt on the asset page). Th
 - Swap interface with limit orders
 
 ### Earn (dropdown + clickable)
+
 Dropdown contents:
-- **Kamino USD** — One-click managed yield (featured/starred)
+- **Kamino USD** — One-click managed yield (featured)
 - **Lending** — Supply assets, earn interest
 - **Private Credit** — Institutional BTC-backed yield
 - **Liquidity** — Automated LP strategies
@@ -87,6 +85,7 @@ Dropdown contents:
 Clicking "Earn" header goes to Earn page with Kamino USD as the first tab and hero section.
 
 ### Borrow (dropdown + clickable)
+
 Dropdown contents:
 - **Markets** — Borrow against your collateral
 - **Multiply** — One-click leveraged positions
@@ -103,19 +102,19 @@ Clicking "Borrow" header goes to Borrow page with Markets and Multiply as equal-
 ## Why This Works
 
 1. **4 items instead of 7+** — Reduces cognitive load while covering all products
-2. **User intent mapping** — Navigation matches what users want to do, not internal product org
-3. **Kamino USD gets prominence** — Featured in dropdown, hero on Earn page, but doesn't need its own nav slot
+2. **User intent mapping** — Navigation matches what users want to do
+3. **Kamino USD gets prominence** — Featured in dropdown, hero on Earn page, without needing its own nav slot
 4. **Multiply stays visible** — Equal treatment with Markets under Borrow, not buried as a sub-feature
 5. **Scales for the future** — New yield products go under Earn, new leverage products go under Borrow
 6. **Serves both user types** — Power users go direct via dropdown, explorers browse via category pages
 
 ---
 
-## What This Enables
+## Future Considerations
 
-This navigation is for the "advanced mode" of the app. After this redesign ships, we'll build a consumer/non-pro mode with an even simpler interface.
+This navigation is for the advanced mode of the app. A consumer/non-pro mode will follow with an even simpler interface.
 
-The structure we've chosen makes this transition easier — the category-based thinking (Earn, Borrow) translates well to a simplified consumer experience where we might just show Kamino USD for yield and hide the complexity entirely.
+The category-based structure (Earn, Borrow) translates well to that simplified experience — potentially showing just Kamino USD for yield and abstracting away the complexity entirely.
 
 ---
 
@@ -125,7 +124,3 @@ The structure we've chosen makes this transition easier — the category-based t
 2. **Borrow page layout** — Tabs vs segmented control for Markets/Multiply?
 3. **Mobile treatment** — Hamburger menu or bottom navigation?
 4. **Assets naming** — Keep "Assets" or use "RWAs"?
-
----
-
-*Last updated: January 2026*
