@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      padding: 16px;
+      margin: 0;
+      background: #ffffff;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    h1 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      color: #000000;
+    }
+    .description {
+      font-size: 12px;
+      color: #666666;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .file-input-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    button {
+      width: 100%;
+      padding: 10px 16px;
+      background: #18a0fb;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #1592e6;
+    }
+    button:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+    }
+    .status {
+      font-size: 12px;
+      padding: 8px;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+    .status.success {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .status.error {
+      background: #ffebee;
+      color: #c62828;
+    }
+    .status.info {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Import FigJam from JSON</h1>
+    <div class="description">
+      Select a JSON file containing your user journey map data. The plugin will create a FigJam diagram with nodes, connections, and color coding.
+    </div>
+    
+    <div class="file-input-wrapper">
+      <input type="file" id="fileInput" accept=".json" />
+    </div>
+    
+    <button id="importButton" disabled>Import to FigJam</button>
+    
+    <div id="status"></div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const importButton = document.getElementById('importButton');
+    const statusDiv = document.getElementById('status');
+    let jsonData = null;
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) {
+        importButton.disabled = true;
+        jsonData = null;
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          jsonData = JSON.parse(event.target.result);
+          importButton.disabled = false;
+          showStatus('File loaded successfully. Ready to import.', 'success');
+        } catch (error) {
+          showStatus('Error parsing JSON: ' + error.message, 'error');
+          importButton.disabled = true;
+          jsonData = null;
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    importButton.addEventListener('click', () => {
+      if (!jsonData) {
+        showStatus('Please select a valid JSON file first.', 'error');
+        return;
+      }
+
+      importButton.disabled = true;
+      showStatus('Importing... This may take a moment.', 'info');
+      
+      parent.postMessage({
+        pluginMessage: {
+          type: 'import-json',
+          data: jsonData
+        }
+      }, '*');
+    });
+
+    function showStatus(message, type) {
+      statusDiv.textContent = message;
+      statusDiv.className = 'status ' + type;
+    }
+
+    // Listen for messages from the plugin
+    window.onmessage = (event) => {
+      const message = event.data.pluginMessage;
+      if (message.type === 'import-complete') {
+        showStatus('Import completed successfully!', 'success');
+        importButton.disabled = false;
+      } else if (message.type === 'import-error') {
+        showStatus('Error: ' + message.error, 'error');
+        importButton.disabled = false;
+      }
+    };
+  </script>
+</body>
+</html>

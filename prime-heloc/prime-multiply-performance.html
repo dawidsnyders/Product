@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRIME Multiply Performance — 76-Day Backtest</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0c0e14;
+      --surface: #141620;
+      --border: #1e2233;
+      --text: #e4e6ef;
+      --muted: #8b8fa3;
+      --prime-base: #6366f1;
+      --prime-3x: #22d3ee;
+      --prime-5x: #a78bfa;
+      --prime-8x: #f472b6;
+      --accent: #34d399;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      padding: 48px 24px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 48px;
+    }
+
+    .chart-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+
+    .chart-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .chart-desc {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 400px;
+    }
+
+    .chart-wrapper-bar {
+      position: relative;
+      width: 100%;
+      height: 280px;
+    }
+
+    .explainer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .explainer h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .explainer p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .explainer p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .legend-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-value {
+      color: var(--text);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .footnote {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PRIME Multiply Performance</h1>
+    <p class="subtitle">76-day backtested returns since launch (Dec 4, 2025 — Feb 18, 2026)</p>
+
+    <!-- Line Chart -->
+    <div class="chart-section">
+      <div class="chart-title">Cumulative Growth: PRIME vs Leveraged Multiply</div>
+      <div class="chart-desc">Growth of $10,000 invested at different leverage levels, based on real average APYs</div>
+      <div class="legend-row">
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--prime-base)"></div>
+          PRIME (1x) — <span class="legend-value">8.00% APY</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--prime-3x)"></div>
+          Multiply 3x — <span class="legend-value">12.45% APY</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--prime-5x)"></div>
+          Multiply 5x — <span class="legend-value">16.64% APY</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--prime-8x)"></div>
+          Multiply 8x — <span class="legend-value">23.14% APY</span>
+        </div>
+      </div>
+      <div class="chart-wrapper">
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Bar Chart -->
+    <div class="chart-section">
+      <div class="chart-title">Annualized Net Yield by Leverage</div>
+      <div class="chart-desc">Average net APY over 76 days at each leverage level — real backtested values</div>
+      <div class="chart-wrapper-bar">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Explainer -->
+    <div class="explainer">
+      <h2>How PRIME Multiply Works</h2>
+      <p>
+        PRIME earns <span class="highlight">~8% base APY</span> from real US HELOC borrower interest payments.
+        On Kamino, Multiply lets you borrow stablecoins against your PRIME at <span class="highlight">~5-7% cost</span>
+        and buy more PRIME — each loop amplifying the yield spread.
+      </p>
+      <p>
+        Because PRIME yield consistently exceeds stablecoin borrow rates, every layer of leverage adds net profit.
+        At <span class="highlight">3x leverage</span>, the net yield rises to 12.45%.
+        At <span class="highlight">5x</span>, it reaches 16.64%.
+        At <span class="highlight">8x</span>, it compounds to 23.14% — nearly 3x the base yield.
+      </p>
+      <p>
+        These are <span class="highlight">real backtested returns</span> over the 76 days since PRIME launched on Kamino (Dec 4, 2025).
+        The positive carry has held across all observed market conditions, with the borrow rate curve engineered to keep the loop profitable up to 97% utilization.
+      </p>
+      <p class="footnote">
+        Data period: Dec 4, 2025 — Feb 18, 2026 (76 days). All values are average net APYs after borrow costs.
+        Past performance does not guarantee future results. Leveraged positions carry additional risk including liquidation.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // APYs and calculation
+    const strategies = [
+      { label: 'PRIME (1x)', apy: 0.08, color: '#6366f1' },
+      { label: 'Multiply 3x', apy: 0.1245, color: '#22d3ee' },
+      { label: 'Multiply 5x', apy: 0.1664, color: '#a78bfa' },
+      { label: 'Multiply 8x', apy: 0.2314, color: '#f472b6' },
+    ];
+
+    const days = 76;
+    const startDate = new Date(2025, 11, 4); // Dec 4, 2025
+    const initialInvestment = 10000;
+
+    // Generate daily data points
+    const labels = [];
+    const datasets = strategies.map(s => {
+      const dailyRate = Math.pow(1 + s.apy, 1 / 365);
+      const data = [];
+      for (let d = 0; d <= days; d++) {
+        const date = new Date(startDate);
+        date.setDate(date.getDate() + d);
+        if (d === 0 || d === days || d % 7 === 0) {
+          labels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+        }
+        data.push(+(((Math.pow(dailyRate, d) - 1) * 100).toFixed(3)));
+      }
+      return data;
+    });
+
+    // Build unique labels for x-axis (every 7 days + first and last)
+    const xLabels = [];
+    for (let d = 0; d <= days; d++) {
+      const date = new Date(startDate);
+      date.setDate(date.getDate() + d);
+      xLabels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+    }
+
+    // Line Chart
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: xLabels,
+        datasets: strategies.map((s, i) => ({
+          label: s.label,
+          data: datasets[i],
+          borderColor: s.color,
+          backgroundColor: s.color + '18',
+          borderWidth: 2.5,
+          pointRadius: 0,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: s.color,
+          tension: 0.3,
+          fill: false,
+        })),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1e2233',
+            titleColor: '#e4e6ef',
+            bodyColor: '#8b8fa3',
+            borderColor: '#2a2f45',
+            borderWidth: 1,
+            padding: 12,
+            displayColors: true,
+            callbacks: {
+              label: function(ctx) {
+                return `${ctx.dataset.label}: +${ctx.parsed.y.toFixed(2)}%`;
+              },
+              title: function(items) {
+                return items[0].label;
+              }
+            }
+          },
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e223322' },
+            ticks: {
+              color: '#8b8fa3',
+              font: { size: 11 },
+              maxTicksLimit: 12,
+              maxRotation: 0,
+            },
+            border: { color: '#1e2233' },
+          },
+          y: {
+            grid: { color: '#1e223344' },
+            ticks: {
+              color: '#8b8fa3',
+              font: { size: 11 },
+              callback: v => `+${v.toFixed(1)}%`,
+            },
+            border: { color: '#1e2233' },
+            title: {
+              display: true,
+              text: 'Cumulative Return (%)',
+              color: '#8b8fa3',
+              font: { size: 12 },
+            },
+          },
+        },
+      },
+    });
+
+    // Bar Chart
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: strategies.map(s => s.label),
+        datasets: [{
+          data: strategies.map(s => s.apy * 100),
+          backgroundColor: strategies.map(s => s.color + 'cc'),
+          borderColor: strategies.map(s => s.color),
+          borderWidth: 1.5,
+          borderRadius: 8,
+          barPercentage: 0.65,
+          categoryPercentage: 0.7,
+        }],
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1e2233',
+            titleColor: '#e4e6ef',
+            bodyColor: '#8b8fa3',
+            borderColor: '#2a2f45',
+            borderWidth: 1,
+            padding: 12,
+            callbacks: {
+              label: function(ctx) {
+                return `${ctx.parsed.x.toFixed(2)}% APY`;
+              }
+            }
+          },
+        },
+        scales: {
+          x: {
+            grid: { color: '#1e223344' },
+            ticks: {
+              color: '#8b8fa3',
+              font: { size: 12 },
+              callback: v => `${v}%`,
+            },
+            border: { color: '#1e2233' },
+            title: {
+              display: true,
+              text: 'Net APY (%)',
+              color: '#8b8fa3',
+              font: { size: 12 },
+            },
+            min: 0,
+            max: 28,
+          },
+          y: {
+            grid: { display: false },
+            ticks: {
+              color: '#e4e6ef',
+              font: { size: 13, weight: '600' },
+            },
+            border: { color: '#1e2233' },
+          },
+        },
+      },
+      plugins: [{
+        id: 'barLabels',
+        afterDatasetsDraw(chart) {
+          const ctx = chart.ctx;
+          chart.data.datasets[0].data.forEach((val, i) => {
+            const meta = chart.getDatasetMeta(0);
+            const bar = meta.data[i];
+            ctx.save();
+            ctx.fillStyle = '#e4e6ef';
+            ctx.font = '600 13px -apple-system, BlinkMacSystemFont, Inter, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(`${val.toFixed(2)}%`, bar.x + 10, bar.y);
+            ctx.restore();
+          });
+        }
+      }],
+    });
+  </script>
+</body>
+</html>

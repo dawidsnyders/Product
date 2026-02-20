@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>PRIME on Kamino — Institutional Product Explainer</title>
+<style>
+  /* ==================== FONTS ==================== */
+  @font-face { font-family: 'Aeonik'; src: url('fonts/aeonik-regular.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Aeonik'; src: url('fonts/aeonik-medium.woff2') format('woff2'); font-weight: 500; }
+  @font-face { font-family: 'Aeonik'; src: url('fonts/aeonik-bold.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Aeonik'; src: url('fonts/aeonik-black.woff2') format('woff2'); font-weight: 900; }
+  @font-face { font-family: 'Aeonik'; src: url('fonts/aeonik-light.woff2') format('woff2'); font-weight: 300; }
+
+  /* ==================== RESET & BASE ==================== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Aeonik', -apple-system, sans-serif; color: #000; background: #e0e0e0; }
+
+  /* ==================== PRINT / PDF ==================== */
+  @page { size: 1440px 810px; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .slide { break-after: page; break-inside: avoid; box-shadow: none !important; margin: 0 !important; }
+  }
+
+  /* ==================== SLIDE BASE ==================== */
+  .slide {
+    width: 1440px; height: 810px;
+    position: relative; overflow: hidden;
+    background: #fff;
+    margin: 20px auto; box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    page-break-after: always;
+  }
+
+  /* ==================== COMMON ELEMENTS ==================== */
+  .footer-logo {
+    position: absolute; bottom: 36px; left: 56px;
+    font-family: 'Aeonik', sans-serif; font-weight: 700; font-size: 20px;
+    color: #000; letter-spacing: -0.02em;
+  }
+  .footer-logo span { font-weight: 900; }
+  .page-num {
+    position: absolute; bottom: 36px; right: 56px;
+    font-size: 15px; color: #999; font-weight: 400;
+  }
+  .slide-icon {
+    position: absolute; top: 40px; right: 56px;
+  }
+
+  /* Kamino-style stacked icon SVG */
+  .k-icon { width: 80px; height: 80px; }
+  .k-icon-sm { width: 60px; height: 60px; }
+
+  /* ==================== COLORS ==================== */
+  :root {
+    --ice: #C8F0F0;
+    --ice-dark: #b0e4e4;
+    --orange: #F47A20;
+    --black: #000000;
+    --gray: #999999;
+    --light-gray: #F5F5F5;
+  }
+
+  /* ==================== TYPOGRAPHY ==================== */
+  .headline {
+    font-weight: 900; letter-spacing: -0.03em; line-height: 1.0;
+    color: var(--black);
+  }
+  .headline-xl { font-size: 72px; }
+  .headline-lg { font-size: 60px; }
+  .headline-md { font-size: 48px; }
+  .headline-sm { font-size: 36px; }
+
+  .body-text { font-size: 16px; line-height: 1.55; font-weight: 400; color: #222; }
+  .body-text-sm { font-size: 14px; line-height: 1.5; font-weight: 400; color: #333; }
+  .label { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); }
+
+  /* ==================== CARD STYLES ==================== */
+  .card {
+    background: var(--ice); padding: 32px; border-radius: 0;
+  }
+  .card-title {
+    font-size: 18px; font-weight: 700; margin-bottom: 16px;
+    padding-left: 14px; border-left: 3px solid #000;
+    line-height: 1.3;
+  }
+  .card-body { font-size: 15px; line-height: 1.55; color: #222; }
+
+  .card-orange { background: var(--orange); color: #fff; }
+  .card-orange .card-body { color: rgba(255,255,255,0.9); }
+  .card-white { background: #fff; }
+
+  /* ==================== STAT CARD ==================== */
+  .stat-card {
+    background: var(--ice); padding: 28px 32px; text-align: left;
+  }
+  .stat-value {
+    font-size: 40px; font-weight: 900; letter-spacing: -0.02em;
+    margin-bottom: 8px; line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 15px; font-weight: 400; color: #444;
+  }
+
+  /* ==================== STEP STYLES ==================== */
+  .step-num {
+    font-size: 20px; font-weight: 700; margin-bottom: 16px; color: #000;
+  }
+  .step-text { font-size: 15px; line-height: 1.5; color: #222; }
+
+  /* ==================== TABLE STYLES ==================== */
+  .data-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  .data-table th {
+    text-align: left; font-weight: 700; font-size: 13px;
+    padding: 10px 14px; border-bottom: 2px solid #000;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .data-table td {
+    padding: 9px 14px; border-bottom: 1px solid #e0e0e0;
+    font-weight: 400;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .val { font-weight: 700; }
+
+  /* ==================== LAYOUT HELPERS ==================== */
+  .flex { display: flex; }
+  .gap-24 { gap: 24px; }
+  .gap-16 { gap: 16px; }
+  .gap-32 { gap: 32px; }
+
+  /* ==================== SLIDE 1: COVER ==================== */
+  .slide-cover {
+    display: flex;
+  }
+  .cover-left {
+    width: 55%; padding: 72px 56px 56px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .cover-right {
+    width: 45%; background: var(--ice); position: relative; display: flex; align-items: center; justify-content: center;
+  }
+  .cover-title { font-size: 86px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 28px; }
+  .cover-subtitle { font-size: 22px; font-weight: 400; color: #444; line-height: 1.45; max-width: 520px; }
+  .cover-date { font-size: 14px; color: var(--gray); font-weight: 400; }
+
+  /* ==================== SLIDE 2: 3-COL VALUE PROP ==================== */
+  .slide-valueprop .top-section {
+    padding: 52px 56px 36px; background: #fff;
+  }
+  .slide-valueprop .bottom-section {
+    background: var(--ice); padding: 36px 56px 56px;
+    display: flex; gap: 24px; flex: 1;
+  }
+  .slide-valueprop .vp-card {
+    flex: 1; background: rgba(255,255,255,0.0); padding: 0;
+  }
+  .slide-valueprop .vp-card-title {
+    font-size: 17px; font-weight: 700; margin-bottom: 20px;
+    padding-left: 14px; border-left: 3px solid #000; line-height: 1.3;
+  }
+  .slide-valueprop .vp-card-body {
+    font-size: 15px; line-height: 1.55; color: #222;
+  }
+
+  /* ==================== SLIDE 3: STATS ==================== */
+  .slide-stats .top-section {
+    padding: 52px 56px 32px; background: #fff;
+  }
+  .slide-stats .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px; padding: 0 56px 0; margin-top: 20px;
+  }
+
+  /* ==================== SLIDE 4: HOW IT WORKS ==================== */
+  .slide-howitworks .top-section {
+    padding: 52px 56px 28px; background: #fff;
+  }
+  .slide-howitworks .steps-section {
+    background: var(--ice); padding: 28px 56px 56px;
+    display: flex; gap: 20px;
+  }
+  .slide-howitworks .step-card {
+    flex: 1; padding: 20px 0;
+  }
+
+  /* ==================== SLIDE 5: FIGURE SPONSOR ==================== */
+  .slide-sponsor {
+    display: flex; flex-direction: column;
+  }
+  .slide-sponsor .top-section {
+    padding: 52px 56px 28px; background: #fff;
+  }
+  .slide-sponsor .content-section {
+    flex: 1; display: flex; padding: 0 56px 56px; gap: 40px;
+  }
+  .slide-sponsor .sponsor-left { width: 42%; }
+  .slide-sponsor .sponsor-right { flex: 1; }
+
+  /* ==================== SLIDE 6: COLLATERAL ==================== */
+  .slide-collateral {
+    display: flex; flex-direction: column;
+  }
+  .slide-collateral .top-section {
+    padding: 48px 56px 20px; background: #fff;
+  }
+  .slide-collateral .content-section {
+    flex: 1; display: flex; padding: 0 56px 56px; gap: 32px;
+  }
+
+  /* ==================== SLIDE 7: SAFETY ==================== */
+  .slide-safety .top-section {
+    padding: 52px 56px 32px; background: #fff;
+  }
+  .slide-safety .cards-section {
+    background: var(--ice); padding: 32px 56px 56px;
+    display: flex; gap: 20px;
+  }
+  .slide-safety .safety-card {
+    flex: 1; background: rgba(255,255,255,0.0); padding: 0;
+  }
+  .slide-safety .safety-card-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1.5px solid #666; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; font-size: 18px;
+  }
+  .slide-safety .safety-card-title {
+    font-size: 16px; font-weight: 700; margin-bottom: 12px; line-height: 1.3;
+  }
+  .slide-safety .safety-card-body {
+    font-size: 14px; line-height: 1.5; color: #333;
+  }
+
+  /* ==================== SLIDE 8: MULTIPLY ==================== */
+  .slide-multiply {
+    display: flex; flex-direction: column;
+  }
+  .slide-multiply .top-section {
+    padding: 52px 56px 24px; background: #fff;
+  }
+  .slide-multiply .content-section {
+    flex: 1; display: flex; padding: 0 56px 56px; gap: 40px;
+  }
+  .slide-multiply .mult-left { width: 45%; }
+  .slide-multiply .mult-right { flex: 1; }
+
+  .yield-bar {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+  }
+  .yield-bar-label { width: 160px; font-size: 14px; font-weight: 500; text-align: right; }
+  .yield-bar-track { flex: 1; height: 36px; background: #eee; border-radius: 0; position: relative; }
+  .yield-bar-fill { height: 100%; border-radius: 0; display: flex; align-items: center; padding-left: 12px; font-size: 13px; font-weight: 700; color: #fff; }
+  .yield-bar-fill.base { background: #222; }
+  .yield-bar-fill.usdc { background: #2563eb; }
+  .yield-bar-fill.cash { background: var(--orange); }
+
+  /* ==================== SLIDE 9: GROWTH ==================== */
+  .slide-growth .top-section {
+    padding: 52px 56px 24px; background: #fff; display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .slide-growth .top-section .headline { max-width: 600px; }
+  .slide-growth .top-section .top-desc { max-width: 500px; font-size: 16px; line-height: 1.55; color: #333; padding-top: 12px; }
+  .slide-growth .stats-row {
+    display: flex; gap: 2px; padding: 24px 56px 20px;
+  }
+  .slide-growth .partners-section {
+    padding: 20px 56px 56px; display: flex; align-items: center; gap: 32px;
+  }
+  .slide-growth .partner-logo {
+    font-size: 17px; font-weight: 700; color: #444; letter-spacing: -0.01em;
+  }
+
+  /* ==================== SLIDE 10: DISCLAIMER ==================== */
+  .slide-disclaimer {
+    background: #000 !important; color: rgba(255,255,255,0.5);
+  }
+  .slide-disclaimer .content {
+    padding: 56px; max-width: 640px;
+  }
+  .slide-disclaimer .disc-title {
+    font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.6); margin-bottom: 20px;
+  }
+  .slide-disclaimer .disc-body {
+    font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.4);
+  }
+  .slide-disclaimer .disc-body p { margin-bottom: 14px; }
+  .slide-disclaimer .footer-logo { color: rgba(255,255,255,0.5); }
+  .slide-disclaimer .page-num { color: rgba(255,255,255,0.3); }
+
+  /* ==================== KAMINO ICON SVG ==================== */
+  .kamino-icon {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== SLIDE 01: COVER ==================== -->
+<section class="slide slide-cover">
+  <div class="cover-left">
+    <div>
+      <div class="cover-title">PRIME<br>on Kamino</div>
+      <div class="cover-subtitle">Institutional-Grade HELOC Yield,<br>Amplified On-Chain</div>
+    </div>
+    <div class="cover-date">February 2026 &nbsp;|&nbsp; Confidential</div>
+  </div>
+  <div class="cover-right">
+    <!-- Kamino stacked icon -->
+    <svg class="kamino-icon" width="200" height="240" viewBox="0 0 200 240" fill="none">
+      <circle cx="100" cy="20" r="8" fill="#fff"/>
+      <circle cx="100" cy="44" r="6" fill="#fff"/>
+      <circle cx="80" cy="44" r="6" fill="#fff"/>
+      <circle cx="120" cy="44" r="6" fill="#fff"/>
+      <circle cx="60" cy="68" r="5" fill="#fff"/>
+      <circle cx="80" cy="68" r="5" fill="#fff"/>
+      <circle cx="100" cy="68" r="5" fill="#fff"/>
+      <circle cx="120" cy="68" r="5" fill="#fff"/>
+      <circle cx="140" cy="68" r="5" fill="#fff"/>
+      <rect x="40" y="100" width="120" height="8" rx="4" fill="#fff"/>
+      <rect x="30" y="118" width="140" height="8" rx="4" fill="#fff"/>
+      <rect x="20" y="136" width="160" height="8" rx="4" fill="#fff"/>
+      <rect x="30" y="158" width="140" height="10" rx="5" fill="#fff"/>
+      <rect x="20" y="178" width="160" height="10" rx="5" fill="#fff"/>
+      <rect x="10" y="198" width="180" height="10" rx="5" fill="#fff"/>
+      <rect x="0" y="220" width="200" height="12" rx="6" fill="#fff"/>
+    </svg>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+</section>
+
+<!-- ==================== SLIDE 02: VALUE PROPOSITION ==================== -->
+<section class="slide slide-valueprop" style="display:flex;flex-direction:column;">
+  <div class="top-section">
+    <div class="headline headline-xl">Real Yield.<br>Real Collateral.<br>Real Exit.</div>
+  </div>
+  <div class="slide-icon">
+    <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+      <circle cx="35" cy="8" r="5" fill="#000"/>
+      <circle cx="25" cy="20" r="4" fill="#000"/>
+      <circle cx="35" cy="20" r="4" fill="#000"/>
+      <circle cx="45" cy="20" r="4" fill="#000"/>
+      <rect x="10" y="32" width="50" height="5" rx="2.5" fill="#000"/>
+      <rect x="5" y="42" width="60" height="5" rx="2.5" fill="#000"/>
+      <rect x="0" y="52" width="70" height="6" rx="3" fill="#000"/>
+      <rect x="0" y="62" width="70" height="6" rx="3" fill="#000"/>
+    </svg>
+  </div>
+  <div class="bottom-section" style="flex:1;">
+    <div class="vp-card">
+      <div class="vp-card-title">What PRIME Is</div>
+      <div class="vp-card-body" style="margin-top: 40px;">
+        A yield-bearing token backed by short-term US HELOC warehouse lending. Delivers 8-9% APY from real homeowner interest payments — not token emissions, not trading fees, not speculation. 100% backed by US Treasury bills under SEC-registered custody.
+      </div>
+    </div>
+    <div class="vp-card">
+      <div class="vp-card-title">How The Yield Works</div>
+      <div class="vp-card-body" style="margin-top: 40px;">
+        T-bill base yield (4-5%) enhanced by warehouse spread (3-4%) earned during the ~42-day hold period before HELOCs exit to AAA-rated securitization. Yield accrues as price appreciation — the vault holds more backing per PRIME over time.
+      </div>
+    </div>
+    <div class="vp-card">
+      <div class="vp-card-title">Why Kamino</div>
+      <div class="vp-card-body" style="margin-top: 40px;">
+        Kamino Multiply amplifies PRIME yield to 11-21% APY via positive carry — borrowing stablecoins at 5-7% against an asset yielding 8-9%. $550M market built in under 3 months with zero incentives. Most popular RWA on Solana.
+      </div>
+    </div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">02</div>
+</section>
+
+<!-- ==================== SLIDE 03: AT A GLANCE ==================== -->
+<section class="slide slide-stats" style="display:flex;flex-direction:column;">
+  <div class="top-section">
+    <div class="headline headline-xl">PRIME at a Glance</div>
+    <div style="margin-top:16px;font-size:17px;color:#555;max-width:700px;line-height:1.5;">
+      PRIME replaces Wall Street warehouse lenders on-chain — a structurally short-duration exposure to high-quality US consumer credit with T-bill capital preservation and full DeFi composability.
+    </div>
+  </div>
+  <div class="slide-icon">
+    <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+      <circle cx="35" cy="8" r="5" fill="#000"/>
+      <circle cx="25" cy="20" r="4" fill="#000"/>
+      <circle cx="35" cy="20" r="4" fill="#000"/>
+      <circle cx="45" cy="20" r="4" fill="#000"/>
+      <rect x="10" y="32" width="50" height="5" rx="2.5" fill="#000"/>
+      <rect x="5" y="42" width="60" height="5" rx="2.5" fill="#000"/>
+      <rect x="0" y="52" width="70" height="6" rx="3" fill="#000"/>
+      <rect x="0" y="62" width="70" height="6" rx="3" fill="#000"/>
+    </svg>
+  </div>
+  <div class="stats-grid" style="flex:1;align-content:center;">
+    <div class="stat-card">
+      <div class="stat-value">~8-9%</div>
+      <div class="stat-label">Base APY from HELOC warehouse lending</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$300M</div>
+      <div class="stat-label">Market capitalization on Solana</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">744+</div>
+      <div class="stat-label">Weighted average FICO score</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">~42 days</div>
+      <div class="stat-label">Average warehouse hold period</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">&lt;1.75%</div>
+      <div class="stat-label">Peak severe delinquency, all vintages (2019-2025)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">7.1 / 10</div>
+      <div class="stat-label">Independent risk rating (A) — Allez Labs</div>
+    </div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">03</div>
+</section>
+
+<!-- ==================== SLIDE 04: HOW IT WORKS ==================== -->
+<section class="slide slide-howitworks" style="display:flex;flex-direction:column;">
+  <div class="top-section" style="display:flex;justify-content:space-between;align-items:flex-start;">
+    <div class="headline headline-xl">How PRIME<br>Works</div>
+    <div style="max-width:440px;padding-top:8px;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:10px;">~42 Day Exposure Window</div>
+      <div style="font-size:15px;line-height:1.5;color:#444;">
+        PRIME lenders are exposed only to the warehouse window — not the 25-year life of the HELOC. By the time a borrower makes their second payment, the loan has already been sold to institutional buyers.
+      </div>
+    </div>
+  </div>
+  <div class="steps-section" style="flex:1;">
+    <div class="step-card" style="background:var(--ice);padding:24px;">
+      <div class="step-num">01</div>
+      <div class="step-text">Figure originates HELOCs to prime US borrowers — 744+ FICO, 62% CLTV, $709K average home value.</div>
+    </div>
+    <div class="step-card" style="background:var(--ice);padding:24px;">
+      <div class="step-num">02</div>
+      <div class="step-text">Licensed originators post HELOCs as collateral into the warehouse facility at 90% LTV with full recourse.</div>
+    </div>
+    <div class="step-card" style="background:var(--ice);padding:24px;">
+      <div class="step-num">03</div>
+      <div class="step-text">DeFi lenders provide capital via hourly Dutch auction and earn 8-9% yield from borrower interest payments.</div>
+    </div>
+    <div class="step-card" style="background:var(--ice);padding:24px;">
+      <div class="step-num">04</div>
+      <div class="step-text">Every ~42 days, HELOCs exit to AAA-rated securitization. Warehouse repaid, fresh loans cycle in.</div>
+    </div>
+    <div class="step-card" style="background:var(--orange);padding:24px;color:#fff;">
+      <div class="step-num" style="color:#fff;">05</div>
+      <div class="step-text" style="color:rgba(255,255,255,0.9);">Yield flows to Solana as the PRIME token via Chainlink CCIP bridge. Fully composable across DeFi.</div>
+    </div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">04</div>
+</section>
+
+<!-- ==================== SLIDE 05: FIGURE SPONSOR ==================== -->
+<section class="slide slide-sponsor">
+  <div class="top-section">
+    <div class="headline headline-lg">Figure Technology<br>Solutions</div>
+    <div style="margin-top:8px;font-size:18px;color:#666;">Nasdaq: FIGR &nbsp;&bull;&nbsp; Largest non-bank HELOC originator in the US</div>
+  </div>
+  <div class="slide-icon">
+    <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+      <circle cx="35" cy="8" r="5" fill="#000"/>
+      <circle cx="25" cy="20" r="4" fill="#000"/>
+      <circle cx="35" cy="20" r="4" fill="#000"/>
+      <circle cx="45" cy="20" r="4" fill="#000"/>
+      <rect x="10" y="32" width="50" height="5" rx="2.5" fill="#000"/>
+      <rect x="5" y="42" width="60" height="5" rx="2.5" fill="#000"/>
+      <rect x="0" y="52" width="70" height="6" rx="3" fill="#000"/>
+      <rect x="0" y="62" width="70" height="6" rx="3" fill="#000"/>
+    </svg>
+  </div>
+  <div class="content-section">
+    <div class="sponsor-left">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:24px;">
+        <div class="stat-card" style="padding:22px 24px;">
+          <div class="stat-value" style="font-size:34px;">$505M+</div>
+          <div class="stat-label">FY2025 Revenue</div>
+        </div>
+        <div class="stat-card" style="padding:22px 24px;">
+          <div class="stat-value" style="font-size:34px;">$132M</div>
+          <div class="stat-label">FY2025 Net Income</div>
+        </div>
+        <div class="stat-card" style="padding:22px 24px;">
+          <div class="stat-value" style="font-size:34px;">$1.1B</div>
+          <div class="stat-label">Cash Position</div>
+        </div>
+        <div class="stat-card" style="padding:22px 24px;">
+          <div class="stat-value" style="font-size:34px;">$22B+</div>
+          <div class="stat-label">Total Originated</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:#888;line-height:1.5;">
+        IPO underwritten by Goldman Sachs, Jefferies, BofA Securities.<br>
+        Securitization partners: Goldman Sachs, JPMorgan, Barclays.
+      </div>
+    </div>
+    <div class="sponsor-right" style="background:var(--ice);padding:32px;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:20px;">7-Year Through-Cycle Track Record</div>
+      <div style="font-size:14.5px;line-height:1.65;color:#222;">
+        <div style="margin-bottom:14px;"><strong>2020-2021 (COVID):</strong> Continued originations, &lt;2% delinquencies. No capital losses.</div>
+        <div style="margin-bottom:14px;"><strong>2022-2023 (Rate hikes 0&rarr;5.25%):</strong> Some unprofitable quarters, zero capital losses to investors.</div>
+        <div style="margin-bottom:14px;"><strong>2023 (Banking crisis):</strong> Maintained securitization access throughout.</div>
+        <div style="margin-bottom:14px;"><strong>H2 2025:</strong> $946M in AAA-rated securitizations. 58% net margin.</div>
+        <div><strong>FY2025:</strong> $8.4B marketplace volume (+63% YoY). Q4 volume $2.7B (+131% YoY).</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">05</div>
+</section>
+
+<!-- ==================== SLIDE 06: COLLATERAL QUALITY ==================== -->
+<section class="slide slide-collateral">
+  <div class="top-section">
+    <div class="headline headline-lg">Collateral Quality &<br>Credit Performance</div>
+  </div>
+  <div class="slide-icon">
+    <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+      <circle cx="35" cy="8" r="5" fill="#000"/>
+      <circle cx="25" cy="20" r="4" fill="#000"/>
+      <circle cx="35" cy="20" r="4" fill="#000"/>
+      <circle cx="45" cy="20" r="4" fill="#000"/>
+      <rect x="10" y="32" width="50" height="5" rx="2.5" fill="#000"/>
+      <rect x="5" y="42" width="60" height="5" rx="2.5" fill="#000"/>
+      <rect x="0" y="52" width="70" height="6" rx="3" fill="#000"/>
+      <rect x="0" y="62" width="70" height="6" rx="3" fill="#000"/>
+    </svg>
+  </div>
+  <div class="content-section">
+    <div style="width:48%;">
+      <div style="font-size:16px;font-weight:700;margin-bottom:16px;">Borrower Profile</div>
+      <table class="data-table">
+        <tr><td>Weighted Avg. FICO</td><td class="val">744-754</td></tr>
+        <tr><td>Average Home Value</td><td class="val">$709,085</td></tr>
+        <tr><td>Average Borrower Income</td><td class="val">$182K-$195K</td></tr>
+        <tr><td>Combined LTV</td><td class="val">62-65%</td></tr>
+        <tr><td>Debt-to-Income</td><td class="val">36.6%</td></tr>
+        <tr><td>Weighted Avg. Coupon</td><td class="val">9.0-9.2%</td></tr>
+        <tr><td>Average Loan Size</td><td class="val">~$90,000</td></tr>
+        <tr><td>Loan Type</td><td class="val">Fixed-rate, fully amortizing</td></tr>
+      </table>
+      <div style="margin-top:16px;font-size:13px;color:#888;line-height:1.5;">
+        744+ FICO = ~60th percentile of US credit scores. Firmly prime — well above the subprime borrowers that drove 2008 losses.
+      </div>
+    </div>
+    <div style="flex:1;">
+      <div style="background:var(--ice);padding:28px;height:100%;display:flex;flex-direction:column;">
+        <div style="font-size:16px;font-weight:700;margin-bottom:14px;">Historical Loss Performance</div>
+        <div style="font-size:14.5px;line-height:1.6;color:#222;flex:1;">
+          <p style="margin-bottom:12px;">Cumulative severe delinquency (180+ DPD) across <strong>all vintages 2019-2025 peaks below 1.75%</strong>. This is the standard measure used in structured finance — effectively a proxy for default.</p>
+          <p style="margin-bottom:12px;"><strong>Realized cumulative gross loss across all Figure originations: &lt;1.25%</strong></p>
+          <p style="margin-bottom:12px;">All vintage curves flatten — the loss window is finite. Recent vintages (2024-2025) track at or below prior cohorts despite macro headwinds.</p>
+          <p style="margin-bottom:12px;">Performance is consistent across all macro environments: pre-COVID (2019), COVID (2020), rate shock (2022), elevated rates (2024-25).</p>
+        </div>
+        <div style="margin-top:auto;padding-top:14px;border-top:1px solid rgba(0,0,0,0.1);font-size:13px;font-weight:600;color:#333;">
+          Securitization exit consistently receives AAA ratings from S&P, Moody's, DBRS Morningstar, and KBRA.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">06</div>
+</section>
+
+<!-- ==================== SLIDE 07: SAFETY ARCHITECTURE ==================== -->
+<section class="slide slide-safety" style="display:flex;flex-direction:column;">
+  <div class="top-section">
+    <div class="headline headline-xl">Built for Capital<br>Preservation.</div>
+    <div style="margin-top:12px;font-size:16px;color:#555;max-width:680px;line-height:1.5;">
+      Risk manifests as yield volatility, not capital loss. Multiple independent protection layers from warehouse to regulatory to custody.
+    </div>
+  </div>
+  <div class="cards-section" style="flex:1;">
+    <div class="safety-card">
+      <div class="safety-card-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 6v6c0 4 3.5 6.5 7 8 3.5-1.5 7-4 7-8V6l-7-4z" stroke="#000" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <div class="safety-card-title">Overcollateralization & Auto-Markdown</div>
+      <div class="safety-card-body">
+        HELOCs valued at $1.03 enter at $1.00; max advance $0.90 (90% LTV). Any HELOC 30+ days delinquent is immediately marked to $0. At 93% LLTV breach, collateral is seized and auctioned. Full recourse to licensed originators.
+      </div>
+    </div>
+    <div class="safety-card">
+      <div class="safety-card-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#000" stroke-width="1.5" fill="none"/><path d="M2 8h16" stroke="#000" stroke-width="1.5"/></svg>
+      </div>
+      <div class="safety-card-title">SEC 1940 Act Registration</div>
+      <div class="safety-card-body">
+        YLDS is the first SEC-registered yield-bearing stablecoin. Daily NAV mandated by SEC. Public prospectus. Independent directors. Contractual redemption rights enforceable in federal court. Same framework governing mutual funds.
+      </div>
+    </div>
+    <div class="safety-card">
+      <div class="safety-card-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="8" width="14" height="10" rx="2" stroke="#000" stroke-width="1.5" fill="none"/><path d="M6 8V5a4 4 0 018 0v3" stroke="#000" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <div class="safety-card-title">Qualified Custody (UMB Bank)</div>
+      <div class="safety-card-body">
+        70-year-old Fed-regulated national bank. $70B+ assets under custody. Overseen by Federal Reserve and OCC. Segregated, bankruptcy-remote structures. Daily reconciliation and independent verification.
+      </div>
+    </div>
+    <div class="safety-card">
+      <div class="safety-card-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#000" stroke-width="1.5" fill="none"/><path d="M10 6v4l3 2" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="safety-card-title">Short Duration (~42 Days)</div>
+      <div class="safety-card-body">
+        Exposure rolls continuously through the warehouse window. By the second borrower payment (~day 60), the HELOC has already been securitized and exited PRIME. No long-duration credit risk.
+      </div>
+    </div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">07</div>
+</section>
+
+<!-- ==================== SLIDE 08: PRIME MULTIPLY ON KAMINO ==================== -->
+<section class="slide slide-multiply">
+  <div class="top-section">
+    <div class="headline headline-lg">PRIME Multiply<br>on Kamino</div>
+    <div style="margin-top:8px;font-size:16px;color:#555;">Amplify PRIME yield through positive carry — the rational spread between collateral yield and borrow cost.</div>
+  </div>
+  <div class="slide-icon">
+    <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+      <circle cx="35" cy="8" r="5" fill="#000"/>
+      <circle cx="25" cy="20" r="4" fill="#000"/>
+      <circle cx="35" cy="20" r="4" fill="#000"/>
+      <circle cx="45" cy="20" r="4" fill="#000"/>
+      <rect x="10" y="32" width="50" height="5" rx="2.5" fill="#000"/>
+      <rect x="5" y="42" width="60" height="5" rx="2.5" fill="#000"/>
+      <rect x="0" y="52" width="70" height="6" rx="3" fill="#000"/>
+      <rect x="0" y="62" width="70" height="6" rx="3" fill="#000"/>
+    </svg>
+  </div>
+  <div class="content-section">
+    <div class="mult-left">
+      <div style="background:var(--ice);padding:28px;margin-bottom:20px;">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px;">How It Works</div>
+        <div style="font-size:14.5px;line-height:1.6;color:#222;">
+          <div style="margin-bottom:10px;"><strong>1.</strong> &nbsp;Deposit PRIME as collateral (earning ~8% base yield)</div>
+          <div style="margin-bottom:10px;"><strong>2.</strong> &nbsp;Borrow stablecoins against it (paying ~5-7%)</div>
+          <div style="margin-bottom:10px;"><strong>3.</strong> &nbsp;Buy more PRIME with borrowed stablecoins</div>
+          <div style="margin-bottom:10px;"><strong>4.</strong> &nbsp;Repeat — up to 9x in a single transaction</div>
+        </div>
+      </div>
+      <div style="font-size:14px;line-height:1.55;color:#444;">
+        <strong>86% of all PRIME on Kamino flows through Multiply.</strong> This is the dominant use case and primary source of PRIME demand.
+      </div>
+      <div style="margin-top:16px;font-size:13px;color:#888;">
+        Borrow utilization capped at 90%, preventing unfavorable rate compression.
+      </div>
+    </div>
+    <div class="mult-right">
+      <div style="font-size:16px;font-weight:700;margin-bottom:20px;">Yield Performance</div>
+      <div style="margin-bottom:28px;">
+        <div class="yield-bar">
+          <div class="yield-bar-label">Base PRIME</div>
+          <div class="yield-bar-track"><div class="yield-bar-fill base" style="width:38%;">~8% APY</div></div>
+        </div>
+        <div class="yield-bar">
+          <div class="yield-bar-label">USDC Multiply</div>
+          <div class="yield-bar-track"><div class="yield-bar-fill usdc" style="width:100%;">11.3% – 21.0% APY</div></div>
+        </div>
+        <div class="yield-bar">
+          <div class="yield-bar-label">CASH Multiply</div>
+          <div class="yield-bar-track"><div class="yield-bar-fill cash" style="width:74%;">9.9% – 15.5% APY</div></div>
+        </div>
+      </div>
+      <div style="background:var(--ice);padding:24px;">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px;">Tranche-Like Risk Structure</div>
+        <table class="data-table" style="font-size:13px;">
+          <tr><th>Role</th><th>Risk</th><th>Yield</th></tr>
+          <tr><td>Multiply (Junior)</td><td>First loss</td><td class="val">11-21%</td></tr>
+          <tr><td>Stablecoin Lenders (Senior)</td><td>Protected by loopers</td><td class="val">4.8-5.6%</td></tr>
+          <tr><td>PRIME Holders (Base)</td><td>Direct exposure</td><td class="val">~8%</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">08</div>
+</section>
+
+<!-- ==================== SLIDE 09: GROWTH & VALIDATION ==================== -->
+<section class="slide slide-growth" style="display:flex;flex-direction:column;">
+  <div class="top-section">
+    <div class="headline headline-xl" style="max-width:560px;">Fastest-Growing<br>RWA on Solana.</div>
+    <div class="top-desc">
+      Zero to $550M in under 3 months. Growth driven entirely by native yield demand — no liquidity mining, no token emissions, no artificial subsidies.
+    </div>
+  </div>
+  <div class="stats-row" style="flex:0;">
+    <div class="stat-card" style="flex:1;">
+      <div class="stat-value" style="font-size:36px;">$550M</div>
+      <div class="stat-label">Kamino PRIME Market (Feb 2026)</div>
+    </div>
+    <div class="stat-card" style="flex:1;">
+      <div class="stat-value" style="font-size:36px;">~45%</div>
+      <div class="stat-label">Month-over-Month Growth</div>
+    </div>
+    <div class="stat-card" style="flex:1;">
+      <div class="stat-value" style="font-size:36px;">$230M</div>
+      <div class="stat-label">Total Borrowed</div>
+    </div>
+    <div class="stat-card" style="flex:1;">
+      <div class="stat-value" style="font-size:36px;">Zero</div>
+      <div class="stat-label">Bad Debt</div>
+    </div>
+  </div>
+  <div style="flex:1;padding:16px 56px;display:flex;gap:24px;">
+    <div style="flex:1;background:var(--ice);padding:24px;">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;">Capacity Headroom</div>
+      <div style="font-size:13.5px;line-height:1.55;color:#333;">
+        Figure's $8.4B annual volume provides substantial runway. Current PRIME market cap (~$300M) represents &lt;25% of estimated Demo Prime eligible capacity. Demand currently exceeds lender supply — $288M borrower demand vs $263M available.
+      </div>
+    </div>
+    <div style="flex:1;background:var(--ice);padding:24px;">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;">Independent Risk Rating</div>
+      <div style="font-size:13.5px;line-height:1.55;color:#333;">
+        Allez Labs rated PRIME <strong>7.1/10 (A) — Approved</strong> in Jan 2026. Highest scores: Regulatory (8.5/AA), Dependency Resilience (8.5/AA), Backing Quality (8.0/AA), Team (8.0/AA). Pre-launch audit by Informal Systems. Zero incidents across 75+ days and $300M TVL.
+      </div>
+    </div>
+    <div style="flex:1;background:var(--ice);padding:24px;">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;">RWA Ecosystem</div>
+      <div style="font-size:13.5px;line-height:1.55;color:#333;">
+        Purpose-built consortium: Kamino (lending & Multiply), Chainlink (oracle + CCIP bridge), Raydium ($75M DEX liquidity), CASH by Stripe (stablecoin), Gauntlet (risk management), Exponent (yield stripping).
+      </div>
+    </div>
+  </div>
+  <div class="partners-section">
+    <div class="label" style="font-size:11px;">INSTITUTIONAL PARTNERS</div>
+    <div class="partner-logo">FIGURE</div>
+    <div class="partner-logo" style="font-weight:400;">Goldman Sachs</div>
+    <div class="partner-logo" style="font-weight:400;">JPMorgan</div>
+    <div class="partner-logo" style="font-weight:400;">Sixth Street</div>
+    <div class="partner-logo" style="font-weight:400;">Chainlink</div>
+    <div class="partner-logo" style="font-weight:400;">Ondo Finance</div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">09</div>
+</section>
+
+<!-- ==================== SLIDE 10: DISCLAIMER ==================== -->
+<section class="slide slide-disclaimer">
+  <div class="content">
+    <div class="disc-title">Disclaimer</div>
+    <div class="disc-body">
+      <p>This presentation is for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation for any security, token, or financial instrument, nor does it constitute investment, legal, tax, or other professional advice.</p>
+      <p>The information contained herein is preliminary and subject to change without notice. Forward-looking statements involve known and unknown risks, uncertainties, and other factors that may cause actual results to differ materially from those expressed or implied.</p>
+      <p>Past performance is not indicative of future results. Digital assets involve significant risks, including but not limited to market volatility, regulatory uncertainty, technological vulnerabilities, and potential loss of principal. Prospective participants should conduct their own due diligence and consult with qualified legal, tax, and financial advisors before making any decisions.</p>
+      <p>This document is confidential and intended solely for the recipient. Distribution, reproduction, or disclosure to third parties without prior written consent is prohibited.</p>
+    </div>
+  </div>
+  <div class="footer-logo"><span>k</span>amino</div>
+  <div class="page-num">10</div>
+</section>
+
+</body>
+</html>

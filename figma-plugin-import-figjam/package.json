@@ -1,0 +1,14 @@
+{
+  "name": "figma-plugin-import-figjam",
+  "version": "1.0.0",
+  "description": "Import user journey maps from JSON into FigJam",
+  "scripts": {
+    "prebuild": "node build.js",
+    "build": "tsc",
+    "watch": "npm run prebuild && tsc --watch"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.88.0",
+    "typescript": "^5.0.0"
+  }
+}
