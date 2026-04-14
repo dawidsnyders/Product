@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFi Saver UX Analysis — Strategic Input for Kamino's Loan Dashboard</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2333;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --orange: #d29922;
+    --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  .hero {
+    background: linear-gradient(135deg, #1a2332 0%, #0d1117 50%, #1a1a2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.4em;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-size: 1.15em;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hero .meta {
+    margin-top: 20px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 30px;
+  }
+  h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin: 50px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    color: var(--accent);
+  }
+  h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 30px 0 12px;
+    color: var(--text);
+  }
+  h4 {
+    font-size: 1.05em;
+    font-weight: 600;
+    margin: 20px 0 8px;
+    color: var(--purple);
+  }
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .section-intro {
+    font-size: 1.05em;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  /* Comparison table */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 30px;
+    font-size: 0.92em;
+  }
+  .comparison-table th {
+    background: var(--surface2);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    color: var(--accent);
+  }
+  .comparison-table td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    vertical-align: top;
+  }
+  .comparison-table tr:hover td {
+    background: var(--surface2);
+  }
+  .yes { color: var(--green); font-weight: 600; }
+  .no { color: var(--red); font-weight: 600; }
+  .partial { color: var(--orange); font-weight: 600; }
+
+  /* Feature cards */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .feature-card h4 {
+    margin: 0 0 8px;
+    color: var(--accent);
+  }
+  .feature-card p {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .feature-card .tag {
+    display: inline-block;
+    font-size: 0.75em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .tag-adopt { background: rgba(63,185,80,0.15); color: var(--green); }
+  .tag-adapt { background: rgba(210,153,34,0.15); color: var(--orange); }
+  .tag-avoid { background: rgba(248,81,73,0.15); color: var(--red); }
+  .tag-unique { background: rgba(188,140,255,0.15); color: var(--purple); }
+
+  /* Callout boxes */
+  .callout {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-left: 4px solid;
+  }
+  .callout-insight {
+    background: rgba(88,166,255,0.08);
+    border-color: var(--accent);
+  }
+  .callout-action {
+    background: rgba(63,185,80,0.08);
+    border-color: var(--green);
+  }
+  .callout-warning {
+    background: rgba(210,153,34,0.08);
+    border-color: var(--orange);
+  }
+  .callout strong {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* IA Diagram */
+  .ia-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 20px 0;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.85em;
+    line-height: 1.8;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--text-muted);
+  }
+  .ia-diagram .highlight { color: var(--accent); font-weight: 600; }
+  .ia-diagram .dim { color: #484f58; }
+  .ia-diagram .green { color: var(--green); }
+  .ia-diagram .orange { color: var(--orange); }
+  .ia-diagram .purple { color: var(--purple); }
+
+  /* Priority matrix */
+  .priority-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .priority-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .priority-box h4 {
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 12px;
+  }
+  .priority-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .priority-box li {
+    padding: 6px 0;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+  }
+  .priority-box li:last-child { border: none; }
+
+  /* Flow diagram */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+  .flow-arrow {
+    color: var(--accent);
+    font-size: 1.1em;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 30px;
+    margin: 30px 0;
+  }
+  .toc h3 { margin: 0 0 12px; color: var(--text); }
+  .toc ol {
+    padding-left: 20px;
+    color: var(--text-muted);
+  }
+  .toc li {
+    padding: 4px 0;
+  }
+  .toc a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .toc a:hover { text-decoration: underline; }
+
+  a { color: var(--accent); }
+
+  /* Collapsible screenshot sections */
+  details {
+    margin: 24px 0;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    background: rgba(22, 27, 34, 0.5);
+  }
+  details[open] {
+    background: var(--surface);
+  }
+  summary {
+    cursor: pointer;
+    padding: 12px 16px;
+    user-select: none;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  summary::before {
+    content: "▸";
+    display: inline-block;
+    transition: transform 0.2s;
+    color: var(--accent);
+    font-size: 1.2em;
+  }
+  details[open] summary::before {
+    transform: rotate(90deg);
+  }
+  summary:hover {
+    background: rgba(88, 166, 255, 0.05);
+  }
+  .screenshot-mockup {
+    padding: 24px;
+    background: var(--bg);
+    border-top: 1px dashed var(--border);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Sidebar mockup */
+  .sidebar-mockup {
+    display: flex;
+    gap: 16px;
+  }
+  .sidebar-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    width: 220px;
+    font-size: 0.85em;
+  }
+  .sidebar-title {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+  }
+  .sidebar-item {
+    padding: 6px 0;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+  }
+  .sidebar-item:last-child {
+    border: none;
+  }
+  .sidebar-item.active {
+    color: var(--accent);
+    font-weight: 600;
+    background: rgba(88, 166, 255, 0.08);
+    padding: 6px 8px;
+    margin: 0 -8px;
+    border-radius: 4px;
+  }
+  .main-content-mockup {
+    flex: 1;
+  }
+  .nav-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 24px;
+    font-size: 0.9em;
+  }
+  .nav-tab {
+    color: var(--text-muted);
+    padding-bottom: 8px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+  .nav-tab.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+  .selector-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 16px;
+    font-size: 0.85em;
+  }
+  .selector {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: var(--text);
+  }
+
+  /* Form mockup */
+  .form-mockup {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 16px;
+  }
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .form-field {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+  }
+  .field-label {
+    font-size: 0.75em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .field-input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px;
+    color: var(--text);
+    font-family: monospace;
+  }
+  .form-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 12px;
+  }
+  .form-tab {
+    padding: 8px 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.85em;
+    flex: 1;
+    text-align: center;
+  }
+  .form-tab.active {
+    background: var(--surface);
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .preview-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 0.8em;
+  }
+  .preview-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+  }
+  .preview-item:last-child {
+    border: none;
+  }
+  .preview-label {
+    color: var(--text-muted);
+  }
+  .preview-value {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Dashboard mockup */
+  .dashboard-mockup {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 16px;
+  }
+  .overview-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .metric {
+    display: flex;
+    flex-direction: column;
+  }
+  .metric-value {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .metric-label {
+    font-size: 0.75em;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .actions-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .action-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+  }
+  .action-tab {
+    padding: 6px 12px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.85em;
+    border-bottom: 2px solid transparent;
+  }
+  .action-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .sub-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .sub-action-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    cursor: pointer;
+  }
+  .sub-action-btn:hover {
+    background: rgba(88, 166, 255, 0.1);
+  }
+  .sidebar-panel-small {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 0.8em;
+  }
+  .sidebar-metric {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.3);
+  }
+  .sidebar-metric:last-child {
+    border: none;
+  }
+
+  /* Automation mockup */
+  .automation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .automation-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .automation-card:hover {
+    border-color: var(--accent);
+  }
+  .automation-icon {
+    font-size: 1.8em;
+    margin-bottom: 6px;
+  }
+  .automation-name {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .ratio-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+  .bar-container {
+    background: linear-gradient(90deg, #f85149 0%, #d29922 30%, #3fb950 50%, #3fb950 80%, #d29922 90%, #f85149 100%);
+    height: 30px;
+    border-radius: 4px;
+    position: relative;
+    margin: 12px 0;
+  }
+  .bar-marker {
+    position: absolute;
+    top: -8px;
+    width: 2px;
+    height: 46px;
+    background: var(--accent);
+  }
+  .bar-label {
+    position: absolute;
+    top: -20px;
+    font-size: 0.75em;
+    color: var(--accent);
+    transform: translateX(-50%);
+  }
+  .bar-current {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .ratio-legend {
+    display: flex;
+    gap: 20px;
+    margin: 12px 0;
+    font-size: 0.8em;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
+
+  /* Recipe creator mockup */
+  .canvas-mockup {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px;
+    text-align: center;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    margin: 12px 0;
+  }
+  .protocol-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .protocol-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 0.8em;
+  }
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .recipe-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 0.75em;
+    cursor: pointer;
+  }
+  .recipe-card:hover {
+    border-color: var(--accent);
+    background: rgba(88, 166, 255, 0.05);
+  }
+
+  /* Useful links box */
+  .useful-links {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 0.8em;
+    margin-top: 16px;
+  }
+  .links-stat {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .links-label {
+    color: var(--text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero { padding: 40px 20px; }
+    .hero h1 { font-size: 1.6em; }
+    .container { padding: 20px 16px; }
+    .priority-matrix { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .form-mockup { grid-template-columns: 1fr; }
+    .dashboard-mockup { grid-template-columns: 1fr; }
+    .sidebar-mockup { flex-direction: column; }
+    .sidebar-panel { width: 100%; }
+    .overview-section { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>DeFi Saver UX Analysis</h1>
+  <p class="subtitle">Strategic competitive analysis for Kamino Finance's Loan Dashboard evolution — covering information architecture, core actions, automation, and composability</p>
+  <p class="meta">March 2026 · Prepared for Kamino Product Team</p>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#exec">Executive Summary</a></li>
+    <li><a href="#ia">Information Architecture Comparison</a></li>
+    <li><a href="#creation">Position Creation: Borrow/Leverage Unification</a></li>
+    <li><a href="#actions">Core Position Actions</a></li>
+    <li><a href="#automation">Automation UX</a></li>
+    <li><a href="#composability">Composability &amp; Advanced Features</a></li>
+    <li><a href="#comparison">Feature-by-Feature Comparison</a></li>
+    <li><a href="#recommendations">Strategic Recommendations for Kamino</a></li>
+    <li><a href="#roadmap">Suggested Roadmap</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="exec">1. Executive Summary</h2>
+<!-- ============================================================ -->
+
+<p>DeFi Saver is the most mature DeFi position management interface on Ethereum, supporting 12 lending protocols through a unified dashboard pattern. After thorough hands-on exploration in simulation mode, this analysis identifies specific UX patterns and architectural decisions that Kamino should adopt, adapt, or avoid as it evolves its Loan Dashboard.</p>
+
+<div class="callout callout-insight">
+  <strong>Key Finding</strong>
+  DeFi Saver's biggest UX advantage is not any single feature — it's the <em>unified action model</em>. Borrow and Leverage live as tabs in the same creation flow. Supply, Withdraw, Borrow, Repay, Boost, and Shift are all inline on the manage page, never hidden behind separate modals or routes. This is the single most impactful pattern Kamino should adopt.
+</div>
+
+<p>Kamino's current Loan Dashboard has strong analytics (scenario analysis, stress testing, LTV charts) that DeFi Saver completely lacks. But it falls short on actionability — the gap between "seeing the risk" and "doing something about it" is too wide. DeFi Saver closes that gap with inline actions, composable transactions, and automation triggers that live right next to the position overview.</p>
+
+<!-- ============================================================ -->
+<h2 id="ia">2. Information Architecture Comparison</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">How each platform organizes navigation, protocol context, and position management across their interfaces.</p>
+
+<h3>DeFi Saver: Protocol-First IA</h3>
+
+<div class="ia-diagram"><span class="highlight">DeFi Saver</span>
+<span class="dim">├──</span> <span class="green">Left Sidebar (persistent)</span>
+<span class="dim">│   ├──</span> Search
+<span class="dim">│   ├──</span> Portfolio
+<span class="dim">│   ├──</span> Discover / Trending
+<span class="dim">│   ├──</span> <span class="orange">PROTOCOLS</span> (12): Aave, Compound, MakerDAO, Spark, Fluid,
+<span class="dim">│   │                     </span> Morpho, Liquity V2, Sky, crvUSD, Llamalend,
+<span class="dim">│   │                     </span> Liquity V1, Euler V2
+<span class="dim">│   └──</span> <span class="purple">TOOLS</span>: Smart Savings, Exchange (Limit/DCA),
+<span class="dim">│                </span> Loan Shifter, Recipe Creator, Bridge
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="green">Top Nav (per protocol, 5 tabs)</span>
+<span class="dim">│   ├──</span> <span class="highlight">Manage</span>     → Position overview + inline ACTIONS
+<span class="dim">│   ├──</span> <span class="highlight">Automate</span>   → 6 automation strategy configs
+<span class="dim">│   ├──</span> Stake (NEW)
+<span class="dim">│   ├──</span> Notify     → Alert configuration
+<span class="dim">│   └──</span> History    → Transaction log
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="green">Protocol Selector</span> (top-right): Aave v3 Core ▾
+<span class="dim">└──</span> <span class="green">Wallet Selector</span> (top-right): Safe SW ▾ / Account ▾</div>
+
+<h3>Kamino: Tab-Based Dashboard IA</h3>
+
+<div class="ia-diagram"><span class="highlight">Kamino Loan Dashboard</span>
+<span class="dim">├──</span> <span class="green">Top-level Products</span> (separate routes)
+<span class="dim">│   ├──</span> Borrow    → Loan Dashboard
+<span class="dim">│   ├──</span> Multiply  → Separate product, different UX
+<span class="dim">│   └──</span> Lend      → Supply-side
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="green">Dashboard Tabs</span> (5 tabs, analytics-heavy)
+<span class="dim">│   ├──</span> <span class="highlight">Loan &amp; Market Overview</span>  → Supplied/borrowed assets, market table
+<span class="dim">│   ├──</span> <span class="highlight">Loan Analytics</span>         → Health, borrow power, LTV chart
+<span class="dim">│   ├──</span> <span class="highlight">Liquidation &amp; Risk</span>     → Risk summary, market impact table
+<span class="dim">│   ├──</span> Scenario Analysis       → Historical stress tests (FTX, LUNA)
+<span class="dim">│   └──</span> Transaction History     → Simple table
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="orange">Actions</span> (modal-based, triggered from 3-dot menus)
+<span class="dim">│   ├──</span> Supply modal
+<span class="dim">│   ├──</span> Withdraw modal
+<span class="dim">│   ├──</span> Repay modal (with "Repay With Collateral" tab)
+<span class="dim">│   └──</span> Borrow modal
+<span class="dim">│</span>
+<span class="dim">└──</span> <span class="red">Missing</span>: No automation, no notifications, no composability</div>
+
+<details>
+  <summary>View: DeFi Saver Sidebar & Navigation</summary>
+  <div class="screenshot-mockup">
+    <div class="sidebar-mockup">
+      <div class="sidebar-panel">
+        <div class="sidebar-title">Search</div>
+        <div style="margin-bottom: 20px;">🔍</div>
+        <div class="sidebar-title">Portfolio</div>
+        <div class="sidebar-item">My Positions</div>
+        <div style="margin-bottom: 20px; padding: 6px 0; border-bottom: 1px solid rgba(48, 54, 61, 0.3);"></div>
+        <div class="sidebar-title">Discover</div>
+        <div class="sidebar-item">Trending</div>
+        <div style="margin-bottom: 20px; padding: 6px 0; border-bottom: 1px solid rgba(48, 54, 61, 0.3);"></div>
+        <div class="sidebar-title">Protocols</div>
+        <div class="sidebar-item active">⭕ Aave</div>
+        <div class="sidebar-item">◯ Compound</div>
+        <div class="sidebar-item">◯ MakerDAO</div>
+        <div class="sidebar-item">◯ Spark</div>
+        <div class="sidebar-item">◯ Fluid</div>
+        <div class="sidebar-item">◯ Morpho</div>
+        <div class="sidebar-item">◯ Liquity V2</div>
+        <div class="sidebar-item">◯ Sky</div>
+        <div class="sidebar-item">◯ crvUSD</div>
+        <div class="sidebar-item">◯ Llamalend</div>
+        <div class="sidebar-item">◯ Liquity V1</div>
+        <div class="sidebar-item">◯ Euler V2</div>
+        <div style="margin-bottom: 20px; padding: 6px 0; border-bottom: 1px solid rgba(48, 54, 61, 0.3);"></div>
+        <div class="sidebar-title">Tools</div>
+        <div class="sidebar-item">Smart Savings</div>
+        <div class="sidebar-item">Exchange</div>
+        <div class="sidebar-item">Loan Shifter</div>
+        <div class="sidebar-item">Recipe Creator</div>
+        <div class="sidebar-item">Bridge</div>
+      </div>
+      <div class="main-content-mockup">
+        <div class="selector-bar">
+          <div class="selector">Aave v3 Core ▾</div>
+          <div class="selector">Safe SW ▾</div>
+        </div>
+        <div class="nav-bar">
+          <div class="nav-tab active">Manage</div>
+          <div class="nav-tab">Automate</div>
+          <div class="nav-tab">Stake NEW</div>
+          <div class="nav-tab">Notify</div>
+          <div class="nav-tab">History</div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 24px; text-align: center; color: var(--text-muted); min-height: 200px; display: flex; align-items: center; justify-content: center;">
+          [Dashboard content with positions, actions, and analytics below]
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<div class="callout callout-insight">
+  <strong>IA Insight</strong>
+  DeFi Saver organizes by <em>what you can do</em> (Manage → Automate → Notify). Kamino organizes by <em>what you can see</em> (Overview → Analytics → Risk). Both are valid, but Kamino's approach creates a gap: after seeing a dangerous LTV on the Risk tab, the user has to hunt for the right 3-dot menu to take action. DeFi Saver puts the action right next to the insight.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="creation">3. Position Creation: Borrow/Leverage Unification</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">The single most important pattern for Kamino's Borrow + Multiply unification strategy.</p>
+
+<h3>DeFi Saver's "Open Position" Flow</h3>
+
+<p>DeFi Saver unifies Borrow and Leverage as <strong>two tabs in the same creation screen</strong>. The form structure is nearly identical — only the Leverage tab adds a multiplier slider, exchange route config, and slippage settings. The right-side preview panel dynamically updates to show resulting collateral, debt, safety ratio, liquidation price, and net APY regardless of which tab you're on.</p>
+
+<div class="flow">
+  <span class="flow-step">Select collateral asset + amount</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">Choose: Borrow | Leverage</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">Configure debt / leverage</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">Review preview panel</span>
+  <span class="flow-arrow">→</span>
+  <span class="flow-step">Create</span>
+</div>
+
+<h4>Post-Creation Upsell (Critical Pattern)</h4>
+<p>After position creation, DeFi Saver immediately presents an "Additional Options" modal listing all available automations and notifications. This is a <strong>high-conversion onboarding moment</strong> — the user just created a position and is primed to protect it. The modal offers:</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <h4>Automated Leverage Management</h4>
+    <p>Auto-repay on price drop, auto-boost on price rise. Configurable thresholds.</p>
+    <span class="tag tag-adopt">Adopt</span>
+  </div>
+  <div class="feature-card">
+    <h4>Stop Loss</h4>
+    <p>Fully close position at configured minimum collateral price.</p>
+    <span class="tag tag-adopt">Adopt</span>
+  </div>
+  <div class="feature-card">
+    <h4>Take Profit</h4>
+    <p>Fully close position at configured maximum collateral price.</p>
+    <span class="tag tag-adopt">Adopt</span>
+  </div>
+  <div class="feature-card">
+    <h4>Boost / Repay on Target Price</h4>
+    <p>Partial leverage adjustments at specific price thresholds.</p>
+    <span class="tag tag-adapt">Adapt</span>
+  </div>
+  <div class="feature-card">
+    <h4>Collateral Switch</h4>
+    <p>Automatically swap collateral to a different asset at price thresholds.</p>
+    <span class="tag tag-adapt">Adapt for Solana</span>
+  </div>
+  <div class="feature-card">
+    <h4>Set Up Notifications</h4>
+    <p>Configure alerts — shown alongside automations, not buried separately.</p>
+    <span class="tag tag-adopt">Adopt</span>
+  </div>
+</div>
+
+<details>
+  <summary>View: Open Position — Borrow Tab</summary>
+  <div class="screenshot-mockup">
+    <div class="form-mockup">
+      <div class="form-section">
+        <div class="form-tabs">
+          <div class="form-tab active">Borrow</div>
+          <div class="form-tab">Leverage</div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Collateral</div>
+          <div class="field-input">COMP ▾  Amount: 50</div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Debt Asset</div>
+          <div class="field-input">USDC ▾  Amount: 10000</div>
+        </div>
+        <div style="padding: 12px; background: rgba(63, 185, 80, 0.1); border-left: 3px solid var(--green); border-radius: 4px; color: var(--text-muted); font-size: 0.8em;">
+          Preview updates in real-time as you adjust values
+        </div>
+      </div>
+      <div class="preview-panel">
+        <div style="margin-bottom: 12px; font-weight: 600; color: var(--accent);">Position Preview</div>
+        <div class="preview-item">
+          <span class="preview-label">Collateral</span>
+          <span class="preview-value">$3,500</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Debt</span>
+          <span class="preview-value">$10,000</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Received USDC</span>
+          <span class="preview-value">$10,000</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Safety Ratio</span>
+          <span class="preview-value">286%</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Liquidation Price</span>
+          <span class="preview-value">$45.20</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Net APY</span>
+          <span class="preview-value">2.15%</span>
+        </div>
+        <button style="width: 100%; margin-top: 12px; padding: 8px; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Create Position</button>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>View: Open Position — Leverage Tab</summary>
+  <div class="screenshot-mockup">
+    <div class="form-mockup">
+      <div class="form-section">
+        <div class="form-tabs">
+          <div class="form-tab">Borrow</div>
+          <div class="form-tab active">Leverage</div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Collateral</div>
+          <div class="field-input">ETH ▾  Amount: 10</div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Leverage Multiplier</div>
+          <div style="padding: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.75em;">
+              <span>1x</span> <span style="font-weight: 600; color: var(--accent);">3.5x</span> <span>5x</span>
+            </div>
+            <div style="background: var(--surface); height: 6px; border-radius: 3px; position: relative;">
+              <div style="position: absolute; left: 70%; width: 3px; height: 6px; background: var(--accent); border-radius: 2px; top: 0;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Exchange Route</div>
+          <div class="field-input">Automatic ▾</div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Slippage Limit</div>
+          <div class="field-input">0.2%</div>
+        </div>
+      </div>
+      <div class="preview-panel">
+        <div style="margin-bottom: 12px; font-weight: 600; color: var(--accent);">Position Preview</div>
+        <div class="preview-item">
+          <span class="preview-label">Collateral</span>
+          <span class="preview-value">$35,000</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Debt</span>
+          <span class="preview-value">$24,500</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Leverage</span>
+          <span class="preview-value">3.5x</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Safety Ratio</span>
+          <span class="preview-value">165%</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Liquidation Price</span>
+          <span class="preview-value">$3,850</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Net APY</span>
+          <span class="preview-value">-1.45%</span>
+        </div>
+        <button style="width: 100%; margin-top: 12px; padding: 8px; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Create Position</button>
+      </div>
+    </div>
+  </div>
+</details>
+
+<h3>Kamino's Current State</h3>
+<p>Kamino separates Borrow and Multiply into entirely different products with inconsistent UX patterns. Borrow uses modals triggered from a market table. Multiply has a dedicated position detail page with an action panel on the right side. There is no post-creation upsell for automation because no automation layer exists.</p>
+
+<div class="callout callout-action">
+  <strong>Recommendation: Unify Creation Flow</strong>
+  Merge Kamino's Borrow and Multiply into a single "Open Position" flow with Borrow/Multiply as tabs. Share the same collateral/debt selection UI. Add the Multiply tab's leverage slider and swap config as progressive disclosure. After creation, immediately offer automation setup (when available).
+</div>
+
+<!-- ============================================================ -->
+<h2 id="actions">4. Core Position Actions</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">How each platform surfaces position management actions — the biggest gap between DeFi Saver and Kamino today.</p>
+
+<h3>DeFi Saver: Inline Tabbed Actions</h3>
+
+<p>DeFi Saver's Manage page shows position overview at the top, then an <strong>ACTIONS section with three tabs</strong> directly below. Every action is accessible without navigating away or opening modals. The actions are organized by intent:</p>
+
+<table class="comparison-table">
+  <thead>
+    <tr>
+      <th>Tab</th>
+      <th>Actions</th>
+      <th>Key UX Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Leverage</strong></td>
+      <td>Boost (increase leverage), Repay (decrease leverage)</td>
+      <td>Shows multi-step flow inline: "Borrow DAI → Swap → Supply ETH." Also offers "Combine with another action: Supply | Pay back"</td>
+    </tr>
+    <tr>
+      <td><strong>Add / Remove</strong></td>
+      <td>Supply, Withdraw, Borrow, Pay back</td>
+      <td>Each action shows max amounts. "Combine with another action: Borrow | Keep ratio" — this is key for one-transaction operations</td>
+    </tr>
+    <tr>
+      <td><strong>Shift</strong></td>
+      <td>Collateral Switch, Debt Switch, Position Flip, cross-protocol Shifter</td>
+      <td>Flash-loan powered asset swaps and cross-protocol migrations in single transactions</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Additionally, a <strong>Close</strong> button is always visible in the top-right of the actions section, and a <strong>Recipe</strong> icon allows launching the drag-and-drop multi-action builder.</p>
+
+<details>
+  <summary>View: Manage Dashboard — Leverage Tab</summary>
+  <div class="screenshot-mockup">
+    <div class="dashboard-mockup">
+      <div>
+        <div class="overview-section">
+          <div class="metric">
+            <div class="metric-value">400.55%</div>
+            <div class="metric-label">Safety Ratio</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$24,881</div>
+            <div class="metric-label">Supplying</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$5,000.50</div>
+            <div class="metric-label">Borrowing</div>
+          </div>
+        </div>
+        <div class="actions-section">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div style="font-weight: 600; color: var(--text);">ACTIONS</div>
+            <button style="background: var(--red); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: pointer;">× Close</button>
+          </div>
+          <div class="action-tabs">
+            <button class="action-tab active">Leverage</button>
+            <button class="action-tab">Add / Remove</button>
+            <button class="action-tab">Shift</button>
+          </div>
+          <div class="sub-actions">
+            <button class="sub-action-btn" style="background: var(--accent); color: var(--bg);">⬆ Boost</button>
+            <button class="sub-action-btn">⬇ Repay</button>
+          </div>
+          <div style="background: var(--bg); border: 1px dashed var(--border); border-radius: 4px; padding: 12px; margin-bottom: 12px;">
+            <div style="font-size: 0.8em; color: var(--text-muted); margin-bottom: 8px;">Boost Example:</div>
+            <div style="display: flex; align-items: center; gap: 6px; font-size: 0.8em; color: var(--text);">
+              <span>Borrow DAI</span> <span style="color: var(--accent);">→</span>
+              <span>Swap</span> <span style="color: var(--accent);">→</span>
+              <span>Supply ETH</span>
+            </div>
+          </div>
+          <div style="padding: 8px; background: rgba(210, 153, 34, 0.1); border-left: 3px solid var(--orange); border-radius: 4px; font-size: 0.8em;">
+            Combine with another action: <a href="#" style="color: var(--accent);">Supply</a> | <a href="#" style="color: var(--accent);">Pay back</a>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-panel-small">
+        <div style="margin-bottom: 12px; font-weight: 600; color: var(--accent);">Balance</div>
+        <div style="margin-bottom: 16px; font-size: 1.1em; color: var(--text);">$19,881</div>
+        <div class="sidebar-metric">
+          <span class="preview-label">Net APY</span>
+          <span class="preview-value">1.67%</span>
+        </div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
+          <div style="font-size: 0.75em; color: var(--accent); margin-bottom: 6px;">Tabs</div>
+          <div style="color: var(--text-muted); font-size: 0.8em;">
+            <div style="margin: 4px 0;">📊 Details</div>
+            <div style="margin: 4px 0;">⚙ Automations</div>
+            <div style="margin: 4px 0;">🎁 Rewards</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>View: Manage Dashboard — Add/Remove Tab</summary>
+  <div class="screenshot-mockup">
+    <div class="dashboard-mockup">
+      <div>
+        <div class="overview-section">
+          <div class="metric">
+            <div class="metric-value">400.55%</div>
+            <div class="metric-label">Safety Ratio</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$24,881</div>
+            <div class="metric-label">Supplying</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$5,000.50</div>
+            <div class="metric-label">Borrowing</div>
+          </div>
+        </div>
+        <div class="actions-section">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div style="font-weight: 600; color: var(--text);">ACTIONS</div>
+            <button style="background: var(--red); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: pointer;">× Close</button>
+          </div>
+          <div class="action-tabs">
+            <button class="action-tab">Leverage</button>
+            <button class="action-tab active">Add / Remove</button>
+            <button class="action-tab">Shift</button>
+          </div>
+          <div class="sub-actions">
+            <button class="sub-action-btn">⬆ Supply</button>
+            <button class="sub-action-btn">⬇ Withdraw</button>
+            <button class="sub-action-btn">⬆ Borrow</button>
+            <button class="sub-action-btn">⬇ Pay back</button>
+          </div>
+          <div style="padding: 8px; background: rgba(210, 153, 34, 0.1); border-left: 3px solid var(--orange); border-radius: 4px; font-size: 0.8em;">
+            Combine with another action: <a href="#" style="color: var(--accent);">Borrow</a> | <a href="#" style="color: var(--accent);">Keep ratio</a>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-panel-small">
+        <div style="margin-bottom: 12px; font-weight: 600; color: var(--accent);">Available to Borrow</div>
+        <div style="margin-bottom: 16px; font-size: 1.1em; color: var(--text);">$8,450</div>
+        <div style="margin-bottom: 12px; font-weight: 600; color: var(--accent);">Max Withdraw</div>
+        <div style="margin-bottom: 16px; font-size: 1.1em; color: var(--text);">$12,500</div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>View: Manage Dashboard — Shift Tab</summary>
+  <div class="screenshot-mockup">
+    <div class="dashboard-mockup">
+      <div>
+        <div class="overview-section">
+          <div class="metric">
+            <div class="metric-value">400.55%</div>
+            <div class="metric-label">Safety Ratio</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$24,881</div>
+            <div class="metric-label">Supplying</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">$5,000.50</div>
+            <div class="metric-label">Borrowing</div>
+          </div>
+        </div>
+        <div class="actions-section">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div style="font-weight: 600; color: var(--text);">ACTIONS</div>
+            <button style="background: var(--red); color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: pointer;">× Close</button>
+          </div>
+          <div class="action-tabs">
+            <button class="action-tab">Leverage</button>
+            <button class="action-tab">Add / Remove</button>
+            <button class="action-tab active">Shift</button>
+          </div>
+          <div class="sub-actions">
+            <button class="sub-action-btn">🔄 Collateral Switch</button>
+            <button class="sub-action-btn">🔄 Debt Switch</button>
+            <button class="sub-action-btn">↔ Position Flip</button>
+            <button class="sub-action-btn">↗ Shifter</button>
+          </div>
+          <div style="padding: 12px; background: rgba(88, 166, 255, 0.1); border-left: 3px solid var(--accent); border-radius: 4px; font-size: 0.8em; color: var(--text-muted);">
+            Flash-loan powered asset swaps and cross-protocol migrations in single transactions.
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-panel-small">
+        <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">Shift Options</div>
+        <div style="color: var(--text-muted); font-size: 0.8em; line-height: 1.6;">
+          Swap your current ETH collateral to another asset<br>
+          Change borrowed USDC to DAI<br>
+          Flip between long and short positions<br>
+          Migrate to different lending protocol
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<h3>Kamino: Modal-Based Basic Actions</h3>
+
+<p>Kamino surfaces actions through 3-dot menus on asset rows, opening modals for Supply, Withdraw, Borrow, and Repay. "Repay With Collateral" exists as a hidden tab within the Repay modal. There is no inline action section, no leverage adjustment, no asset switching, and no combined transactions.</p>
+
+<table class="comparison-table">
+  <thead>
+    <tr>
+      <th>Action</th>
+      <th>DeFi Saver</th>
+      <th>Kamino</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Supply / Add Collateral</td>
+      <td class="yes">✓ Inline, with "Combine + Borrow"</td>
+      <td class="yes">✓ Modal from 3-dot menu</td>
+    </tr>
+    <tr>
+      <td>Withdraw</td>
+      <td class="yes">✓ Inline</td>
+      <td class="yes">✓ Modal from 3-dot menu</td>
+    </tr>
+    <tr>
+      <td>Borrow</td>
+      <td class="yes">✓ Inline, with "Combine + Supply"</td>
+      <td class="yes">✓ Modal from 3-dot menu</td>
+    </tr>
+    <tr>
+      <td>Repay from Wallet</td>
+      <td class="yes">✓ Inline ("Pay back")</td>
+      <td class="yes">✓ Modal default tab</td>
+    </tr>
+    <tr>
+      <td>Repay with Collateral</td>
+      <td class="yes">✓ Leverage → Repay (flash-loan)</td>
+      <td class="partial">⚠ Hidden tab in Repay modal, needs "Setup Account"</td>
+    </tr>
+    <tr>
+      <td>Supply + Borrow in One Tx</td>
+      <td class="yes">✓ "Combine with another action"</td>
+      <td class="no">✗ Not available</td>
+    </tr>
+    <tr>
+      <td>Increase Leverage (Boost)</td>
+      <td class="yes">✓ Borrow → Swap → Supply in one tx</td>
+      <td class="no">✗ Only in Multiply product (separate UX)</td>
+    </tr>
+    <tr>
+      <td>Decrease Leverage</td>
+      <td class="yes">✓ Withdraw → Swap → Repay in one tx</td>
+      <td class="no">✗ Not available in Borrow</td>
+    </tr>
+    <tr>
+      <td>Collateral Switch</td>
+      <td class="yes">✓ Flash-loan + aggregator swap</td>
+      <td class="no">✗ Not available</td>
+    </tr>
+    <tr>
+      <td>Debt Switch</td>
+      <td class="yes">✓ Swap debt asset in one tx</td>
+      <td class="no">✗ Not available</td>
+    </tr>
+    <tr>
+      <td>Close Position</td>
+      <td class="yes">✓ Dedicated button, always visible</td>
+      <td class="no">✗ Must manually withdraw + repay</td>
+    </tr>
+    <tr>
+      <td>Keep Ratio on Supply</td>
+      <td class="yes">✓ Auto-borrow to maintain ratio</td>
+      <td class="no">✗ Not available</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-action">
+  <strong>Recommendation: Inline Action Panel</strong>
+  Replace Kamino's modal-based actions with an inline action section on the Loan Dashboard (below the overview, above the market table). Use tabs for Leverage / Add-Remove / Close. This keeps users on one page and enables the "Combine actions" pattern that DeFi Saver does well.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="automation">5. Automation UX</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">DeFi Saver's biggest differentiator and Kamino's biggest gap — a full automation layer for position protection and optimization.</p>
+
+<h3>DeFi Saver's Automation Architecture</h3>
+
+<p>Automation in DeFi Saver is accessible from three places: the "Automations" tab in the position detail sidebar, the dedicated "Automate" top nav tab, and the post-creation upsell modal. All six automation types share a consistent configuration pattern:</p>
+
+<p><strong>Visual ratio bar</strong> — A horizontal bar shows the current safety ratio (green), danger zone (red), and configurable trigger thresholds (draggable markers). This makes it immediately intuitive to understand "if my ratio drops below X, do Y." The bar is color-coded: red for liquidation zone, orange for trigger zone, green for safe zone.</p>
+
+<p><strong>Configuration fields</strong> — Each automation type uses the same pattern: trigger condition (ratio or price threshold), target action (repay to ratio, close position, boost leverage), and asset pair selection. The "Configure" and "History" tabs let users both set up and audit their automations from the same screen.</p>
+
+<h4>Six Automation Types</h4>
+<table class="comparison-table">
+  <thead>
+    <tr>
+      <th>Automation</th>
+      <th>Trigger</th>
+      <th>Action</th>
+      <th>Kamino Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Auto Leverage Management</strong></td>
+      <td>Ratio falls below / rises above threshold</td>
+      <td>Auto-repay or auto-boost to target ratio</td>
+      <td class="yes">P0 — Core protection</td>
+    </tr>
+    <tr>
+      <td><strong>Stop Loss</strong></td>
+      <td>Collateral price drops below threshold</td>
+      <td>Full position close</td>
+      <td class="yes">P0 — Essential</td>
+    </tr>
+    <tr>
+      <td><strong>Take Profit</strong></td>
+      <td>Collateral price rises above threshold</td>
+      <td>Full position close</td>
+      <td class="yes">P1 — High demand</td>
+    </tr>
+    <tr>
+      <td><strong>Boost on Target Price</strong></td>
+      <td>Price meets configured level</td>
+      <td>Increase leverage</td>
+      <td class="partial">P2 — Advanced</td>
+    </tr>
+    <tr>
+      <td><strong>Repay on Target Price</strong></td>
+      <td>Price meets configured level</td>
+      <td>Decrease leverage</td>
+      <td class="partial">P2 — Advanced</td>
+    </tr>
+    <tr>
+      <td><strong>Collateral Switch</strong></td>
+      <td>Price above/below threshold</td>
+      <td>Swap collateral asset automatically</td>
+      <td class="partial">P3 — Aspirational</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-warning">
+  <strong>Solana Constraint</strong>
+  DeFi Saver's automations run on Ethereum via smart contract-based Safe wallets. On Solana, Kamino would need a keeper network or off-chain automation system (similar to how Kamino's Multiply loops already work). This is a technical constraint that affects the UX — Kamino should design the automation config UI first, then figure out execution.
+</div>
+
+<details>
+  <summary>View: Automate Page — All Strategies</summary>
+  <div class="screenshot-mockup">
+    <div style="display: grid; grid-template-columns: 1fr 240px; gap: 16px;">
+      <div>
+        <div class="automation-grid">
+          <div class="automation-card">
+            <div class="automation-icon">📊</div>
+            <div class="automation-name">Automated Leverage<br>Management</div>
+          </div>
+          <div class="automation-card">
+            <div class="automation-icon">⛔</div>
+            <div class="automation-name">Stop Loss</div>
+          </div>
+          <div class="automation-card">
+            <div class="automation-icon">🎯</div>
+            <div class="automation-name">Take Profit</div>
+          </div>
+          <div class="automation-card">
+            <div class="automation-icon">⬆</div>
+            <div class="automation-name">Boost on Target<br>Price</div>
+          </div>
+          <div class="automation-card">
+            <div class="automation-icon">⬇</div>
+            <div class="automation-name">Repay on Target<br>Price</div>
+          </div>
+          <div class="automation-card">
+            <div class="automation-icon">🔄</div>
+            <div class="automation-name">Collateral<br>Switch</div>
+          </div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-top: 16px;">
+          <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">Click any automation to configure triggers and actions</div>
+          <div style="color: var(--text-muted); font-size: 0.85em;">Each automation type shares a consistent visual configuration pattern with trigger conditions, target actions, and asset pair selection.</div>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-panel-small">
+          <div style="margin-bottom: 12px; font-weight: 600; color: var(--accent);">Position Overview</div>
+          <div class="sidebar-metric">
+            <span class="preview-label">Collateral</span>
+            <span class="preview-value">$24,881</span>
+          </div>
+          <div class="sidebar-metric">
+            <span class="preview-label">Debt</span>
+            <span class="preview-value">$5,000.50</span>
+          </div>
+          <div class="sidebar-metric">
+            <span class="preview-label">Safety Ratio</span>
+            <span class="preview-value">400.55%</span>
+          </div>
+          <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
+            <div class="useful-links">
+              <div class="links-label">Useful Links</div>
+              <div class="links-stat">969 users</div>
+              <div style="color: var(--text-muted); font-size: 0.75em; margin-top: 6px;">using automations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>View: Auto Leverage Management Config</summary>
+  <div class="screenshot-mockup">
+    <div style="display: grid; grid-template-columns: 1fr 260px; gap: 16px;">
+      <div>
+        <div class="form-tabs" style="margin-bottom: 16px;">
+          <div class="form-tab active">Configure</div>
+          <div class="form-tab">History</div>
+        </div>
+        <div class="ratio-bar">
+          <div style="margin-bottom: 16px;">
+            <div style="font-weight: 600; color: var(--text); margin-bottom: 8px;">Safety Ratio Zones</div>
+            <div style="font-size: 0.8em; color: var(--text-muted);">Configure trigger thresholds for automatic actions</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar-marker" style="left: 15%; top: -8px;">
+              <div class="bar-label" style="left: 0;">135%<br>Trigger</div>
+            </div>
+            <div class="bar-marker" style="left: 40%; top: -8px;">
+              <div class="bar-label" style="left: 0;">150%<br>Target</div>
+            </div>
+            <div class="bar-marker" style="left: 65%; top: -8px;">
+              <div class="bar-label" style="left: 0;">165%<br>Trigger</div>
+            </div>
+            <div class="bar-current" style="left: 95%;"></div>
+          </div>
+          <div style="font-size: 0.75em; color: var(--text-muted); margin-top: 12px;">
+            Current position: 400.55% (far right, very safe)
+          </div>
+          <div class="ratio-legend">
+            <div class="legend-item">
+              <div class="legend-box" style="background: #f85149;"></div>
+              <span>Liquidation Zone</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box" style="background: #d29922;"></div>
+              <span>Trigger Zone</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box" style="background: #3fb950;"></div>
+              <span>Safe Zone</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Keep the ratio at</div>
+          <div class="field-input">150%</div>
+        </div>
+        <div style="padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; margin: 12px 0;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85em;">
+            <input type="checkbox"> Advanced options
+          </label>
+        </div>
+        <button style="width: 100%; padding: 10px; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 12px;">Enable Automation</button>
+      </div>
+      <div class="sidebar-panel-small">
+        <div style="font-weight: 600; color: var(--accent); margin-bottom: 12px;">How it works</div>
+        <div style="font-size: 0.8em; color: var(--text-muted); line-height: 1.6;">
+          <div style="margin-bottom: 8px;"><strong style="color: var(--text);">Repay Below 135%</strong> — If ratio drops below trigger, auto-repay borrowed assets</div>
+          <div style="margin-bottom: 8px;"><strong style="color: var(--text);">Boost Above 165%</strong> — If ratio rises above trigger, auto-borrow to rebalance</div>
+          <div><strong style="color: var(--text);">Target: 150%</strong> — Both actions aim to keep ratio near target</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<h3>What Kamino Should Take</h3>
+<p>The visual ratio bar configuration pattern is excellent and maps directly to Kamino's existing risk metrics (LTV, borrow power, liquidation price). The post-creation upsell modal is high-impact and low-effort to implement. The "Automations" tab in the position sidebar provides at-a-glance automation status without leaving the dashboard.</p>
+
+<!-- ============================================================ -->
+<h2 id="composability">6. Composability &amp; Advanced Features</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">DeFi Saver's power-user features that create defensible differentiation.</p>
+
+<h3>Recipe Creator</h3>
+<p>A drag-and-drop visual transaction builder that lets users compose complex multi-step DeFi operations. Users drag action blocks (Wrap ETH, Supply to Aave, Borrow DAI, Swap on Uniswap, etc.) into a canvas to build custom transaction bundles. The Recipe Book offers pre-made templates like "Ethena x Aave Liquid Leverage" and various leveraged staking strategies, filterable by protocol and type.</p>
+
+<h3>Loan Shifter</h3>
+<p>Moves entire positions between lending protocols in a single flash-loan-powered transaction. Example: migrate from Aave v2 to Aave v3, or from Compound to Spark. This is powerful on Ethereum where protocol fragmentation is high.</p>
+
+<h3>"Combine with Another Action"</h3>
+<p>Each basic action (Supply, Borrow, etc.) offers inline links to combine it with another action in one transaction. "Supply + Borrow" or "Supply + Keep Ratio" execute atomically. This is the most practical composability feature for Kamino to adopt — it doesn't require a full Recipe Creator, just smart transaction bundling.</p>
+
+<details>
+  <summary>View: Recipe Creator Canvas</summary>
+  <div class="screenshot-mockup">
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="canvas-mockup">
+        Drag actions from below to start building your recipe
+      </div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 12px;">
+        <div style="font-size: 0.75em; color: var(--text-muted); margin-bottom: 8px;">PROTOCOLS</div>
+        <div class="protocol-row">
+          <div class="protocol-icon" style="background: #5B8DEE;">Aa</div>
+          <div class="protocol-icon" style="background: #00D084;">Co</div>
+          <div class="protocol-icon" style="background: #FF007A;">Mk</div>
+          <div class="protocol-icon" style="background: #4C63FF;">Sp</div>
+          <div class="protocol-icon" style="background: #00F0FF;">Fl</div>
+          <div class="protocol-icon" style="background: #A78BFF;">Mo</div>
+          <div class="protocol-icon" style="background: #1A1AFF;">Lq</div>
+          <div class="protocol-icon" style="background: #00AA00;">Sk</div>
+        </div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 12px;">
+        <div style="font-size: 0.75em; color: var(--text-muted); margin-bottom: 8px;">ACTION BLOCKS</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <div style="background: var(--surface2); border: 1px dashed var(--border); padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: grab; color: var(--text);">Wrap ETH</div>
+          <div style="background: var(--surface2); border: 1px dashed var(--border); padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: grab; color: var(--text);">Unwrap WETH</div>
+          <div style="background: var(--surface2); border: 1px dashed var(--border); padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: grab; color: var(--text);">Sell</div>
+          <div style="background: var(--surface2); border: 1px dashed var(--border); padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: grab; color: var(--text);">Send Token</div>
+          <div style="background: var(--surface2); border: 1px dashed var(--border); padding: 6px 12px; border-radius: 4px; font-size: 0.8em; cursor: grab; color: var(--text);">Pull Token</div>
+        </div>
+      </div>
+      <button style="width: 100%; padding: 10px; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Execute Recipe</button>
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>View: Recipe Book</summary>
+  <div class="screenshot-mockup">
+    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+      <div class="selector" style="flex: 1;">Protocol ▾</div>
+      <div class="selector" style="flex: 1;">Type ▾</div>
+      <div style="background: var(--surface2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 4px; flex: 1;">🔍 Search recipes</div>
+    </div>
+    <div class="recipe-grid">
+      <div class="recipe-card">
+        <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">Ethena x Aave Liquid Leverage</div>
+        <div style="color: var(--text-muted); font-size: 0.7em;">Supply USDe, earn yield</div>
+      </div>
+      <div class="recipe-card">
+        <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">Leverage wstETH-ETH using Spark</div>
+        <div style="color: var(--text-muted); font-size: 0.7em;">Long ETH with staking APY</div>
+      </div>
+      <div class="recipe-card">
+        <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">MakerDAO Stablecoin Strategy</div>
+        <div style="color: var(--text-muted); font-size: 0.7em;">Generate DAI from MKR</div>
+      </div>
+      <div class="recipe-card">
+        <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">Morpho Vanilla Farming</div>
+        <div style="color: var(--text-muted); font-size: 0.7em;">Maximize base yield + MORPH</div>
+      </div>
+      <div class="recipe-card">
+        <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">Liquity Staking Loops</div>
+        <div style="color: var(--text-muted); font-size: 0.7em;">Loop LUSD for extra APY</div>
+      </div>
+      <div class="recipe-card">
+        <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">Euler Collateral Flip</div>
+        <div style="color: var(--text-muted); font-size: 0.7em;">Switch positions atomically</div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<div class="callout callout-action">
+  <strong>Recommendation: Start with Combined Actions</strong>
+  Don't build a Recipe Creator. Instead, add "Combine with..." links to each action in the inline action panel. "Supply + Borrow" and "Repay + Withdraw" cover 80% of user needs. This is achievable on Solana using transaction composition (multiple instructions in one tx).
+</div>
+
+<!-- ============================================================ -->
+<h2 id="comparison">7. Feature-by-Feature Comparison</h2>
+<!-- ============================================================ -->
+
+<table class="comparison-table">
+  <thead>
+    <tr>
+      <th style="width:30%">Category</th>
+      <th style="width:35%">DeFi Saver</th>
+      <th style="width:35%">Kamino</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Position Overview</strong></td>
+      <td>Safety ratio, supply/borrow amounts, visual bars, USD/ETH toggle</td>
+      <td class="yes">Stronger — LTV charts, borrow power, net value, interest breakdown, scenario analysis</td>
+    </tr>
+    <tr>
+      <td><strong>Risk Communication</strong></td>
+      <td>Liquidation price, borrow power used, safety ratio. Basic but functional</td>
+      <td class="yes">Much stronger — historical stress tests, market impact tables, net value impact charts</td>
+    </tr>
+    <tr>
+      <td><strong>Action Model</strong></td>
+      <td class="yes">Inline tabbed actions, composable, always visible</td>
+      <td>Modal-based, hidden behind 3-dot menus, no composition</td>
+    </tr>
+    <tr>
+      <td><strong>Borrow/Leverage Unity</strong></td>
+      <td class="yes">Same creation screen, tabbed</td>
+      <td class="no">Separate products with different UX patterns</td>
+    </tr>
+    <tr>
+      <td><strong>Automation</strong></td>
+      <td class="yes">6 types, visual config, per-position</td>
+      <td class="no">None</td>
+    </tr>
+    <tr>
+      <td><strong>Notifications</strong></td>
+      <td class="yes">Dedicated tab, protocol-integrated</td>
+      <td class="no">None</td>
+    </tr>
+    <tr>
+      <td><strong>Close Position</strong></td>
+      <td class="yes">One-click close button, always visible</td>
+      <td class="no">Manual multi-step (repay then withdraw)</td>
+    </tr>
+    <tr>
+      <td><strong>Cross-sell Between Products</strong></td>
+      <td>Implicit via unified interface</td>
+      <td class="partial">Supply modal has Multiply banner, but otherwise siloed</td>
+    </tr>
+    <tr>
+      <td><strong>Transaction Composition</strong></td>
+      <td class="yes">Combine actions + Recipe Creator</td>
+      <td class="no">Single-action transactions only</td>
+    </tr>
+    <tr>
+      <td><strong>Multi-protocol Support</strong></td>
+      <td class="yes">12 protocols, same UX pattern</td>
+      <td>Single protocol (Kamino Lend), simpler but focused</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2 id="recommendations">8. Strategic Recommendations for Kamino</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">Prioritized recommendations organized by impact and effort, calibrated for Solana's technical constraints and Kamino's existing strengths.</p>
+
+<h3>Adopt (High Impact, DeFi Saver Does This Well)</h3>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <h4>1. Inline Action Panel</h4>
+    <p>Replace modal-based actions with a persistent tabbed action section on the dashboard. Tabs: Leverage / Add-Remove / Close. Show max amounts, preview new ratios inline. This is the single biggest UX improvement available.</p>
+    <span class="tag tag-adopt">Adopt — P0</span>
+  </div>
+  <div class="feature-card">
+    <h4>2. Borrow + Multiply Unification</h4>
+    <p>Single "Open Position" flow with Borrow/Multiply as tabs. Same collateral/debt selection, Multiply adds leverage slider. Real-time preview panel showing resulting metrics.</p>
+    <span class="tag tag-adopt">Adopt — P0</span>
+  </div>
+  <div class="feature-card">
+    <h4>3. One-Click Close Position</h4>
+    <p>Always-visible "Close" button that handles repay+withdraw atomically. Users shouldn't have to figure out the multi-step close sequence.</p>
+    <span class="tag tag-adopt">Adopt — P0</span>
+  </div>
+  <div class="feature-card">
+    <h4>4. Combined Transactions</h4>
+    <p>"Supply + Borrow" and "Repay + Withdraw" in single Solana transactions. Leverage Solana's native tx composition. Show as "Combine with..." links next to each action.</p>
+    <span class="tag tag-adopt">Adopt — P1</span>
+  </div>
+  <div class="feature-card">
+    <h4>5. Post-Creation Automation Setup</h4>
+    <p>After creating any position, show a modal offering to set up stop-loss, take-profit, and notifications. This is the highest-conversion moment for automation adoption.</p>
+    <span class="tag tag-adopt">Adopt — P1</span>
+  </div>
+  <div class="feature-card">
+    <h4>6. Automation Visual Config</h4>
+    <p>Visual ratio/price bar for configuring automation triggers. Color-coded zones (red/orange/green) map perfectly to Kamino's existing risk metrics.</p>
+    <span class="tag tag-adopt">Adopt — P1</span>
+  </div>
+</div>
+
+<h3>Adapt (Good Concept, Needs Solana/Kamino Adjustments)</h3>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <h4>7. Stop-Loss &amp; Take-Profit</h4>
+    <p>Essential automation, but implementation on Solana differs from Ethereum's smart-wallet model. Kamino needs a keeper network or off-chain monitoring + on-chain execution pattern. Design the UX first, build infra second.</p>
+    <span class="tag tag-adapt">Adapt — P1</span>
+  </div>
+  <div class="feature-card">
+    <h4>8. Collateral/Debt Switch</h4>
+    <p>Powerful on Ethereum where flash-loans make atomic asset swaps easy. On Solana, this needs Jupiter integration for in-tx swaps. Technically feasible but requires careful slippage handling.</p>
+    <span class="tag tag-adapt">Adapt — P2</span>
+  </div>
+  <div class="feature-card">
+    <h4>9. Notifications</h4>
+    <p>DeFi Saver has protocol-integrated notifications. Kamino should implement notifications but can start simpler: email/Telegram alerts for ratio thresholds, configurable from the dashboard's risk tab.</p>
+    <span class="tag tag-adapt">Adapt — P1</span>
+  </div>
+</div>
+
+<h3>Preserve (Kamino Advantages to Keep)</h3>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <h4>Scenario Analysis &amp; Stress Testing</h4>
+    <p>Kamino's historical event stress tests (FTX, LUNA collapse simulations) and market impact analysis are completely absent from DeFi Saver. This is a genuine competitive advantage — preserve and expand it.</p>
+    <span class="tag tag-unique">Kamino Advantage</span>
+  </div>
+  <div class="feature-card">
+    <h4>Risk Visualization Depth</h4>
+    <p>LTV charts over time, interest breakdown, net value impact projections — DeFi Saver only shows a basic safety ratio percentage. Kamino's analytics tabs are significantly stronger.</p>
+    <span class="tag tag-unique">Kamino Advantage</span>
+  </div>
+  <div class="feature-card">
+    <h4>Rewards Integration</h4>
+    <p>Kamino's dashboard prominently shows pending rewards and claimable amounts. DeFi Saver has a "Rewards" tab but it's minimal. Keep this front and center.</p>
+    <span class="tag tag-unique">Kamino Advantage</span>
+  </div>
+</div>
+
+<h3>Avoid (DeFi Saver Patterns Not Worth Copying)</h3>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <h4>Recipe Creator</h4>
+    <p>The drag-and-drop transaction builder is a power-user tool with a small audience. It adds significant complexity for marginal user value. Combined transactions (Supply+Borrow) cover 80% of needs without the builder.</p>
+    <span class="tag tag-avoid">Avoid for now</span>
+  </div>
+  <div class="feature-card">
+    <h4>12-Protocol Sidebar</h4>
+    <p>DeFi Saver's left sidebar is cluttered with 12 protocols. Kamino is a single protocol — this navigation pattern doesn't apply. Keep the focused, single-product experience.</p>
+    <span class="tag tag-avoid">Not applicable</span>
+  </div>
+  <div class="feature-card">
+    <h4>Smart Wallet Requirement</h4>
+    <p>DeFi Saver requires creating a Safe smart wallet for advanced features. This adds onboarding friction. Kamino should aim for a frictionless model where all features work with a standard wallet.</p>
+    <span class="tag tag-avoid">Avoid — user friction</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="roadmap">9. Suggested Roadmap</h2>
+<!-- ============================================================ -->
+
+<div class="priority-matrix">
+  <div class="priority-box" style="border-left: 3px solid var(--green);">
+    <h4 style="color: var(--green);">Phase 1 — Foundation (4-6 weeks)</h4>
+    <ul>
+      <li>Inline action panel (Leverage / Add-Remove / Close tabs)</li>
+      <li>Borrow + Multiply unified creation flow</li>
+      <li>One-click Close Position</li>
+      <li>Combined transactions (Supply+Borrow, Repay+Withdraw)</li>
+    </ul>
+  </div>
+  <div class="priority-box" style="border-left: 3px solid var(--accent);">
+    <h4 style="color: var(--accent);">Phase 2 — Protection (6-8 weeks)</h4>
+    <ul>
+      <li>Stop-loss automation (keeper infra + UI)</li>
+      <li>Take-profit automation</li>
+      <li>Visual ratio bar config for automation triggers</li>
+      <li>Post-creation automation setup modal</li>
+    </ul>
+  </div>
+  <div class="priority-box" style="border-left: 3px solid var(--orange);">
+    <h4 style="color: var(--orange);">Phase 3 — Intelligence (4-6 weeks)</h4>
+    <ul>
+      <li>Notification system (email/Telegram alerts)</li>
+      <li>Auto-leverage management (auto-repay + auto-boost)</li>
+      <li>Automations tab in position sidebar</li>
+      <li>Integration with existing scenario analysis</li>
+    </ul>
+  </div>
+  <div class="priority-box" style="border-left: 3px solid var(--purple);">
+    <h4 style="color: var(--purple);">Phase 4 — Advanced (8+ weeks)</h4>
+    <ul>
+      <li>Collateral Switch (Jupiter-powered in-tx swaps)</li>
+      <li>Debt Switch</li>
+      <li>Repay with Collateral improvements</li>
+      <li>Boost/Repay on target price automations</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout callout-insight">
+  <strong>Final Thought</strong>
+  DeFi Saver proves that the "see risk → take action → automate protection" pipeline is the gold standard for DeFi position management. Kamino already has the strongest "see risk" layer in DeFi. The opportunity is to close the loop with action and automation — turning Kamino's analytics advantage into a full position management platform that makes DeFi Saver's approach look incomplete by comparison.
+</div>
+
+</div>
+
+</body>
+</html>
