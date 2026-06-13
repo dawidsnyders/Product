@@ -20,11 +20,11 @@ Each product below has its own page. This hub is the map.
 
 ---
 
-## One team operates the machinery behind every loan
+## The machinery behind every loan
 
 A borrowing facility touches four things that usually live with four different vendors: the price the collateral is marked at, the risk parameters that govern the position, the integration into your custody and compliance stack, and the party you call when a market moves at 3 a.m. Kamino runs all four.
 
-Collateral is priced by [Scope](./scope.md), the in-house oracle that has marked $19.33B of value with zero oracle exploits — including tokenized equities through market halts, NAV-based funds, and assets held in custody. The risk parameters — LTV ceilings, liquidation thresholds, borrow factors, oracle guards — are set and monitored by the same team that operates the [liquidation engine](./liquidation-engine.md) carrying a $0-bad-debt record across three years and $120M+ cleared. Integration into your custodian, your KYC provider, and your wallet architecture is delivered hands-on, with defined liquidation and redemption SLAs and a named team that runs the facility. When you book credit on Kamino, one team operates the pricing, the risk, and the integration, under defined SLAs with named coverage.
+Collateral is priced by [Scope](./scope.md), the in-house oracle that has marked $19.33B of value with zero oracle exploits — including tokenized equities through market halts, NAV-based funds, and assets held in custody. The risk parameters — LTV ceilings, liquidation thresholds, borrow factors, oracle guards — are set and monitored by the same team that operates the [liquidation engine](./liquidation-engine.md) carrying a $0-bad-debt record across three years and $120M+ cleared. Integration into your custodian, your KYC provider, and your wallet architecture is delivered hands-on, with defined liquidation and redemption SLAs.
 
 ---
 

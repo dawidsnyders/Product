@@ -114,9 +114,9 @@ Every component is a setting on infrastructure that is already live, priced, sec
 
 ---
 
-## One team operates the whole loop
+## The infrastructure beneath the loop
 
-An institution standing up a market for its own clients still has to know who runs the machinery underneath it. Kamino operates that machinery as one team: the oracle pricing on [Scope](./scope.md), the risk management and tiered liquidity logic on the [vault engine](./vault-engine.md), the [liquidation engine](./liquidation-engine.md) that winds down breached positions, and the white-glove integration that stands the loop up. The operating model is concrete — a named team, defined SLAs on monitoring, liquidation, and redemption, and direct lines to risk and engineering when a position moves. When your risk committee asks who runs each part of the system and how fast it responds under stress, every layer has a named operator and a production track record behind it.
+The loop runs on Kamino's in-house oracle ([Scope](./scope.md)), the tiered liquidity logic of the [vault engine](./vault-engine.md), the [liquidation engine](./liquidation-engine.md) that winds down breached positions, and a white-glove integration, with operational support and defined SLAs on monitoring, liquidation, and redemption.
 
 → [Security & transparency](./security.md)
 
@@ -139,7 +139,7 @@ PRIME — the tokenized private-credit market built on Kamino with $1B+ in depos
 
 ## Who this is for
 
-- **[Institutions](./institutions.md)** — run a closed-loop credit and yield market for your own clients, under your own brand, on rails one team operates end to end with named coverage and defined SLAs.
+- **[Institutions](./institutions.md)** — run a closed-loop credit and yield market for your own clients, under your own brand.
 - **[Institutions — wealth & asset managers](./institutions-wealth-asset-managers.md)** — give clients who hold your funds a way to lever them and clients with idle cash a trusted yield, both inside one branded market.
 - **[Asset issuers](./asset-issuers.md)** — make your tokenized fund the collateral at the center of a market your institution operates end to end.
 

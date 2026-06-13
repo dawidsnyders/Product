@@ -1,6 +1,6 @@
 # Blog
 
-*Resources · Blog index. The reading room for everything Kamino ships, learns, and proves — product launches, market and risk commentary, customer stories, and the thinking behind capital-markets infrastructure for the tokenized economy. This page defines the index structure (hero, category rows, featured logic, subscribe, cross-links), not the individual posts.*
+*Resources · Blog index. The reading room for everything Kamino ships, learns, and proves — product launches, market and risk commentary, customer stories, and the thinking behind capital-markets infrastructure for the tokenized economy. This page defines the index structure: hero, category rows, featured logic, subscribe, and cross-links. The individual posts are written separately.*
 
 ---
 

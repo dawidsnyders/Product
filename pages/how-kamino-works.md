@@ -159,8 +159,7 @@ Three properties make these layers hard to replicate as a set.
 
 **The stack is proven in production.** Over $21B in loans originated with $0 bad debt and zero security incidents, three years live, backed by 20 independent audits and 4 formal verifications. The infrastructure an institution underwrites is the same infrastructure that has run at scale.
 
-**Kamino operates the rails alongside you.** The oracle pricing your asset, the risk parameters on your market, and the integration into your custody and KYB plumbing are run by the team that built them. A market or vault is set up white-glove and tuned to your asset, your access rules, and your mandate; pricing logic stays under Kamino's control end to end; collateral held at a qualified custodian is read through a tri-party agreement with on-chain attestations; and every dollar of yield is traceable to a KYB-verified borrower. An institution gets one operating team across pricing, risk, custody integration, and support — with defined SLAs and reporting on each.
-
+**Kamino operates the rails alongside you.** The oracle pricing your asset, the risk parameters on your market, and the integration into your custody and KYB plumbing are run by the team that built them. A market or vault is set up white-glove and tuned to your asset, your access rules, and your mandate; pricing logic stays under Kamino's control end to end; collateral held at a qualified custodian is read through a tri-party agreement with on-chain attestations; and every dollar of yield is traceable to a KYB-verified borrower.
 The full diligence picture — the audit program, formal verification, the bug bounty, oracle resilience, the liquidation record, opsec and multisig governance, custody and proof-of-reserves — lives on the [Security](./security.md) page, with the live dashboards at multisig.kamino.fi and oracles.kamino.fi.
 
 ---

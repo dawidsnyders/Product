@@ -30,7 +30,7 @@ The pricing engine, [Scope](./scope.md), values assets with real-world behavior 
 
 ## How we work with institutions
 
-Kamino stays on the rails alongside the institution well past integration. The oracle that prices an asset, the risk parameters on its market, and the integration into custody and KYB systems are run by the team that built and operates them: pricing logic stays under Kamino's control, markets and vaults are set up white-glove and tuned to the asset, the access rules, and the mandate, and collateral held at a qualified custodian is read through a tri-party agreement with on-chain attestations. The result is one team operating pricing, risk, custody integration, and support, with defined SLAs and reporting on each. End to end, every dollar of yield traces back to a KYB-verified borrower.
+Kamino stays on the rails alongside the institution well past integration. The oracle that prices an asset, the risk parameters on its market, and the integration into custody and KYB systems are run by the team that built and operates them: pricing logic stays under Kamino's control, markets and vaults are set up white-glove and tuned to the asset, the access rules, and the mandate, and collateral held at a qualified custodian is read through a tri-party agreement with on-chain attestations. End to end, every dollar of yield traces back to a KYB-verified borrower.
 
 ---
 

@@ -84,7 +84,7 @@ Custodial Borrowing works because the layers underneath it already run in produc
 
 **A configurable market engine.** [Markets](./markets.md) treat collateral location as one of four configuration axes — alongside risk grouping, permissioning, and term — so a custodied venue runs on the same audited rails already in production. Name the asset, the custodian, the LTV, the access rules, and the term, and the market stands up.
 
-One party runs all of it end to end. Kamino prices the collateral on [Scope](./scope.md), manages the risk and the default path through its own [liquidation engine](./liquidation-engine.md), gates access through [Permissioning](./permissioning.md), and stands up the market in a white-glove onboarding it operates with the borrower — with named contacts and defined SLAs on monitoring and liquidation, so one team operates the facility day to day. Custody at a qualified bank, continuous attested pricing, a tested liquidation path, compliance gating, and a configurable market combine into a borrowing structure a regulated institution can put balance-sheet capital behind, with one team operating the whole stack end to end.
+Kamino prices the collateral on [Scope](./scope.md), runs the default path through its own [liquidation engine](./liquidation-engine.md), gates access through [Permissioning](./permissioning.md), and stands the market up in a white-glove onboarding, with named contacts and defined SLAs on monitoring and liquidation. Custody at a qualified bank, continuous attested pricing, a tested liquidation path, compliance gating, and a configurable market combine into a borrowing structure a regulated institution can put balance-sheet capital behind.
 
 ---
 

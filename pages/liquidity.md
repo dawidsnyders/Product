@@ -106,6 +106,6 @@ Run liquidity venues on Kamino's rails through the [Curation Suite](./curation.m
 
 ## Talk to us
 
-Kamino operates the whole execution stack as one team: it prices every asset on [Scope](./scope.md), runs the routing and the safety controls that govern each fill, and integrates your assets, order flow, and pools directly, with named coverage on the execution path. Whether you're an issuer bringing a tokenized asset to market, a market maker quoting as a solver, or an institution that needs reliable execution at size, that team will map your assets, order flow, and integration path to the right surfaces and walk through the economics.
+Kamino operates the execution stack end to end: it prices every asset on [Scope](./scope.md), runs the routing and the safety controls that govern each fill, and integrates your assets, order flow, and pools directly, with named coverage on the execution path. Whether you're an issuer bringing a tokenized asset to market, a market maker quoting as a solver, or an institution that needs reliable execution at size, that team will map your assets, order flow, and integration path to the right surfaces and walk through the economics.
 
 [Contact sales →](./contact-sales.md) · [Launch App →](https://kamino.com/home)

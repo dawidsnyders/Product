@@ -121,13 +121,13 @@ Kamino's consumer surface is the one place the pure-B2B model gives way to a dir
 
 **Platform products (the "Build on Kamino" line) (~5):** Curation (canonical page; surfaced as Market Curation + Vault Curation) · BuildKit · Institutional Yield API · Embedded Wallets · White-Label vaults
 
-**Infrastructure pages (~7) — not in the menu; reached by explicit links from hubs, Security, How-it-works, audiences:** Markets · Scope (oracle / pricing) · Permissioning · Liquidation engine · Routing/execution (kSwap · Kobayashi · Limo) · Vault engine · Cross-chain (Ethereum–Solana bridge)
+**Infrastructure pages (~7) — kept out of the menu, reached by explicit links from hubs, Security, How-it-works, audiences:** Markets · Scope (oracle / pricing) · Permissioning · Liquidation engine · Routing/execution (kSwap · Kobayashi · Limo) · Vault engine · Cross-chain (Ethereum–Solana bridge)
 
 **Audience pages (5):** Institutions (+ three sub-segment views) · Asset issuers · Fintechs & apps · Curators & managers · Individuals
 
 **Use-case pages (5):** Offer credit against tokenized assets · BTC-backed credit · Launch a managed fund · Embed yield in your app · Launch your own on-chain money market
 
-**Trust & overview:** Security · How Kamino works (Why Kamino) · the two dashboards (surfaces, not content pages)
+**Trust & overview:** Security · How Kamino works (Why Kamino) · the two dashboards (live external surfaces we link to)
 
 **Delivery & developer:** Kamino App page · Developers hub (docs / API / SDK index)
 
@@ -201,7 +201,7 @@ Each audience page is an entry point that frames Kamino for one buyer and branch
 
 The eleven contested decisions, the verdict, and why — including where I overrode a lens, so the reasoning is auditable.
 
-1. **Hub names = capability nouns (Credit · Liquidity · Yield), drop "Suite."** Two lenses for nouns, one for verbs (Borrow/Trade/Earn). The lead buyer is a finance institution fluent in capital-markets vocabulary, and Stripe itself names buckets by domain function rather than retail verbs. The consumer app uses the verb aliases (Borrow / Earn / Swap), so newcomer clarity is served on the surface where it matters.
+1. **Hub names = capability nouns (Credit · Liquidity · Yield), drop "Suite."** Two lenses for nouns, one for verbs (Borrow/Trade/Earn). The lead buyer is a finance institution fluent in capital-markets vocabulary, and Stripe itself names buckets by domain function (Payments, Billing, Connect), the vocabulary a finance institution already speaks. The consumer app uses the verb aliases (Borrow / Earn / Swap), so newcomer clarity is served on the surface where it matters.
 2. **Infrastructure stays out of the Products menu; the moat gets prominence via Security (top-level) + a "How Kamino works" narrative + rich in-context surfacing in hubs and audience pages.** *This overrides two lenses that wanted infra surfaced in the menu* (both cited Stripe filing Radar/Connect in Products — verified true). The distinction that resolves it: Radar and Connect are products customers actively buy; Scope and the Liquidation engine are plumbing closer to Stripe's own un-surfaced ledger. The agents' real concern — the moat must convert institutions — is fully met by a top-level Security page and the moat told in-context, without putting plumbing in a menu that lists things you select. (Honors the founder's product-vs-infrastructure line.)
 3. **No "Platform" column; a spanning "Build on Kamino" row instead.** *Overrides two lenses that wanted a fourth column.* The clarity lens's row gives the two-sided platform story one visible home without a column, honoring the founder's removal of a "Curate" category. Curation stays cross-listed as Market/Vault Curation.
 4. **BuildKit's canonical home is Developers + the Fintechs solution page**, surfaced via the Build-on-Kamino row. The embed story is developer- and integration-centric; a thin Products column would add little.
@@ -218,7 +218,7 @@ The eleven contested decisions, the verdict, and why — including where I overr
 ## Part 13 — Why it works
 
 - **It conveys what Kamino is** — a capital-markets infrastructure company. The Products axis shows the depth (credit, liquidity, yield, the platform), and Security shows the moat that makes it trustworthy to institutions.
-- **It conveys what we offer** — every product has a home, the infrastructure is evident through the trust surface and in-context, and the breadth reads as a platform rather than a single app.
+- **It conveys what we offer** — every product has a home, the infrastructure is evident through the trust surface and in-context, and the breadth reads as a platform with many products.
 - **It conveys who we serve** — the Solutions axis routes wealth managers, funds, treasuries, issuers, fintechs, curators, and individuals each to a page built for them, recombining the same products per buyer.
 - **It conveys what we're building toward** — "capital-markets infrastructure for the tokenized economy" is carried by the RWA-and-tokenization framing woven through Markets, Scope, RWA Liquidity, the issuer page, and the tokenized-asset use-cases.
 - **It holds the consumer-and-B2B duality** — B2B leads the structure; the consumer app is featured first in the Products menu and given its own page, the one place the Stripe analogy gives way and Kamino reaches users directly.
