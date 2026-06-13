@@ -8,9 +8,9 @@
 
 ## Hero
 
-### Run institutional credit, liquidity, and yield on-chain
+### Institutional credit, liquidity, and yield, on-chain
 
-Configure a market, a vault, and an oracle into the venue your assets need — the same engine an institution borrows on, a wealth manager allocates through, an issuer lists against, and a fintech embeds.
+The engine for lending, trading, and asset management — configurable to any market. Built for institutions, asset issuers, and the consumer fintechs people use every day.
 
 **[Contact sales →](./contact-sales.md)**  ·  [Launch App](https://kamino.com/home)
 

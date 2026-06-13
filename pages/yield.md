@@ -6,9 +6,11 @@
 
 ## Hero
 
-# Earn yield on idle capital, run by professional risk managers
+# On-chain yield solutions for capital growth
 
-Every dollar deposited on Kamino is allocated by a named risk manager, deployed into lending markets that institutions borrow from, and compounded into a single appreciating share. The yield is interest paid by borrowers drawing fixed-rate term loans, looping leveraged positions, and carrying stablecoins against tokenized collateral. The same vault architecture settles a self-custody depositor's USDC and a regulated wealth manager's mandate.
+Build a vault, a fund, or an embedded product. Launch in seconds, integrate in minutes.
+
+**$2.5B in assets under management · $0 bad debt · three years live**
 
 **[Contact sales](./contact-sales.md)** · **[Launch App](https://kamino.com/home)**
 

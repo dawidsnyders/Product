@@ -4,15 +4,15 @@
 >
 > # Borrow against anything, at the rate and term you choose.
 >
-> Open a variable line in seconds or lock a rate to a fixed maturity. Post on-chain collateral or assets held at your custodian, into an open market or a KYC-gated venue. Every loan settles in the same lending engine and is priced by the same in-house oracle.
+> Draw a variable line or lock a fixed rate, against on-chain or custodied collateral. Borrow in permissionless markets, or launch a white-glove solution tailored to institutional needs.
 >
-> One liquidation system protects all of it: $120M+ cleared across 100,000+ liquidations in three years of production, with zero bad debt.
+> **$21B+ originated · 130,915 active loans · $0 bad debt · three years live**
 >
 > **[Contact sales](./contact-sales.md)** · **[Launch App](https://kamino.com/home)**
 
 ---
 
-## One credit engine, configured to the loan
+## Four choices shape every loan
 
 Borrowing on Kamino starts from a single lending engine and four choices: whether your rate floats or is fixed to a term, whether your collateral sits on-chain or at a custodian, whether the market is open or gated to approved counterparties, and how correlated your collateral and debt are. Those choices generate every credit product below. A bespoke institutional facility and a retail SOL loan run on the same audited rails, tuned through settings.
 

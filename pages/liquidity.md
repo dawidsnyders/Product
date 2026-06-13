@@ -2,11 +2,11 @@
 
 > **Hero**
 >
-> # Trade any asset at the best price the whole market can offer.
+> # Price and trade any asset on-chain
 >
-> Route a $1 swap or an institutional-size RWA fill across more than fifteen execution venues at once, simulated against live on-chain state before it signs and filled at the output you were quoted. Make a newly issued asset tradable against its oracle price from day one, run concentrated liquidity as a single deposit, and let large orders clear through a solver auction.
+> Best execution across fifteen-plus venues. Bespoke oracle pricing for every asset.
 >
-> One execution stack settles all of it — quoted output has matched settled output to 99.944% accuracy across more than 370,000 transactions, and it carries the trading and exit liquidity behind Kamino's $1B+ in tokenized real-world asset deposits.
+> **99.944% quoted-to-settled accuracy · 370,000+ trades · the liquidity behind $1B+ in tokenized RWAs**
 >
 > **[Contact sales](./contact-sales.md)** · **[Launch App](https://kamino.com/home)**
 
