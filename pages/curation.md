@@ -6,7 +6,7 @@
 
 ## Build and manage institutional-grade yield vaults and credit markets
 
-Deposit demand is already on the platform the day you launch. Every venue you stand up draws on the same consumer app, borrower flow, and distribution that holds **$2.5B in assets** and has originated **$21B+ in loans**. You bring the strategy, the risk judgment, and the capital relationships; Kamino supplies the audited infrastructure, the in-house oracle, the liquidation engine, the operational support, and the demand surface that funds what you launch — and answers for the rails underneath it.
+Deposit demand is already on the platform the day you launch. Every venue you stand up draws on the same consumer app, borrower flow, and distribution that holds **$2.5B in assets** and has originated **$21B+ in loans**. You bring the strategy, the risk judgment, and the capital relationships; Kamino supplies the audited infrastructure, the in-house oracle, the liquidation engine, the operational support, and the demand surface that funds what you launch — and operates the rails underneath it.
 
 The curators operating on these rails today include Gauntlet, Steakhouse, Sentora, RockawayX, and Allez, with venues surfaced through partners like Squads and Phantom. Their vaults and markets sit on the same engine you deploy on.
 

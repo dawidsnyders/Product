@@ -76,7 +76,7 @@ For ETH-native collateral such as tokenized gold or USDe, liquidation routes thr
 
 When you launch your own market or vault through [Curation](./curation.md), the liquidation engine is part of the rails from the first block. You configure the parameters that govern it — liquidation thresholds, close factor, the penalty floor and ceiling, the maturity-liquidation ramp, and whether liquidators are open or whitelisted — and the engine, the [oracle guards](./scope.md) that price every position, and the [routing](./routing.md) that executes recoveries all come standard. A curator stands up a venue through [Markets](./markets.md) and inherits a liquidation system carrying a $120M+ cleared, $0-bad-debt record, with no engine to build and audit.
 
-This is one face of what it means for Kamino to stand behind the system end to end: Kamino operates the pricing that decides when a position is liquidatable, the risk framework that sets the parameters and arms auto-deleverage, and the execution that recovers collateral — one accountable counterparty for the machinery that protects lender capital, with the same engine, guards, and record behind a curated venue as behind Kamino's own markets.
+This is one face of what it means for Kamino to operate the system end to end: Kamino runs the pricing that decides when a position is liquidatable, the risk framework that sets the parameters and arms auto-deleverage, and the execution that recovers collateral — one team operating the machinery that protects lender capital, with the same engine, guards, and record behind a curated venue as behind Kamino's own markets.
 
 ---
 

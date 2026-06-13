@@ -77,15 +77,15 @@ The two compose. A swap router weighs the pool quote and the RFQ quote together 
 
 ---
 
-## One counterparty operates the whole market
+## One team operates the whole market
 
-Standing up a market for a tokenized asset spreads across several jobs that usually live with several vendors: an oracle to price it, a risk framework to set its parameters and unwind bad positions, and an integration team to wire it into custody and compliance. On Kamino, one counterparty does all three and answers for the result.
+Standing up a market for a tokenized asset spreads across several jobs that usually live with several vendors: an oracle to price it, a risk framework to set its parameters and unwind bad positions, and an integration team to wire it into custody and compliance. On Kamino, one team does all three and runs the market day to day.
 
 - **Pricing.** [Scope](./scope.md) builds and operates the guarded feed your pool quotes against — the same in-house oracle that has priced $19.33B with zero oracle exploits.
-- **Risk.** The team that runs Kamino's [liquidation engine](./liquidation-engine.md) sets each pool's curve, spread, and guard limits and stands behind the unwind path: $120M+ cleared across 100k+ liquidations with $0 bad debt across three years in production.
-- **Integration.** Bringing the asset on-chain — the feed, the market, the pool, the permissioning, the custody and KYC wiring — is delivered hands-on, with defined liquidation and redemption SLAs and a named team accountable for the asset's market once it is live.
+- **Risk.** The team that runs Kamino's [liquidation engine](./liquidation-engine.md) sets each pool's curve, spread, and guard limits and runs the unwind path: $120M+ cleared across 100k+ liquidations with $0 bad debt across three years in production.
+- **Integration.** Bringing the asset on-chain — the feed, the market, the pool, the permissioning, the custody and KYC wiring — is delivered hands-on, with defined liquidation and redemption SLAs and a named team that runs the asset's market once it is live.
 
-When you list an asset here, you hold one party responsible for whether it prices correctly, unwinds cleanly, and stays compliant.
+When you list an asset here, one team operates the pricing, the unwind, and the compliance gating, with named coverage and defined SLAs.
 
 ---
 

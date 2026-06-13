@@ -108,7 +108,7 @@ You set the user-facing cap and keep every basis point above 2.5% APY as your sp
 
 ## Run the full loop — your own on-chain money market
 
-The same rails close a single loop end to end. Tokenize a fund, deploy it into a white-glove permissioned market that carries your own identity and authorization rules, issue your own branded stablecoin through Coinbase's stablecoin-as-a-service as the borrow liquidity, and pay the yield on that stablecoin back to your clients. Two sides of one market meet inside it: the clients who hold the fund borrow your stablecoin against it to lever their position, and the clients who supply that stablecoin earn the interest the borrowers pay. The stablecoin yield closes the loop, and both sides stay inside your brand on infrastructure Kamino operates and stands behind.
+The same rails close a single loop end to end. Tokenize a fund, deploy it into a white-glove permissioned market that carries your own identity and authorization rules, issue your own branded stablecoin through Coinbase's stablecoin-as-a-service as the borrow liquidity, and pay the yield on that stablecoin back to your clients. Two sides of one market meet inside it: the clients who hold the fund borrow your stablecoin against it to lever their position, and the clients who supply that stablecoin earn the interest the borrowers pay. The stablecoin yield closes the loop, and both sides stay inside your brand on infrastructure Kamino operates end to end.
 
 [Launch your own on-chain money market →](./uc-own-stablecoin-market.md)
 

@@ -107,11 +107,11 @@ Two revenue streams sit side by side on every vault and never touch.
 
 ---
 
-## Why it holds, and who stands behind it
+## Why it holds, and who operates it
 
 The vault engine sits inside Kamino's audited, formally-verified core. The Earn vaults and the limit-order system carry Certora and OtterSec formal verification, the code is open-source with reproducible on-chain build verification, and the engine prices on the same [Scope](./scope.md) oracle and relies on the same [Liquidation engine](./liquidation-engine.md) that have closed out more than $120M across 100,000+ liquidations with $0 bad debt. The danger triggers add a vault-level defense on top of that protocol-level safety. See the full diligence on [Security](./security.md).
 
-A curator sets the strategy, but Kamino operates the rails underneath it as one counterparty: the [Scope](./scope.md) prices the engine acts on, the danger-trigger risk framework that pulls capital before a loss lands, the liquidation machinery that backs the loans, and the integration and support to stand up a venue and run it. An institution allocating into a vault on this engine gets a named party that operates the infrastructure, prices the assets, manages the risk, and answers for how it behaves. The economics and the diligence resolve to the same place.
+A curator sets the strategy, and Kamino operates the rails underneath it as one team: the [Scope](./scope.md) prices the engine acts on, the danger-trigger risk framework that pulls capital before a loss lands, the liquidation machinery that backs the loans, and the integration and support to stand up a venue and run it. An institution allocating into a vault on this engine gets a named operator that runs the infrastructure, prices the assets, and manages the risk day to day. The economics and the diligence resolve to the same place.
 
 Markets are the demand side; the vault engine is the supply side; conditional liquidity is the bridge that lets one quote a fixed-rate curve and fund term credit the moment it is drawn. That is how depositor capital and institutional borrowing become one machine.
 

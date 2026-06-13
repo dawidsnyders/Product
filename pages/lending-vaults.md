@@ -53,7 +53,7 @@ A vault rebalances toward its targets automatically as deposits and withdrawals 
 
 ## How depositors are protected
 
-A curator sets the strategy; Kamino runs the system underneath it and answers for it. The same party operates the oracle that prices every reserve, the liquidation engine that keeps those reserves solvent, and the audited contracts the vault is built on — one counterparty accountable for the rails your capital sits on, behind a single named curator accountable for how it is allocated.
+A curator sets the strategy; Kamino operates the system underneath it. The same team runs the oracle that prices every reserve, the liquidation engine that keeps those reserves solvent, and the audited contracts the vault is built on — one operator for the rails your capital sits on, beneath a single named curator who sets how it is allocated and stakes first-loss capital behind that allocation.
 
 **Curator first-loss capital.** Curators post their own capital into the vault's **Insurance Pool**, staked under a mandatory 30-day cooldown. If a vault takes a loss, that capital is spent first to make depositors whole. Kamino matches a curator's commitment up to $250,000 per vault, so the people setting your strategy have their own money absorbing losses ahead of yours.
 

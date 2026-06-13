@@ -114,9 +114,9 @@ Every component is a setting on infrastructure that is already live, priced, sec
 
 ---
 
-## Kamino is your counterparty for the whole loop
+## One team operates the whole loop
 
-An institution standing up a market for its own clients is taking on responsibility for how that market behaves. Kamino takes on the parts that determine it. We run the oracle pricing on [Scope](./scope.md), the risk management and tiered liquidity logic on the [vault engine](./vault-engine.md), the [liquidation engine](./liquidation-engine.md) that winds down breached positions, and the white-glove integration that stands the loop up — with operational support, redemption and liquidation SLAs, and clear accountability for outcomes. You get a partner who operates the engine alongside your team and answers for the pricing, the liquidations, and the redemptions, so when your risk committee asks who is responsible when something moves, the answer is a named counterparty that stands behind the system.
+An institution standing up a market for its own clients still has to know who runs the machinery underneath it. Kamino operates that machinery as one team: the oracle pricing on [Scope](./scope.md), the risk management and tiered liquidity logic on the [vault engine](./vault-engine.md), the [liquidation engine](./liquidation-engine.md) that winds down breached positions, and the white-glove integration that stands the loop up. The operating model is concrete — a named team, defined SLAs on monitoring, liquidation, and redemption, and direct lines to risk and engineering when a position moves. When your risk committee asks who runs each part of the system and how fast it responds under stress, every layer has a named operator and a production track record behind it.
 
 → [Security & transparency](./security.md)
 
@@ -139,7 +139,7 @@ PRIME — the tokenized private-credit market built on Kamino with $1B+ in depos
 
 ## Who this is for
 
-- **[Institutions](./institutions.md)** — run a closed-loop credit and yield market for your own clients, under your own brand, on a counterparty you can hold responsible.
+- **[Institutions](./institutions.md)** — run a closed-loop credit and yield market for your own clients, under your own brand, on rails one team operates end to end with named coverage and defined SLAs.
 - **[Institutions — wealth & asset managers](./institutions-wealth-asset-managers.md)** — give clients who hold your funds a way to lever them and clients with idle cash a trusted yield, both inside one branded market.
 - **[Asset issuers](./asset-issuers.md)** — make your tokenized fund the collateral at the center of a market your institution operates end to end.
 

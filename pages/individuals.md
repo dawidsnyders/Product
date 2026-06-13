@@ -75,7 +75,7 @@ The vaults and markets you see in the app have passed Kamino's go-live review an
 
 ## Built to protect your capital
 
-The same infrastructure underwriting institutional credit is what stands behind your deposit.
+The same infrastructure that underwrites institutional credit runs beneath your deposit.
 
 **A liquidation engine that has carried zero bad debt.** When a position crosses its limit, Kamino closes it in slices — each round shuts a configured fraction of the loan and leaves the rest intact, so adding collateral or repaying between rounds can halt the process before your whole position unwinds. The penalty opens near zero and escalates the longer a position sits unhealthy, which rewards acting early and clears unhealthy positions fast. For the harder cases — where an asset's liquidity collapses or its quality deteriorates — borrowers get a 72-hour, penalty-free window to restructure before any orderly deleverage begins, and lenders are held clear throughout. Across **100,000+ liquidations and $120M+ liquidated** — including 55,649 in a single 48-hour SOL crash — the protocol has carried **$0 in bad debt**.
 
